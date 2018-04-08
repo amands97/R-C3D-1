@@ -124,7 +124,7 @@ def _compute_targets(rois, overlaps, labels):
     print(rois.shape[0])
     print(labels[0].shape[0])
     targets1 = np.zeros((rois.shape[0], 99), dtype=np.float32)
-    targets2 = np.zeros((rois.shape[0], 3), dtype=np.float32)
+    targets2 = np.zeros((rois.shape[0], 2), dtype=np.float32)
     targets1[ex_inds] = labels[ex_inds]
     targets2[ex_inds] = twin_transform(ex_rois, gt_rois)
     return targets1, targets2
