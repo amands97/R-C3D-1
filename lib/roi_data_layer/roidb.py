@@ -122,7 +122,7 @@ def _compute_targets(rois, overlaps, labels):
     gt_rois = rois[gt_inds[gt_assignment], :]
     ex_rois = rois[ex_inds, :]
     print(rois.shape[0])
-    print(labels[0].shape)
+    print(labels[0].shape[0])
     targets = np.zeros((rois.shape[0], 3), dtype=np.float32)
     targets[ex_inds, 0] = labels[ex_inds]
     targets[ex_inds, 1:] = twin_transform(ex_rois, gt_rois)
