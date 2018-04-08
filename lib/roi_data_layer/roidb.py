@@ -43,7 +43,7 @@ def add_twin_regression_targets(roidb):
     """Add information needed to train time window regressors."""
     assert len(roidb) > 0
     assert 'max_classes' in roidb[0], 'Did you call prepare_roidb first?'
-
+    print(roidb)
     # Infer number of classes from the number of columns in gt_overlaps
     num_classes = cfg.NUM_CLASSES
     for item in roidb:
