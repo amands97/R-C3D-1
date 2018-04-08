@@ -1,3 +1,4 @@
 **/*.mp4
 preprocess/activityNet/videos/
+caffe3d/
 preprocess/activityNet/frames/**/*
