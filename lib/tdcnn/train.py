@@ -36,8 +36,9 @@ class SolverWrapper(object):
 
         if cfg.TRAIN.TWIN_REG:
             print 'Computing bounding-box regression targets...'
-            self.twin_means, self.twin_stds = \
-                    rdl_roidb.add_twin_regression_targets(roidb)
+            # self.twin_means, self.twin_stds = \
+                    # rdl_roidb.add_twin_regression_targets(roidb)
+            #means per class
             print 'done'
 
         self.solver = caffe.SGDSolver(solver_prototxt)
