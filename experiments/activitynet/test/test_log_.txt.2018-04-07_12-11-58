@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "./experiments/activitynet/test/test_net.py", line 13, in <module>
+    from tdcnn.test import test_net
+  File "/data/aman/R-C3D/experiments/activitynet/test/../../../lib/tdcnn/test.py", line 16, in <module>
+    import caffe
+  File "/data/aman/R-C3D/experiments/activitynet/test/../../../caffe3d/python/caffe/__init__.py", line 1, in <module>
+    from .pycaffe import Net, SGDSolver, NesterovSolver, AdaGradSolver, RMSPropSolver, AdaDeltaSolver, AdamSolver
+  File "/data/aman/R-C3D/experiments/activitynet/test/../../../caffe3d/python/caffe/pycaffe.py", line 13, in <module>
+    from ._caffe import Net, SGDSolver, NesterovSolver, AdaGradSolver, \
+ImportError: No module named _caffe

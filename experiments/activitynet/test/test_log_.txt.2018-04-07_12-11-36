@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "./experiments/activitynet/test/test_net.py", line 13, in <module>
+    from tdcnn.test import test_net
+  File "/data/aman/R-C3D/experiments/activitynet/test/../../../lib/tdcnn/test.py", line 10, in <module>
+    from tdcnn.config import cfg
+  File "/data/aman/R-C3D/experiments/activitynet/test/../../../lib/tdcnn/config.py", line 22, in <module>
+    from easydict import EasyDict as edict
+ImportError: No module named easydict
