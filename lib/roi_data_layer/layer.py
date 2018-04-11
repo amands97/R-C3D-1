@@ -127,7 +127,7 @@ class RoIDataLayer(caffe.Layer):
             top_ind = self._name_to_top_map[blob_name]
             print(blob)
             blob1, blob2 = blob
-            print((blob1.shape)+ (blob2.shape))
+            print((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
             # Reshape net's input blobs
 
             top[top_ind].reshape(*(blob.shape))
