@@ -126,7 +126,10 @@ class RoIDataLayer(caffe.Layer):
         for blob_name, blob in blobs.iteritems():
             top_ind = self._name_to_top_map[blob_name]
             print(blob)
+            blob1, blob2 = blob
+            print(*(blob1.shape), *(blob2.shape))
             # Reshape net's input blobs
+
             top[top_ind].reshape(*(blob.shape))
             # Copy data into net's input blobs
             top[top_ind].data[...] = blob.astype(np.float32, copy=False)
