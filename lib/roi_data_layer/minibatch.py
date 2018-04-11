@@ -49,7 +49,7 @@ def get_minibatch(roidb, num_classes):
         gt_windows2 = np.empty((len(gt_inds), len(roidb[0]['gt_classes'][0])), dtype=np.float32)
                 
         gt_windows1[:, 0:2] = roidb[0]['wins'][gt_inds, :]
-        gt_windows2[:, -1] = roidb[0]['gt_classes'][gt_inds]
+        gt_windows2[:] = roidb[0]['gt_classes'][gt_inds]
         blobs['gt_windows'] = gt_windows
     else: # not using RPN
         # Now, build the region of interest and label blobs
