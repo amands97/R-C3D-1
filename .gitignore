@@ -2,4 +2,5 @@
 pretrain/activitynet_iter_30000_3fps.caffemodel
 preprocess/activityNet/videos/
 snapshot/activitynet_iter_135000.caffemodel
+preprocess/activityNet/videos/
 preprocess/activityNet/frames/**/*
