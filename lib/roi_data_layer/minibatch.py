@@ -35,7 +35,7 @@ def get_minibatch(roidb, num_classes):
     if cfg.TRAIN.HAS_RPN:
         assert len(roidb) == 1, "Single batch only"
         # gt windows: (x1, x2, cls)
-        print(roidb[0]['gt_classes'][0].shape()[1])
+        print(len(roidb[0]['gt_classes'][0]))
         print(np.where(roidb[0]['gt_classes'] != 0))
         # print(np.where(roidb[0]['gt_classes'][0] != 1))
         # print(np.where(roidb[0]['gt_classes'][98] != 97))
