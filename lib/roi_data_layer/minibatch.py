@@ -35,8 +35,12 @@ def get_minibatch(roidb, num_classes):
     if cfg.TRAIN.HAS_RPN:
         assert len(roidb) == 1, "Single batch only"
         # gt windows: (x1, x2, cls)
+        print(roidb[0]['gt_classes'])
         gt_inds = np.where(roidb[0]['gt_classes'] != 0)[0]
-        gt_windows = np.empty((len(gt_inds), 3), dtype=np.float32)
+        # gt_windows = np.empty((len(gt_inds), 3), dtype=np.float32)
+        gt_windows1 = np.empty((len(gt_inds), 2), dtype=np.float32)
+        gt_windows2 = np.empty((len(gt_inds), 3), dtype=np.float32)
+                
         gt_windows[:, 0:2] = roidb[0]['wins'][gt_inds, :]
         gt_windows[:, -1] = roidb[0]['gt_classes'][gt_inds]
         blobs['gt_windows'] = gt_windows
