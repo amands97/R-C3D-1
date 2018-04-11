@@ -38,8 +38,8 @@ def get_minibatch(roidb, num_classes):
         print(roidb[0]['gt_classes'])
         print(np.where(roidb[0]['gt_classes'] != 0))
         print(np.where(roidb[0]['gt_classes'][0] != 1))
-        print(np.where(roidb[0]['gt_classes'][0] != 98))
-        print(np.where(roidb[0]['gt_classes'][0] != 99))
+        print(np.where(roidb[0]['gt_classes'][98] != 97))
+        print(np.where(roidb[0]['gt_classes'][99] != 98))
         
         
         gt_inds = np.where(roidb[0]['gt_classes'] != 0)[0]
