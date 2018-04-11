@@ -36,6 +36,12 @@ def get_minibatch(roidb, num_classes):
         assert len(roidb) == 1, "Single batch only"
         # gt windows: (x1, x2, cls)
         print(roidb[0]['gt_classes'])
+        print(np.where(roidb[0]['gt_classes'] != 0))
+        print(np.where(roidb[0]['gt_classes'][0] != 1))
+        print(np.where(roidb[0]['gt_classes'][0] != 98))
+        print(np.where(roidb[0]['gt_classes'][0] != 99))
+        
+        
         gt_inds = np.where(roidb[0]['gt_classes'] != 0)[0]
         # gt_windows = np.empty((len(gt_inds), 3), dtype=np.float32)
         gt_windows1 = np.empty((len(gt_inds), 2), dtype=np.float32)
