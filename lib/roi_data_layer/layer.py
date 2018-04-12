@@ -79,7 +79,7 @@ class RoIDataLayer(caffe.Layer):
 
         # data blob: holds a batch of N videos, each with 3 channels
         idx = 0
-        top[idx].reshape(cfg.TRAIN.VIDEO_BATCH, 103, max(cfg.TRAIN.LENGTH),
+        top[idx].reshape(cfg.TRAIN.VIDEO_BATCH, 3, max(cfg.TRAIN.LENGTH),
                          cfg.TRAIN.CROP_SIZE, cfg.TRAIN.CROP_SIZE)
         self._name_to_top_map['data'] = idx
         idx += 1
@@ -188,5 +188,6 @@ class BlobFetcher(Process):
         while True:
             db_inds = self._get_next_minibatch_inds()
             minibatch_db = [self._roidb[i] for i in db_inds]
+            print("minibatch\n\n\n", minibatch_db)
             blobs = get_minibatch(minibatch_db, self._num_classes)
             self._queue.put(blobs)
