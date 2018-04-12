@@ -1,0 +1,3415 @@
+Called with args:
+Namespace(cfg_file='./experiments/activitynet/td_cnn_end2end.yml', gpu_id=1, max_iters=350000, pretrained_model='./pretrain/activitynet_iter_30000_3fps.caffemodel', randomize=False, set_cfgs=None, solver='./experiments/activitynet/solver.prototxt')
+Using config:
+{'DEDUP_BOXES': 0.125,
+ 'EPS': 1e-14,
+ 'FPS': 25,
+ 'GPU_ID': 1,
+ 'INPUT': 'video',
+ 'NUM_CLASSES': 201,
+ 'PIXEL_MEANS': array([[[ 90,  98, 102]]]),
+ 'PIXEL_MEANS_FLOW': array([128]),
+ 'RNG_SEED': 3,
+ 'TEST': {'CROP_SIZE': 112,
+          'FRAME_SIZE': [128, 171],
+          'HAS_RPN': True,
+          'LENGTH': [768],
+          'MAX_SIZE': 1000,
+          'NMS': 0.4,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 0,
+          'RPN_NMS_THRESH': 0.9,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SVM': False,
+          'TWIN_REG': True},
+ 'TRAIN': {'BATCH_SIZE': 128,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.1,
+           'CINPUT': False,
+           'CROP_SIZE': 112,
+           'FG_FRACTION': 0.5,
+           'FG_THRESH': 0.5,
+           'FRAME_SIZE': [128, 171],
+           'HAS_RPN': True,
+           'LENGTH': [768],
+           'OHEM_LOSS_ONLY_CLASSIFICATION': False,
+           'OHEM_LOSS_ONLY_LOCALIZATION': False,
+           'OHEM_NMS_THRESH': 0.7,
+           'OHEM_USE_NMS': True,
+           'PROPOSAL_METHOD': 'gt',
+           'RANDOM': False,
+           'RPN_BATCHSIZE': 64,
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 0,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.8,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'RPN_TWIN_INSIDE_WEIGHTS': [1.0, 1.0],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 1000,
+           'TWIN_INSIDE_WEIGHTS': [1.0, 1.0],
+           'TWIN_NORMALIZE_MEANS': [0.0, 0.0],
+           'TWIN_NORMALIZE_STDS': [0.1, 0.2],
+           'TWIN_NORMALIZE_TARGETS': True,
+           'TWIN_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'TWIN_REG': True,
+           'TWIN_THRESH': 0.5,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': True,
+           'VIDEO_BATCH': 1},
+ 'USE_GPU_NMS': True}
+2 roidb entries
+print done
+[{'gt_classes': array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]]), 'fg_name': u'./preprocess/activityNet/frames/training/sJFgo9H6zNo', 'max_classes': array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]]), 'wins': array([[3.12500000e-02, 3.85698023e+02]]), 'durations': array([385.66677312]), 'bg_name': u'./preprocess/activityNet/frames/training/sJFgo9H6zNo', 'flipped': False, 'frames': array([[   0,    0, 3476,    8]]), 'max_overlaps': array([1.])}, {'gt_classes': array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]]), 'fg_name': u'./preprocess/activityNet/frames/training/sJFgo9H6zNo', 'max_classes': array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]]), 'wins': array([[3.12500000e-02, 3.85698023e+02]]), 'durations': array([385.66677312]), 'bg_name': u'./preprocess/activityNet/frames/training/sJFgo9H6zNo', 'flipped': True, 'frames': array([[   0,    0, 3476,    8]]), 'max_overlaps': array([1.])}]
+Output will be saved to `./experiments/best_activitynet/snapshot/`
+Computing bounding-box regression targets...
+done
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0412 04:28:31.057436 29002 solver.cpp:48] Initializing solver from parameters: 
+train_net: "./experiments/activitynet/train.prototxt"
+base_lr: 0.0001
+display: 1
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+stepsize: 350000
+snapshot: 0
+snapshot_prefix: "./experiments/activitynet/snapshot/activitynet"
+average_loss: 100
+iter_size: 1
+I0412 04:28:31.057523 29002 solver.cpp:81] Creating training net from train_net file: ./experiments/activitynet/train.prototxt
+I0412 04:28:31.058387 29002 net.cpp:58] Initializing net from parameters: 
+name: "activitynet"
+state {
+  phase: TRAIN
+}
+layer {
+  name: "data"
+  type: "Python"
+  top: "data"
+  top: "gt_boxes"
+  python_param {
+    module: "roi_data_layer.layer"
+    layer: "RoIDataLayer"
+    param_str: "\'num_classes\': 201"
+  }
+}
+layer {
+  name: "conv1a"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1a"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 64
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu1a"
+  type: "ReLU"
+  bottom: "conv1a"
+  top: "conv1a"
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1a"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 1
+    kernel_size: 2
+    kernel_size: 2
+    stride: 1
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv2a"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2a"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 128
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu2a"
+  type: "ReLU"
+  bottom: "conv2a"
+  top: "conv2a"
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2a"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv3a"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv3a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu3a"
+  type: "ReLU"
+  bottom: "conv3a"
+  top: "conv3a"
+}
+layer {
+  name: "conv3b"
+  type: "Convolution"
+  bottom: "conv3a"
+  top: "conv3b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu3b"
+  type: "ReLU"
+  bottom: "conv3b"
+  top: "conv3b"
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv3b"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv4a"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv4a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu4a"
+  type: "ReLU"
+  bottom: "conv4a"
+  top: "conv4a"
+}
+layer {
+  name: "conv4b"
+  type: "Convolution"
+  bottom: "conv4a"
+  top: "conv4b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu4b"
+  type: "ReLU"
+  bottom: "conv4b"
+  top: "conv4b"
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv4b"
+  top: "pool4"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv5a"
+  type: "Convolution"
+  bottom: "pool4"
+  top: "conv5a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu5a"
+  type: "ReLU"
+  bottom: "conv5a"
+  top: "conv5a"
+}
+layer {
+  name: "conv5b"
+  type: "Convolution"
+  bottom: "conv5a"
+  top: "conv5b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu5b"
+  type: "ReLU"
+  bottom: "conv5b"
+  top: "conv5b"
+}
+layer {
+  name: "rpn_conv/3x3"
+  type: "Convolution"
+  bottom: "conv5b"
+  top: "rpn/output"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    stride: 1
+    stride: 2
+    stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_relu/3x3"
+  type: "ReLU"
+  bottom: "rpn/output"
+  top: "rpn/output"
+}
+layer {
+  name: "rpn_conv/3x3_2"
+  type: "Convolution"
+  bottom: "rpn/output"
+  top: "rpn/output_2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    stride: 1
+    stride: 2
+    stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_relu/3x3_2"
+  type: "ReLU"
+  bottom: "rpn/output_2"
+  top: "rpn/output_2"
+}
+layer {
+  name: "rpn/output_pool"
+  type: "Pooling"
+  bottom: "rpn/output_2"
+  top: "rpn/output_pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 1
+    kernel_size: 2
+    kernel_size: 2
+  }
+}
+layer {
+  name: "rpn_cls_score"
+  type: "Convolution"
+  bottom: "rpn/output_pool"
+  top: "rpn_cls_score"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 74
+    kernel_size: 1
+    kernel_size: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_twin_pred"
+  type: "Convolution"
+  bottom: "rpn/output_pool"
+  top: "rpn_twin_pred"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 74
+    kernel_size: 1
+    kernel_size: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_cls_score_reshape"
+  type: "Reshape"
+  bottom: "rpn_cls_score"
+  top: "rpn_cls_score_reshape"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 2
+      dim: -1
+      dim: 0
+      dim: 0
+    }
+  }
+}
+layer {
+  name: "rpn-data"
+  type: "Python"
+  bottom: "rpn_cls_score"
+  bottom: "gt_boxes"
+  bottom: "data"
+  top: "rpn_labels"
+  top: "rpn_twin_targets"
+  top: "rpn_twin_inside_weights"
+  top: "rpn_twin_outside_weights"
+  python_param {
+    module: "rpn.anchor_target_layer"
+    layer: "AnchorTargetLayer"
+    param_str: "\'feat_stride\': 8 \n\'scales\': !!python/tuple [1,1.25, 1.5,1.75, 2,2.5, 3,3.5, 4,4.5, 5,5.5, 6,7, 8,9,10,11,12,14,16,18,20,22,24,28,32,36,40,44,52,60,68,76,84,92,100]"
+  }
+}
+layer {
+  name: "rpn_loss_cls"
+  type: "SoftmaxWithLoss"
+  bottom: "rpn_cls_score_reshape"
+  bottom: "rpn_labels"
+  top: "rpn_cls_loss"
+  loss_weight: 1
+  propagate_down: true
+  propagate_down: false
+  loss_param {
+    ignore_label: -1
+    normalize: true
+  }
+}
+layer {
+  name: "rpn_loss_twin"
+  type: "SmoothL1Loss"
+  bottom: "rpn_twin_pred"
+  bottom: "rpn_twin_targets"
+  bottom: "rpn_twin_inside_weights"
+  bottom: "rpn_twin_outside_weights"
+  top: "rpn_loss_twin"
+  loss_weight: 1
+  smooth_l1_loss_param {
+    sigma: 3
+  }
+}
+layer {
+  name: "rpn_accuarcy"
+  type: "Accuracy"
+  bottom: "rpn_cls_score_reshape"
+  bottom: "rpn_labels"
+  top: "rpn_accuarcy"
+  top: "rpn_accuarcy_class"
+  propagate_down: false
+  propagate_down: false
+  accuracy_param {
+    ignore_label: -1
+  }
+}
+layer {
+  name: "rpn_cls_prob"
+  type: "Softmax"
+  bottom: "rpn_cls_score_reshape"
+  top: "rpn_cls_prob"
+}
+layer {
+  name: "rpn_cls_prob_reshape"
+  type: "Reshape"
+  bottom: "rpn_cls_prob"
+  top: "rpn_cls_prob_reshape"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 74
+      dim: -1
+      dim: 0
+      dim: 0
+    }
+  }
+}
+layer {
+  name: "proposal"
+  type: "Python"
+  bottom: "rpn_cls_prob_reshape"
+  bottom: "rpn_twin_pred"
+  top: "rpn_rois"
+  include {
+    phase: TRAIN
+  }
+  python_param {
+    module: "rpn.proposal_layer"
+    layer: "ProposalLayer"
+    param_str: "\'feat_stride\': 8 \n\'scales\': !!python/tuple [1,1.25, 1.5,1.75, 2,2.5, 3,3.5, 4,4.5, 5,5.5, 6,7, 8,9,10,11,12,14,16,18,20,22,24,28,32,36,40,44,52,60,68,76,84,92,100]"
+  }
+}
+layer {
+  name: "roi-data"
+  type: "Python"
+  bottom: "rpn_rois"
+  bottom: "gt_boxes"
+  top: "rois"
+  top: "labels"
+  top: "twin_targets"
+  top: "twin_inside_weights"
+  top: "twin_outside_weights"
+  python_param {
+    module: "rpn.proposal_target_layer"
+    layer: "ProposalTargetLayer"
+    param_str: "\'num_classes\': 201"
+  }
+}
+layer {
+  name: "roi_pool5"
+  type: "ROIPooling"
+  bottom: "conv5b"
+  bottom: "rois"
+  top: "pool5"
+  roi_pooling_param {
+    pooled_h: 4
+    pooled_w: 4
+    spatial_scale: 0.0625
+    pooled_l: 1
+    temporal_scale: 0.125
+  }
+}
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "cls_score"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "cls_score"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 201
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "twin_pred"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "twin_pred"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 402
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_cls"
+  type: "SoftmaxWithLoss"
+  bottom: "cls_score"
+  bottom: "labels"
+  top: "loss_cls"
+  loss_weight: 1
+  propagate_down: true
+  propagate_down: false
+}
+layer {
+  name: "loss_twin"
+  type: "SmoothL1Loss"
+  bottom: "twin_pred"
+  bottom: "twin_targets"
+  bottom: "twin_inside_weights"
+  bottom: "twin_outside_weights"
+  top: "loss_twin"
+  loss_weight: 1
+}
+layer {
+  name: "accuarcy"
+  type: "Accuracy"
+  bottom: "cls_score"
+  bottom: "labels"
+  top: "accuarcy"
+  propagate_down: false
+  propagate_down: false
+  accuracy_param {
+    ignore_label: -1
+  }
+}
+I0412 04:28:31.061122 29002 layer_factory.hpp:77] Creating layer data
+I0412 04:28:31.077992 29002 net.cpp:100] Creating Layer data
+I0412 04:28:31.078151 29002 net.cpp:408] data -> data
+I0412 04:28:31.078217 29002 net.cpp:408] data -> gt_boxes
+RoiDataLayer: name_to_top: {'gt_windows': 1, 'data': 0}
+I0412 04:28:31.091025 29002 net.cpp:150] Setting up data
+I0412 04:28:31.091048 29002 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0412 04:28:31.091053 29002 net.cpp:157] Top shape: 1 3 (3)
+I0412 04:28:31.091056 29002 net.cpp:165] Memory required for data: 115605516
+I0412 04:28:31.091063 29002 layer_factory.hpp:77] Creating layer data_data_0_split
+I0412 04:28:31.091074 29002 net.cpp:100] Creating Layer data_data_0_split
+I0412 04:28:31.091079 29002 net.cpp:434] data_data_0_split <- data
+I0412 04:28:31.091087 29002 net.cpp:408] data_data_0_split -> data_data_0_split_0
+I0412 04:28:31.091099 29002 net.cpp:408] data_data_0_split -> data_data_0_split_1
+I0412 04:28:31.091148 29002 net.cpp:150] Setting up data_data_0_split
+I0412 04:28:31.091157 29002 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0412 04:28:31.091163 29002 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0412 04:28:31.091168 29002 net.cpp:165] Memory required for data: 346816524
+I0412 04:28:31.091173 29002 layer_factory.hpp:77] Creating layer gt_boxes_data_1_split
+I0412 04:28:31.091182 29002 net.cpp:100] Creating Layer gt_boxes_data_1_split
+I0412 04:28:31.091187 29002 net.cpp:434] gt_boxes_data_1_split <- gt_boxes
+I0412 04:28:31.091199 29002 net.cpp:408] gt_boxes_data_1_split -> gt_boxes_data_1_split_0
+I0412 04:28:31.091212 29002 net.cpp:408] gt_boxes_data_1_split -> gt_boxes_data_1_split_1
+I0412 04:28:31.091253 29002 net.cpp:150] Setting up gt_boxes_data_1_split
+I0412 04:28:31.091261 29002 net.cpp:157] Top shape: 1 3 (3)
+I0412 04:28:31.091267 29002 net.cpp:157] Top shape: 1 3 (3)
+I0412 04:28:31.091272 29002 net.cpp:165] Memory required for data: 346816548
+I0412 04:28:31.091276 29002 layer_factory.hpp:77] Creating layer conv1a
+I0412 04:28:31.091291 29002 net.cpp:100] Creating Layer conv1a
+I0412 04:28:31.091297 29002 net.cpp:434] conv1a <- data_data_0_split_0
+I0412 04:28:31.091305 29002 net.cpp:408] conv1a -> conv1a
+I0412 04:28:31.111608 29002 net.cpp:150] Setting up conv1a
+I0412 04:28:31.111688 29002 net.cpp:157] Top shape: 1 64 768 112 112 (616562688)
+I0412 04:28:31.111696 29002 net.cpp:165] Memory required for data: 2813067300
+I0412 04:28:31.111717 29002 layer_factory.hpp:77] Creating layer relu1a
+I0412 04:28:31.111739 29002 net.cpp:100] Creating Layer relu1a
+I0412 04:28:31.111747 29002 net.cpp:434] relu1a <- conv1a
+I0412 04:28:31.111754 29002 net.cpp:395] relu1a -> conv1a (in-place)
+I0412 04:28:31.111769 29002 net.cpp:150] Setting up relu1a
+I0412 04:28:31.111776 29002 net.cpp:157] Top shape: 1 64 768 112 112 (616562688)
+I0412 04:28:31.111783 29002 net.cpp:165] Memory required for data: 5279318052
+I0412 04:28:31.111788 29002 layer_factory.hpp:77] Creating layer pool1
+I0412 04:28:31.111795 29002 net.cpp:100] Creating Layer pool1
+I0412 04:28:31.111814 29002 net.cpp:434] pool1 <- conv1a
+I0412 04:28:31.111830 29002 net.cpp:408] pool1 -> pool1
+I0412 04:28:31.111958 29002 net.cpp:150] Setting up pool1
+I0412 04:28:31.111970 29002 net.cpp:157] Top shape: 1 64 768 56 56 (154140672)
+I0412 04:28:31.111974 29002 net.cpp:165] Memory required for data: 5895880740
+I0412 04:28:31.111979 29002 layer_factory.hpp:77] Creating layer conv2a
+I0412 04:28:31.111990 29002 net.cpp:100] Creating Layer conv2a
+I0412 04:28:31.111994 29002 net.cpp:434] conv2a <- pool1
+I0412 04:28:31.112002 29002 net.cpp:408] conv2a -> conv2a
+I0412 04:28:31.121819 29002 net.cpp:150] Setting up conv2a
+I0412 04:28:31.121888 29002 net.cpp:157] Top shape: 1 128 768 56 56 (308281344)
+I0412 04:28:31.121912 29002 net.cpp:165] Memory required for data: 7129006116
+I0412 04:28:31.121944 29002 layer_factory.hpp:77] Creating layer relu2a
+I0412 04:28:31.121973 29002 net.cpp:100] Creating Layer relu2a
+I0412 04:28:31.121994 29002 net.cpp:434] relu2a <- conv2a
+I0412 04:28:31.122016 29002 net.cpp:395] relu2a -> conv2a (in-place)
+I0412 04:28:31.122045 29002 net.cpp:150] Setting up relu2a
+I0412 04:28:31.122068 29002 net.cpp:157] Top shape: 1 128 768 56 56 (308281344)
+I0412 04:28:31.122086 29002 net.cpp:165] Memory required for data: 8362131492
+I0412 04:28:31.122102 29002 layer_factory.hpp:77] Creating layer pool2
+I0412 04:28:31.122130 29002 net.cpp:100] Creating Layer pool2
+I0412 04:28:31.122148 29002 net.cpp:434] pool2 <- conv2a
+I0412 04:28:31.122167 29002 net.cpp:408] pool2 -> pool2
+I0412 04:28:31.122287 29002 net.cpp:150] Setting up pool2
+I0412 04:28:31.122313 29002 net.cpp:157] Top shape: 1 128 384 28 28 (38535168)
+I0412 04:28:31.122331 29002 net.cpp:165] Memory required for data: 8516272164
+I0412 04:28:31.122347 29002 layer_factory.hpp:77] Creating layer conv3a
+I0412 04:28:31.122376 29002 net.cpp:100] Creating Layer conv3a
+I0412 04:28:31.122397 29002 net.cpp:434] conv3a <- pool2
+I0412 04:28:31.122421 29002 net.cpp:408] conv3a -> conv3a
+I0412 04:28:31.134414 29002 net.cpp:150] Setting up conv3a
+I0412 04:28:31.134451 29002 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0412 04:28:31.134456 29002 net.cpp:165] Memory required for data: 8824553508
+I0412 04:28:31.134470 29002 layer_factory.hpp:77] Creating layer relu3a
+I0412 04:28:31.134497 29002 net.cpp:100] Creating Layer relu3a
+I0412 04:28:31.134519 29002 net.cpp:434] relu3a <- conv3a
+I0412 04:28:31.134531 29002 net.cpp:395] relu3a -> conv3a (in-place)
+I0412 04:28:31.134541 29002 net.cpp:150] Setting up relu3a
+I0412 04:28:31.134560 29002 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0412 04:28:31.134578 29002 net.cpp:165] Memory required for data: 9132834852
+I0412 04:28:31.134595 29002 layer_factory.hpp:77] Creating layer conv3b
+I0412 04:28:31.134624 29002 net.cpp:100] Creating Layer conv3b
+I0412 04:28:31.134645 29002 net.cpp:434] conv3b <- conv3a
+I0412 04:28:31.134671 29002 net.cpp:408] conv3b -> conv3b
+I0412 04:28:31.156419 29002 net.cpp:150] Setting up conv3b
+I0412 04:28:31.156455 29002 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0412 04:28:31.156461 29002 net.cpp:165] Memory required for data: 9441116196
+I0412 04:28:31.156476 29002 layer_factory.hpp:77] Creating layer relu3b
+I0412 04:28:31.156491 29002 net.cpp:100] Creating Layer relu3b
+I0412 04:28:31.156497 29002 net.cpp:434] relu3b <- conv3b
+I0412 04:28:31.156508 29002 net.cpp:395] relu3b -> conv3b (in-place)
+I0412 04:28:31.156520 29002 net.cpp:150] Setting up relu3b
+I0412 04:28:31.156535 29002 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0412 04:28:31.156539 29002 net.cpp:165] Memory required for data: 9749397540
+I0412 04:28:31.156543 29002 layer_factory.hpp:77] Creating layer pool3
+I0412 04:28:31.156550 29002 net.cpp:100] Creating Layer pool3
+I0412 04:28:31.156555 29002 net.cpp:434] pool3 <- conv3b
+I0412 04:28:31.156563 29002 net.cpp:408] pool3 -> pool3
+I0412 04:28:31.156623 29002 net.cpp:150] Setting up pool3
+I0412 04:28:31.156630 29002 net.cpp:157] Top shape: 1 256 192 14 14 (9633792)
+I0412 04:28:31.156635 29002 net.cpp:165] Memory required for data: 9787932708
+I0412 04:28:31.156637 29002 layer_factory.hpp:77] Creating layer conv4a
+I0412 04:28:31.156648 29002 net.cpp:100] Creating Layer conv4a
+I0412 04:28:31.156653 29002 net.cpp:434] conv4a <- pool3
+I0412 04:28:31.156661 29002 net.cpp:408] conv4a -> conv4a
+I0412 04:28:31.198415 29002 net.cpp:150] Setting up conv4a
+I0412 04:28:31.198480 29002 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0412 04:28:31.198495 29002 net.cpp:165] Memory required for data: 9865003044
+I0412 04:28:31.198524 29002 layer_factory.hpp:77] Creating layer relu4a
+I0412 04:28:31.198546 29002 net.cpp:100] Creating Layer relu4a
+I0412 04:28:31.198561 29002 net.cpp:434] relu4a <- conv4a
+I0412 04:28:31.198581 29002 net.cpp:395] relu4a -> conv4a (in-place)
+I0412 04:28:31.198604 29002 net.cpp:150] Setting up relu4a
+I0412 04:28:31.198621 29002 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0412 04:28:31.198634 29002 net.cpp:165] Memory required for data: 9942073380
+I0412 04:28:31.198647 29002 layer_factory.hpp:77] Creating layer conv4b
+I0412 04:28:31.198673 29002 net.cpp:100] Creating Layer conv4b
+I0412 04:28:31.198690 29002 net.cpp:434] conv4b <- conv4a
+I0412 04:28:31.198707 29002 net.cpp:408] conv4b -> conv4b
+I0412 04:28:31.279510 29002 net.cpp:150] Setting up conv4b
+I0412 04:28:31.279582 29002 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0412 04:28:31.279598 29002 net.cpp:165] Memory required for data: 10019143716
+I0412 04:28:31.279619 29002 layer_factory.hpp:77] Creating layer relu4b
+I0412 04:28:31.279639 29002 net.cpp:100] Creating Layer relu4b
+I0412 04:28:31.279659 29002 net.cpp:434] relu4b <- conv4b
+I0412 04:28:31.279677 29002 net.cpp:395] relu4b -> conv4b (in-place)
+I0412 04:28:31.279700 29002 net.cpp:150] Setting up relu4b
+I0412 04:28:31.279719 29002 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0412 04:28:31.279733 29002 net.cpp:165] Memory required for data: 10096214052
+I0412 04:28:31.279748 29002 layer_factory.hpp:77] Creating layer pool4
+I0412 04:28:31.279768 29002 net.cpp:100] Creating Layer pool4
+I0412 04:28:31.279783 29002 net.cpp:434] pool4 <- conv4b
+I0412 04:28:31.279803 29002 net.cpp:408] pool4 -> pool4
+I0412 04:28:31.279881 29002 net.cpp:150] Setting up pool4
+I0412 04:28:31.279903 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.279918 29002 net.cpp:165] Memory required for data: 10105847844
+I0412 04:28:31.279932 29002 layer_factory.hpp:77] Creating layer conv5a
+I0412 04:28:31.279958 29002 net.cpp:100] Creating Layer conv5a
+I0412 04:28:31.279975 29002 net.cpp:434] conv5a <- pool4
+I0412 04:28:31.279997 29002 net.cpp:408] conv5a -> conv5a
+I0412 04:28:31.346884 29002 net.cpp:150] Setting up conv5a
+I0412 04:28:31.346915 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.346920 29002 net.cpp:165] Memory required for data: 10115481636
+I0412 04:28:31.346930 29002 layer_factory.hpp:77] Creating layer relu5a
+I0412 04:28:31.346941 29002 net.cpp:100] Creating Layer relu5a
+I0412 04:28:31.346946 29002 net.cpp:434] relu5a <- conv5a
+I0412 04:28:31.346956 29002 net.cpp:395] relu5a -> conv5a (in-place)
+I0412 04:28:31.346966 29002 net.cpp:150] Setting up relu5a
+I0412 04:28:31.346971 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.346976 29002 net.cpp:165] Memory required for data: 10125115428
+I0412 04:28:31.346978 29002 layer_factory.hpp:77] Creating layer conv5b
+I0412 04:28:31.346992 29002 net.cpp:100] Creating Layer conv5b
+I0412 04:28:31.346995 29002 net.cpp:434] conv5b <- conv5a
+I0412 04:28:31.347002 29002 net.cpp:408] conv5b -> conv5b
+I0412 04:28:31.410856 29002 net.cpp:150] Setting up conv5b
+I0412 04:28:31.410946 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.410965 29002 net.cpp:165] Memory required for data: 10134749220
+I0412 04:28:31.410987 29002 layer_factory.hpp:77] Creating layer relu5b
+I0412 04:28:31.411017 29002 net.cpp:100] Creating Layer relu5b
+I0412 04:28:31.411038 29002 net.cpp:434] relu5b <- conv5b
+I0412 04:28:31.411061 29002 net.cpp:395] relu5b -> conv5b (in-place)
+I0412 04:28:31.411087 29002 net.cpp:150] Setting up relu5b
+I0412 04:28:31.411110 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.411128 29002 net.cpp:165] Memory required for data: 10144383012
+I0412 04:28:31.411144 29002 layer_factory.hpp:77] Creating layer conv5b_relu5b_0_split
+I0412 04:28:31.411176 29002 net.cpp:100] Creating Layer conv5b_relu5b_0_split
+I0412 04:28:31.411197 29002 net.cpp:434] conv5b_relu5b_0_split <- conv5b
+I0412 04:28:31.411216 29002 net.cpp:408] conv5b_relu5b_0_split -> conv5b_relu5b_0_split_0
+I0412 04:28:31.411239 29002 net.cpp:408] conv5b_relu5b_0_split -> conv5b_relu5b_0_split_1
+I0412 04:28:31.411324 29002 net.cpp:150] Setting up conv5b_relu5b_0_split
+I0412 04:28:31.411350 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.411370 29002 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0412 04:28:31.411386 29002 net.cpp:165] Memory required for data: 10163650596
+I0412 04:28:31.411403 29002 layer_factory.hpp:77] Creating layer rpn_conv/3x3
+I0412 04:28:31.411432 29002 net.cpp:100] Creating Layer rpn_conv/3x3
+I0412 04:28:31.411454 29002 net.cpp:434] rpn_conv/3x3 <- conv5b_relu5b_0_split_0
+I0412 04:28:31.411479 29002 net.cpp:408] rpn_conv/3x3 -> rpn/output
+I0412 04:28:31.506165 29002 net.cpp:150] Setting up rpn_conv/3x3
+I0412 04:28:31.506232 29002 net.cpp:157] Top shape: 1 512 96 4 4 (786432)
+I0412 04:28:31.506251 29002 net.cpp:165] Memory required for data: 10166796324
+I0412 04:28:31.506286 29002 layer_factory.hpp:77] Creating layer rpn_relu/3x3
+I0412 04:28:31.506314 29002 net.cpp:100] Creating Layer rpn_relu/3x3
+I0412 04:28:31.506335 29002 net.cpp:434] rpn_relu/3x3 <- rpn/output
+I0412 04:28:31.506357 29002 net.cpp:395] rpn_relu/3x3 -> rpn/output (in-place)
+I0412 04:28:31.506387 29002 net.cpp:150] Setting up rpn_relu/3x3
+I0412 04:28:31.506412 29002 net.cpp:157] Top shape: 1 512 96 4 4 (786432)
+I0412 04:28:31.506429 29002 net.cpp:165] Memory required for data: 10169942052
+I0412 04:28:31.506445 29002 layer_factory.hpp:77] Creating layer rpn_conv/3x3_2
+I0412 04:28:31.506476 29002 net.cpp:100] Creating Layer rpn_conv/3x3_2
+I0412 04:28:31.506496 29002 net.cpp:434] rpn_conv/3x3_2 <- rpn/output
+I0412 04:28:31.506520 29002 net.cpp:408] rpn_conv/3x3_2 -> rpn/output_2
+I0412 04:28:31.569564 29002 net.cpp:150] Setting up rpn_conv/3x3_2
+I0412 04:28:31.569597 29002 net.cpp:157] Top shape: 1 512 96 2 2 (196608)
+I0412 04:28:31.569600 29002 net.cpp:165] Memory required for data: 10170728484
+I0412 04:28:31.569612 29002 layer_factory.hpp:77] Creating layer rpn_relu/3x3_2
+I0412 04:28:31.569622 29002 net.cpp:100] Creating Layer rpn_relu/3x3_2
+I0412 04:28:31.569630 29002 net.cpp:434] rpn_relu/3x3_2 <- rpn/output_2
+I0412 04:28:31.569638 29002 net.cpp:395] rpn_relu/3x3_2 -> rpn/output_2 (in-place)
+I0412 04:28:31.569648 29002 net.cpp:150] Setting up rpn_relu/3x3_2
+I0412 04:28:31.569654 29002 net.cpp:157] Top shape: 1 512 96 2 2 (196608)
+I0412 04:28:31.569659 29002 net.cpp:165] Memory required for data: 10171514916
+I0412 04:28:31.569664 29002 layer_factory.hpp:77] Creating layer rpn/output_pool
+I0412 04:28:31.569672 29002 net.cpp:100] Creating Layer rpn/output_pool
+I0412 04:28:31.569677 29002 net.cpp:434] rpn/output_pool <- rpn/output_2
+I0412 04:28:31.569684 29002 net.cpp:408] rpn/output_pool -> rpn/output_pool
+I0412 04:28:31.569739 29002 net.cpp:150] Setting up rpn/output_pool
+I0412 04:28:31.569749 29002 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0412 04:28:31.569754 29002 net.cpp:165] Memory required for data: 10171711524
+I0412 04:28:31.569758 29002 layer_factory.hpp:77] Creating layer rpn/output_pool_rpn/output_pool_0_split
+I0412 04:28:31.569769 29002 net.cpp:100] Creating Layer rpn/output_pool_rpn/output_pool_0_split
+I0412 04:28:31.569777 29002 net.cpp:434] rpn/output_pool_rpn/output_pool_0_split <- rpn/output_pool
+I0412 04:28:31.569785 29002 net.cpp:408] rpn/output_pool_rpn/output_pool_0_split -> rpn/output_pool_rpn/output_pool_0_split_0
+I0412 04:28:31.569798 29002 net.cpp:408] rpn/output_pool_rpn/output_pool_0_split -> rpn/output_pool_rpn/output_pool_0_split_1
+I0412 04:28:31.569849 29002 net.cpp:150] Setting up rpn/output_pool_rpn/output_pool_0_split
+I0412 04:28:31.569854 29002 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0412 04:28:31.569859 29002 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0412 04:28:31.569865 29002 net.cpp:165] Memory required for data: 10172104740
+I0412 04:28:31.569869 29002 layer_factory.hpp:77] Creating layer rpn_cls_score
+I0412 04:28:31.569881 29002 net.cpp:100] Creating Layer rpn_cls_score
+I0412 04:28:31.569887 29002 net.cpp:434] rpn_cls_score <- rpn/output_pool_rpn/output_pool_0_split_0
+I0412 04:28:31.569895 29002 net.cpp:408] rpn_cls_score -> rpn_cls_score
+I0412 04:28:31.570473 29002 net.cpp:150] Setting up rpn_cls_score
+I0412 04:28:31.570482 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.570485 29002 net.cpp:165] Memory required for data: 10172133156
+I0412 04:28:31.570492 29002 layer_factory.hpp:77] Creating layer rpn_cls_score_rpn_cls_score_0_split
+I0412 04:28:31.570499 29002 net.cpp:100] Creating Layer rpn_cls_score_rpn_cls_score_0_split
+I0412 04:28:31.570504 29002 net.cpp:434] rpn_cls_score_rpn_cls_score_0_split <- rpn_cls_score
+I0412 04:28:31.570513 29002 net.cpp:408] rpn_cls_score_rpn_cls_score_0_split -> rpn_cls_score_rpn_cls_score_0_split_0
+I0412 04:28:31.570521 29002 net.cpp:408] rpn_cls_score_rpn_cls_score_0_split -> rpn_cls_score_rpn_cls_score_0_split_1
+I0412 04:28:31.570574 29002 net.cpp:150] Setting up rpn_cls_score_rpn_cls_score_0_split
+I0412 04:28:31.570582 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.570588 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.570595 29002 net.cpp:165] Memory required for data: 10172189988
+I0412 04:28:31.570600 29002 layer_factory.hpp:77] Creating layer rpn_twin_pred
+I0412 04:28:31.570618 29002 net.cpp:100] Creating Layer rpn_twin_pred
+I0412 04:28:31.570626 29002 net.cpp:434] rpn_twin_pred <- rpn/output_pool_rpn/output_pool_0_split_1
+I0412 04:28:31.570632 29002 net.cpp:408] rpn_twin_pred -> rpn_twin_pred
+I0412 04:28:31.571185 29002 net.cpp:150] Setting up rpn_twin_pred
+I0412 04:28:31.571193 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.571195 29002 net.cpp:165] Memory required for data: 10172218404
+I0412 04:28:31.571203 29002 layer_factory.hpp:77] Creating layer rpn_twin_pred_rpn_twin_pred_0_split
+I0412 04:28:31.571213 29002 net.cpp:100] Creating Layer rpn_twin_pred_rpn_twin_pred_0_split
+I0412 04:28:31.571218 29002 net.cpp:434] rpn_twin_pred_rpn_twin_pred_0_split <- rpn_twin_pred
+I0412 04:28:31.571226 29002 net.cpp:408] rpn_twin_pred_rpn_twin_pred_0_split -> rpn_twin_pred_rpn_twin_pred_0_split_0
+I0412 04:28:31.571235 29002 net.cpp:408] rpn_twin_pred_rpn_twin_pred_0_split -> rpn_twin_pred_rpn_twin_pred_0_split_1
+I0412 04:28:31.571316 29002 net.cpp:150] Setting up rpn_twin_pred_rpn_twin_pred_0_split
+I0412 04:28:31.571331 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.571336 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.571341 29002 net.cpp:165] Memory required for data: 10172275236
+I0412 04:28:31.571344 29002 layer_factory.hpp:77] Creating layer rpn_cls_score_reshape
+I0412 04:28:31.571358 29002 net.cpp:100] Creating Layer rpn_cls_score_reshape
+I0412 04:28:31.571363 29002 net.cpp:434] rpn_cls_score_reshape <- rpn_cls_score_rpn_cls_score_0_split_0
+I0412 04:28:31.571373 29002 net.cpp:408] rpn_cls_score_reshape -> rpn_cls_score_reshape
+I0412 04:28:31.571429 29002 net.cpp:150] Setting up rpn_cls_score_reshape
+I0412 04:28:31.571441 29002 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0412 04:28:31.571446 29002 net.cpp:165] Memory required for data: 10172303652
+I0412 04:28:31.571450 29002 layer_factory.hpp:77] Creating layer rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0412 04:28:31.571460 29002 net.cpp:100] Creating Layer rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0412 04:28:31.571465 29002 net.cpp:434] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split <- rpn_cls_score_reshape
+I0412 04:28:31.571473 29002 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_0
+I0412 04:28:31.571488 29002 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_1
+I0412 04:28:31.571497 29002 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_2
+I0412 04:28:31.571595 29002 net.cpp:150] Setting up rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0412 04:28:31.571609 29002 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0412 04:28:31.571614 29002 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0412 04:28:31.571619 29002 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0412 04:28:31.571624 29002 net.cpp:165] Memory required for data: 10172388900
+I0412 04:28:31.571629 29002 layer_factory.hpp:77] Creating layer rpn-data
+I0412 04:28:31.572111 29002 net.cpp:100] Creating Layer rpn-data
+I0412 04:28:31.572125 29002 net.cpp:434] rpn-data <- rpn_cls_score_rpn_cls_score_0_split_1
+I0412 04:28:31.572132 29002 net.cpp:434] rpn-data <- gt_boxes_data_1_split_0
+I0412 04:28:31.572139 29002 net.cpp:434] rpn-data <- data_data_0_split_1
+I0412 04:28:31.572147 29002 net.cpp:408] rpn-data -> rpn_labels
+I0412 04:28:31.572157 29002 net.cpp:408] rpn-data -> rpn_twin_targets
+I0412 04:28:31.572166 29002 net.cpp:408] rpn-data -> rpn_twin_inside_weights
+I0412 04:28:31.572176 29002 net.cpp:408] rpn-data -> rpn_twin_outside_weights
+I0412 04:28:31.575325 29002 net.cpp:150] Setting up rpn-data
+I0412 04:28:31.575352 29002 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0412 04:28:31.575358 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.575363 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.575368 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.575371 29002 net.cpp:165] Memory required for data: 10172488356
+I0412 04:28:31.575377 29002 layer_factory.hpp:77] Creating layer rpn_labels_rpn-data_0_split
+I0412 04:28:31.575392 29002 net.cpp:100] Creating Layer rpn_labels_rpn-data_0_split
+I0412 04:28:31.575399 29002 net.cpp:434] rpn_labels_rpn-data_0_split <- rpn_labels
+I0412 04:28:31.575408 29002 net.cpp:408] rpn_labels_rpn-data_0_split -> rpn_labels_rpn-data_0_split_0
+I0412 04:28:31.575419 29002 net.cpp:408] rpn_labels_rpn-data_0_split -> rpn_labels_rpn-data_0_split_1
+I0412 04:28:31.575474 29002 net.cpp:150] Setting up rpn_labels_rpn-data_0_split
+I0412 04:28:31.575481 29002 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0412 04:28:31.575486 29002 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0412 04:28:31.575490 29002 net.cpp:165] Memory required for data: 10172516772
+I0412 04:28:31.575495 29002 layer_factory.hpp:77] Creating layer rpn_loss_cls
+I0412 04:28:31.575506 29002 net.cpp:100] Creating Layer rpn_loss_cls
+I0412 04:28:31.575515 29002 net.cpp:434] rpn_loss_cls <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_0
+I0412 04:28:31.575522 29002 net.cpp:434] rpn_loss_cls <- rpn_labels_rpn-data_0_split_0
+I0412 04:28:31.575531 29002 net.cpp:408] rpn_loss_cls -> rpn_cls_loss
+I0412 04:28:31.575543 29002 layer_factory.hpp:77] Creating layer rpn_loss_cls
+I0412 04:28:31.575673 29002 net.cpp:150] Setting up rpn_loss_cls
+I0412 04:28:31.575682 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.575685 29002 net.cpp:160]     with loss weight 1
+I0412 04:28:31.575711 29002 net.cpp:165] Memory required for data: 10172516776
+I0412 04:28:31.575716 29002 layer_factory.hpp:77] Creating layer rpn_loss_twin
+I0412 04:28:31.575726 29002 net.cpp:100] Creating Layer rpn_loss_twin
+I0412 04:28:31.575731 29002 net.cpp:434] rpn_loss_twin <- rpn_twin_pred_rpn_twin_pred_0_split_0
+I0412 04:28:31.575736 29002 net.cpp:434] rpn_loss_twin <- rpn_twin_targets
+I0412 04:28:31.575745 29002 net.cpp:434] rpn_loss_twin <- rpn_twin_inside_weights
+I0412 04:28:31.575752 29002 net.cpp:434] rpn_loss_twin <- rpn_twin_outside_weights
+I0412 04:28:31.575759 29002 net.cpp:408] rpn_loss_twin -> rpn_loss_twin
+I0412 04:28:31.575860 29002 net.cpp:150] Setting up rpn_loss_twin
+I0412 04:28:31.575867 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.575870 29002 net.cpp:160]     with loss weight 1
+I0412 04:28:31.575877 29002 net.cpp:165] Memory required for data: 10172516780
+I0412 04:28:31.575881 29002 layer_factory.hpp:77] Creating layer rpn_accuarcy
+I0412 04:28:31.575894 29002 net.cpp:100] Creating Layer rpn_accuarcy
+I0412 04:28:31.575904 29002 net.cpp:434] rpn_accuarcy <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_1
+I0412 04:28:31.575911 29002 net.cpp:434] rpn_accuarcy <- rpn_labels_rpn-data_0_split_1
+I0412 04:28:31.575917 29002 net.cpp:408] rpn_accuarcy -> rpn_accuarcy
+I0412 04:28:31.575925 29002 net.cpp:408] rpn_accuarcy -> rpn_accuarcy_class
+I0412 04:28:31.575973 29002 net.cpp:150] Setting up rpn_accuarcy
+I0412 04:28:31.575979 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.575985 29002 net.cpp:157] Top shape: 2 (2)
+I0412 04:28:31.575989 29002 net.cpp:165] Memory required for data: 10172516792
+I0412 04:28:31.575997 29002 layer_factory.hpp:77] Creating layer rpn_cls_prob
+I0412 04:28:31.576006 29002 net.cpp:100] Creating Layer rpn_cls_prob
+I0412 04:28:31.576012 29002 net.cpp:434] rpn_cls_prob <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_2
+I0412 04:28:31.576020 29002 net.cpp:408] rpn_cls_prob -> rpn_cls_prob
+I0412 04:28:31.576133 29002 net.cpp:150] Setting up rpn_cls_prob
+I0412 04:28:31.576144 29002 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0412 04:28:31.576149 29002 net.cpp:165] Memory required for data: 10172545208
+I0412 04:28:31.576153 29002 layer_factory.hpp:77] Creating layer rpn_cls_prob_reshape
+I0412 04:28:31.576164 29002 net.cpp:100] Creating Layer rpn_cls_prob_reshape
+I0412 04:28:31.576170 29002 net.cpp:434] rpn_cls_prob_reshape <- rpn_cls_prob
+I0412 04:28:31.576177 29002 net.cpp:408] rpn_cls_prob_reshape -> rpn_cls_prob_reshape
+I0412 04:28:31.576217 29002 net.cpp:150] Setting up rpn_cls_prob_reshape
+I0412 04:28:31.576227 29002 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0412 04:28:31.576231 29002 net.cpp:165] Memory required for data: 10172573624
+I0412 04:28:31.576236 29002 layer_factory.hpp:77] Creating layer proposal
+I0412 04:28:31.577030 29002 net.cpp:100] Creating Layer proposal
+I0412 04:28:31.577045 29002 net.cpp:434] proposal <- rpn_cls_prob_reshape
+I0412 04:28:31.577052 29002 net.cpp:434] proposal <- rpn_twin_pred_rpn_twin_pred_0_split_1
+I0412 04:28:31.577061 29002 net.cpp:408] proposal -> rpn_rois
+I0412 04:28:31.580987 29002 net.cpp:150] Setting up proposal
+I0412 04:28:31.581009 29002 net.cpp:157] Top shape: 1 3 (3)
+I0412 04:28:31.581014 29002 net.cpp:165] Memory required for data: 10172573636
+I0412 04:28:31.581020 29002 layer_factory.hpp:77] Creating layer roi-data
+I0412 04:28:31.581214 29002 net.cpp:100] Creating Layer roi-data
+I0412 04:28:31.581228 29002 net.cpp:434] roi-data <- rpn_rois
+I0412 04:28:31.581235 29002 net.cpp:434] roi-data <- gt_boxes_data_1_split_1
+I0412 04:28:31.581244 29002 net.cpp:408] roi-data -> rois
+I0412 04:28:31.581256 29002 net.cpp:408] roi-data -> labels
+I0412 04:28:31.581266 29002 net.cpp:408] roi-data -> twin_targets
+I0412 04:28:31.581276 29002 net.cpp:408] roi-data -> twin_inside_weights
+I0412 04:28:31.581285 29002 net.cpp:408] roi-data -> twin_outside_weights
+I0412 04:28:31.581758 29002 net.cpp:150] Setting up roi-data
+I0412 04:28:31.581773 29002 net.cpp:157] Top shape: 1 3 (3)
+I0412 04:28:31.581779 29002 net.cpp:157] Top shape: 1 1 (1)
+I0412 04:28:31.581784 29002 net.cpp:157] Top shape: 1 402 (402)
+I0412 04:28:31.581789 29002 net.cpp:157] Top shape: 1 402 (402)
+I0412 04:28:31.581794 29002 net.cpp:157] Top shape: 1 402 (402)
+I0412 04:28:31.581799 29002 net.cpp:165] Memory required for data: 10172578476
+I0412 04:28:31.581804 29002 layer_factory.hpp:77] Creating layer labels_roi-data_1_split
+I0412 04:28:31.581811 29002 net.cpp:100] Creating Layer labels_roi-data_1_split
+I0412 04:28:31.581817 29002 net.cpp:434] labels_roi-data_1_split <- labels
+I0412 04:28:31.581825 29002 net.cpp:408] labels_roi-data_1_split -> labels_roi-data_1_split_0
+I0412 04:28:31.581835 29002 net.cpp:408] labels_roi-data_1_split -> labels_roi-data_1_split_1
+I0412 04:28:31.581894 29002 net.cpp:150] Setting up labels_roi-data_1_split
+I0412 04:28:31.581907 29002 net.cpp:157] Top shape: 1 1 (1)
+I0412 04:28:31.581913 29002 net.cpp:157] Top shape: 1 1 (1)
+I0412 04:28:31.581918 29002 net.cpp:165] Memory required for data: 10172578484
+I0412 04:28:31.581923 29002 layer_factory.hpp:77] Creating layer roi_pool5
+I0412 04:28:31.581930 29002 net.cpp:100] Creating Layer roi_pool5
+I0412 04:28:31.581936 29002 net.cpp:434] roi_pool5 <- conv5b_relu5b_0_split_1
+I0412 04:28:31.581943 29002 net.cpp:434] roi_pool5 <- rois
+I0412 04:28:31.581951 29002 net.cpp:408] roi_pool5 -> pool5
+I0412 04:28:31.581960 29002 roi_pooling_layer.cpp:34] Temporal scale: 0.125
+I0412 04:28:31.581974 29002 roi_pooling_layer.cpp:35] Spatial scale: 0.0625
+I0412 04:28:31.582036 29002 net.cpp:150] Setting up roi_pool5
+I0412 04:28:31.582048 29002 net.cpp:157] Top shape: 1 512 1 4 4 (8192)
+I0412 04:28:31.582053 29002 net.cpp:165] Memory required for data: 10172611252
+I0412 04:28:31.582058 29002 layer_factory.hpp:77] Creating layer fc6
+I0412 04:28:31.582070 29002 net.cpp:100] Creating Layer fc6
+I0412 04:28:31.582077 29002 net.cpp:434] fc6 <- pool5
+I0412 04:28:31.582085 29002 net.cpp:408] fc6 -> fc6
+I0412 04:28:31.946705 29002 net.cpp:150] Setting up fc6
+I0412 04:28:31.946739 29002 net.cpp:157] Top shape: 1 4096 (4096)
+I0412 04:28:31.946743 29002 net.cpp:165] Memory required for data: 10172627636
+I0412 04:28:31.946756 29002 layer_factory.hpp:77] Creating layer relu6
+I0412 04:28:31.946769 29002 net.cpp:100] Creating Layer relu6
+I0412 04:28:31.946775 29002 net.cpp:434] relu6 <- fc6
+I0412 04:28:31.946784 29002 net.cpp:395] relu6 -> fc6 (in-place)
+I0412 04:28:31.946792 29002 net.cpp:150] Setting up relu6
+I0412 04:28:31.946797 29002 net.cpp:157] Top shape: 1 4096 (4096)
+I0412 04:28:31.946801 29002 net.cpp:165] Memory required for data: 10172644020
+I0412 04:28:31.946805 29002 layer_factory.hpp:77] Creating layer drop6
+I0412 04:28:31.946812 29002 net.cpp:100] Creating Layer drop6
+I0412 04:28:31.946816 29002 net.cpp:434] drop6 <- fc6
+I0412 04:28:31.946821 29002 net.cpp:395] drop6 -> fc6 (in-place)
+I0412 04:28:31.946866 29002 net.cpp:150] Setting up drop6
+I0412 04:28:31.946874 29002 net.cpp:157] Top shape: 1 4096 (4096)
+I0412 04:28:31.946877 29002 net.cpp:165] Memory required for data: 10172660404
+I0412 04:28:31.946882 29002 layer_factory.hpp:77] Creating layer fc6_drop6_0_split
+I0412 04:28:31.946889 29002 net.cpp:100] Creating Layer fc6_drop6_0_split
+I0412 04:28:31.946893 29002 net.cpp:434] fc6_drop6_0_split <- fc6
+I0412 04:28:31.946902 29002 net.cpp:408] fc6_drop6_0_split -> fc6_drop6_0_split_0
+I0412 04:28:31.946908 29002 net.cpp:408] fc6_drop6_0_split -> fc6_drop6_0_split_1
+I0412 04:28:31.946962 29002 net.cpp:150] Setting up fc6_drop6_0_split
+I0412 04:28:31.946969 29002 net.cpp:157] Top shape: 1 4096 (4096)
+I0412 04:28:31.946972 29002 net.cpp:157] Top shape: 1 4096 (4096)
+I0412 04:28:31.946976 29002 net.cpp:165] Memory required for data: 10172693172
+I0412 04:28:31.946980 29002 layer_factory.hpp:77] Creating layer cls_score
+I0412 04:28:31.946988 29002 net.cpp:100] Creating Layer cls_score
+I0412 04:28:31.946992 29002 net.cpp:434] cls_score <- fc6_drop6_0_split_0
+I0412 04:28:31.947001 29002 net.cpp:408] cls_score -> cls_score
+I0412 04:28:31.955252 29002 net.cpp:150] Setting up cls_score
+I0412 04:28:31.955283 29002 net.cpp:157] Top shape: 1 201 (201)
+I0412 04:28:31.955288 29002 net.cpp:165] Memory required for data: 10172693976
+I0412 04:28:31.955301 29002 layer_factory.hpp:77] Creating layer cls_score_cls_score_0_split
+I0412 04:28:31.955313 29002 net.cpp:100] Creating Layer cls_score_cls_score_0_split
+I0412 04:28:31.955319 29002 net.cpp:434] cls_score_cls_score_0_split <- cls_score
+I0412 04:28:31.955328 29002 net.cpp:408] cls_score_cls_score_0_split -> cls_score_cls_score_0_split_0
+I0412 04:28:31.955338 29002 net.cpp:408] cls_score_cls_score_0_split -> cls_score_cls_score_0_split_1
+I0412 04:28:31.955399 29002 net.cpp:150] Setting up cls_score_cls_score_0_split
+I0412 04:28:31.955407 29002 net.cpp:157] Top shape: 1 201 (201)
+I0412 04:28:31.955412 29002 net.cpp:157] Top shape: 1 201 (201)
+I0412 04:28:31.955416 29002 net.cpp:165] Memory required for data: 10172695584
+I0412 04:28:31.955421 29002 layer_factory.hpp:77] Creating layer twin_pred
+I0412 04:28:31.955432 29002 net.cpp:100] Creating Layer twin_pred
+I0412 04:28:31.955438 29002 net.cpp:434] twin_pred <- fc6_drop6_0_split_1
+I0412 04:28:31.955448 29002 net.cpp:408] twin_pred -> twin_pred
+I0412 04:28:31.977499 29002 net.cpp:150] Setting up twin_pred
+I0412 04:28:31.977579 29002 net.cpp:157] Top shape: 1 402 (402)
+I0412 04:28:31.977598 29002 net.cpp:165] Memory required for data: 10172697192
+I0412 04:28:31.977627 29002 layer_factory.hpp:77] Creating layer loss_cls
+I0412 04:28:31.977655 29002 net.cpp:100] Creating Layer loss_cls
+I0412 04:28:31.977684 29002 net.cpp:434] loss_cls <- cls_score_cls_score_0_split_0
+I0412 04:28:31.977706 29002 net.cpp:434] loss_cls <- labels_roi-data_1_split_0
+I0412 04:28:31.977735 29002 net.cpp:408] loss_cls -> loss_cls
+I0412 04:28:31.977766 29002 layer_factory.hpp:77] Creating layer loss_cls
+I0412 04:28:31.977958 29002 net.cpp:150] Setting up loss_cls
+I0412 04:28:31.977983 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.978001 29002 net.cpp:160]     with loss weight 1
+I0412 04:28:31.978029 29002 net.cpp:165] Memory required for data: 10172697196
+I0412 04:28:31.978046 29002 layer_factory.hpp:77] Creating layer loss_twin
+I0412 04:28:31.978080 29002 net.cpp:100] Creating Layer loss_twin
+I0412 04:28:31.978099 29002 net.cpp:434] loss_twin <- twin_pred
+I0412 04:28:31.978121 29002 net.cpp:434] loss_twin <- twin_targets
+I0412 04:28:31.978140 29002 net.cpp:434] loss_twin <- twin_inside_weights
+I0412 04:28:31.978162 29002 net.cpp:434] loss_twin <- twin_outside_weights
+I0412 04:28:31.978188 29002 net.cpp:408] loss_twin -> loss_twin
+I0412 04:28:31.978343 29002 net.cpp:150] Setting up loss_twin
+I0412 04:28:31.978368 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.978385 29002 net.cpp:160]     with loss weight 1
+I0412 04:28:31.978404 29002 net.cpp:165] Memory required for data: 10172697200
+I0412 04:28:31.978420 29002 layer_factory.hpp:77] Creating layer accuarcy
+I0412 04:28:31.978440 29002 net.cpp:100] Creating Layer accuarcy
+I0412 04:28:31.978457 29002 net.cpp:434] accuarcy <- cls_score_cls_score_0_split_1
+I0412 04:28:31.978476 29002 net.cpp:434] accuarcy <- labels_roi-data_1_split_1
+I0412 04:28:31.978499 29002 net.cpp:408] accuarcy -> accuarcy
+I0412 04:28:31.978528 29002 net.cpp:150] Setting up accuarcy
+I0412 04:28:31.978554 29002 net.cpp:157] Top shape: (1)
+I0412 04:28:31.978572 29002 net.cpp:165] Memory required for data: 10172697204
+I0412 04:28:31.978588 29002 net.cpp:228] accuarcy does not need backward computation.
+I0412 04:28:31.978605 29002 net.cpp:226] loss_twin needs backward computation.
+I0412 04:28:31.978623 29002 net.cpp:226] loss_cls needs backward computation.
+I0412 04:28:31.978642 29002 net.cpp:226] twin_pred needs backward computation.
+I0412 04:28:31.978660 29002 net.cpp:226] cls_score_cls_score_0_split needs backward computation.
+I0412 04:28:31.978677 29002 net.cpp:226] cls_score needs backward computation.
+I0412 04:28:31.978693 29002 net.cpp:226] fc6_drop6_0_split needs backward computation.
+I0412 04:28:31.978710 29002 net.cpp:226] drop6 needs backward computation.
+I0412 04:28:31.978725 29002 net.cpp:226] relu6 needs backward computation.
+I0412 04:28:31.978740 29002 net.cpp:226] fc6 needs backward computation.
+I0412 04:28:31.978756 29002 net.cpp:226] roi_pool5 needs backward computation.
+I0412 04:28:31.978773 29002 net.cpp:228] labels_roi-data_1_split does not need backward computation.
+I0412 04:28:31.978790 29002 net.cpp:226] roi-data needs backward computation.
+I0412 04:28:31.978806 29002 net.cpp:226] proposal needs backward computation.
+I0412 04:28:31.978822 29002 net.cpp:226] rpn_cls_prob_reshape needs backward computation.
+I0412 04:28:31.978838 29002 net.cpp:226] rpn_cls_prob needs backward computation.
+I0412 04:28:31.978854 29002 net.cpp:228] rpn_accuarcy does not need backward computation.
+I0412 04:28:31.978870 29002 net.cpp:226] rpn_loss_twin needs backward computation.
+I0412 04:28:31.978891 29002 net.cpp:226] rpn_loss_cls needs backward computation.
+I0412 04:28:31.978909 29002 net.cpp:228] rpn_labels_rpn-data_0_split does not need backward computation.
+I0412 04:28:31.978926 29002 net.cpp:226] rpn-data needs backward computation.
+I0412 04:28:31.978943 29002 net.cpp:226] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split needs backward computation.
+I0412 04:28:31.978960 29002 net.cpp:226] rpn_cls_score_reshape needs backward computation.
+I0412 04:28:31.978982 29002 net.cpp:226] rpn_twin_pred_rpn_twin_pred_0_split needs backward computation.
+I0412 04:28:31.979001 29002 net.cpp:226] rpn_twin_pred needs backward computation.
+I0412 04:28:31.979017 29002 net.cpp:226] rpn_cls_score_rpn_cls_score_0_split needs backward computation.
+I0412 04:28:31.979033 29002 net.cpp:226] rpn_cls_score needs backward computation.
+I0412 04:28:31.979049 29002 net.cpp:226] rpn/output_pool_rpn/output_pool_0_split needs backward computation.
+I0412 04:28:31.979066 29002 net.cpp:226] rpn/output_pool needs backward computation.
+I0412 04:28:31.979081 29002 net.cpp:226] rpn_relu/3x3_2 needs backward computation.
+I0412 04:28:31.979097 29002 net.cpp:226] rpn_conv/3x3_2 needs backward computation.
+I0412 04:28:31.979113 29002 net.cpp:226] rpn_relu/3x3 needs backward computation.
+I0412 04:28:31.979128 29002 net.cpp:226] rpn_conv/3x3 needs backward computation.
+I0412 04:28:31.979145 29002 net.cpp:226] conv5b_relu5b_0_split needs backward computation.
+I0412 04:28:31.979161 29002 net.cpp:226] relu5b needs backward computation.
+I0412 04:28:31.979176 29002 net.cpp:226] conv5b needs backward computation.
+I0412 04:28:31.979192 29002 net.cpp:226] relu5a needs backward computation.
+I0412 04:28:31.979207 29002 net.cpp:226] conv5a needs backward computation.
+I0412 04:28:31.979223 29002 net.cpp:226] pool4 needs backward computation.
+I0412 04:28:31.979239 29002 net.cpp:226] relu4b needs backward computation.
+I0412 04:28:31.979255 29002 net.cpp:226] conv4b needs backward computation.
+I0412 04:28:31.979271 29002 net.cpp:226] relu4a needs backward computation.
+I0412 04:28:31.979287 29002 net.cpp:226] conv4a needs backward computation.
+I0412 04:28:31.979303 29002 net.cpp:226] pool3 needs backward computation.
+I0412 04:28:31.979320 29002 net.cpp:226] relu3b needs backward computation.
+I0412 04:28:31.979334 29002 net.cpp:226] conv3b needs backward computation.
+I0412 04:28:31.979349 29002 net.cpp:226] relu3a needs backward computation.
+I0412 04:28:31.979365 29002 net.cpp:226] conv3a needs backward computation.
+I0412 04:28:31.979382 29002 net.cpp:228] pool2 does not need backward computation.
+I0412 04:28:31.979398 29002 net.cpp:228] relu2a does not need backward computation.
+I0412 04:28:31.979414 29002 net.cpp:228] conv2a does not need backward computation.
+I0412 04:28:31.979431 29002 net.cpp:228] pool1 does not need backward computation.
+I0412 04:28:31.979447 29002 net.cpp:228] relu1a does not need backward computation.
+I0412 04:28:31.979465 29002 net.cpp:228] conv1a does not need backward computation.
+I0412 04:28:31.979482 29002 net.cpp:228] gt_boxes_data_1_split does not need backward computation.
+I0412 04:28:31.979501 29002 net.cpp:228] data_data_0_split does not need backward computation.
+I0412 04:28:31.979521 29002 net.cpp:228] data does not need backward computation.
+I0412 04:28:31.979537 29002 net.cpp:270] This network produces output accuarcy
+I0412 04:28:31.979555 29002 net.cpp:270] This network produces output loss_cls
+I0412 04:28:31.979574 29002 net.cpp:270] This network produces output loss_twin
+I0412 04:28:31.979591 29002 net.cpp:270] This network produces output rpn_accuarcy
+I0412 04:28:31.979607 29002 net.cpp:270] This network produces output rpn_accuarcy_class
+I0412 04:28:31.979624 29002 net.cpp:270] This network produces output rpn_cls_loss
+I0412 04:28:31.979638 29002 net.cpp:270] This network produces output rpn_loss_twin
+I0412 04:28:31.979707 29002 net.cpp:283] Network initialization done.
+I0412 04:28:31.979888 29002 solver.cpp:60] Solver scaffolding done.
+Loading pretrained model weights from ./pretrain/activitynet_iter_30000_3fps.caffemodel
+I0412 04:28:32.177938 29002 net.cpp:761] Ignoring source layer pool5
+I0412 04:28:32.200620 29002 net.cpp:761] Ignoring source layer fc7
+I0412 04:28:32.200639 29002 net.cpp:761] Ignoring source layer relu7
+I0412 04:28:32.200641 29002 net.cpp:761] Ignoring source layer drop7
+I0412 04:28:32.200644 29002 net.cpp:761] Ignoring source layer fc8-200
+I0412 04:28:32.200646 29002 net.cpp:761] Ignoring source layer loss
+Solving...
+BlobFetcher started
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[-57.,   9., -31., ...,  32.,  52.,  55.],
+          [-50., -17.,   4., ..., -44., -43., -24.],
+          [-59.,  17.,  -3., ..., -49., -51., -53.],
+          ...,
+          [ 85.,  96.,  97., ...,  76.,  79.,  77.],
+          [ 86.,  97., 101., ...,  76.,  79.,  77.],
+          [ 86.,  96.,  96., ...,  76.,  78.,  75.]],
+
+         [[ 10.,   2.,  11., ...,  66.,  64.,  63.],
+          [ -2.,  -5.,   0., ...,  60.,  61.,  64.],
+          [ -8., -11.,   0., ...,  61.,  57.,  58.],
+          ...,
+          [ 94.,  91.,  89., ...,  81.,  77.,  72.],
+          [ 88.,  85.,  84., ...,  81.,  77.,  73.],
+          [ 84.,  81.,  83., ...,  79.,  78.,  75.]],
+
+         [[ 16.,  26.,  -6., ...,  62.,  62.,  61.],
+          [ -9., -44., -23., ...,  64.,  63.,  62.],
+          [ 39., -23.,  -5., ...,  65.,  64.,  62.],
+          ...,
+          [113., 109., 102., ...,  73.,  73.,  73.],
+          [110., 108., 102., ...,  74.,  73.,  73.],
+          [107., 105., 101., ...,  74.,  72.,  72.]],
+
+         ...,
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]],
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]],
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]]],
+
+
+        [[[ 40., 105.,  70., ...,  25.,  45.,  48.],
+          [ 41.,  73., 108., ..., -51., -50., -31.],
+          [ 38., 121., 121., ..., -57., -59., -61.],
+          ...,
+          [ 19.,  34.,  37., ...,  73.,  74.,  72.],
+          [ 19.,  34.,  40., ...,  73.,  74.,  72.],
+          [ 18.,  30.,  35., ...,  73.,  73.,  70.]],
+
+         [[123., 120., 117., ...,  59.,  57.,  56.],
+          [121., 123., 116., ...,  53.,  54.,  57.],
+          [121., 121., 117., ...,  54.,  50.,  51.],
+          ...,
+          [ 15.,  17.,  18., ...,  76.,  72.,  67.],
+          [ 16.,  17.,  19., ...,  76.,  72.,  68.],
+          [ 16.,  17.,  23., ...,  74.,  73.,  70.]],
+
+         [[104., 116.,  99., ...,  55.,  55.,  54.],
+          [ 75.,  43.,  83., ...,  57.,  56.,  55.],
+          [127.,  70., 111., ...,  58.,  57.,  55.],
+          ...,
+          [ 19.,  19.,  19., ...,  70.,  70.,  70.],
+          [ 18.,  18.,  20., ...,  71.,  70.,  70.],
+          [ 17.,  19.,  20., ...,  71.,  69.,  69.]],
+
+         ...,
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]],
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]],
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]]],
+
+
+        [[[ 79., 144., 110., ...,  19.,  39.,  42.],
+          [ 81., 115., 147., ..., -57., -56., -37.],
+          [ 77., 153., 153., ..., -61., -63., -65.],
+          ...,
+          [-37., -23., -20., ...,  67.,  68.,  66.],
+          [-35., -21., -15., ...,  67.,  68.,  66.],
+          [-38., -23., -19., ...,  67.,  67.,  64.]],
+
+         [[151., 151., 153., ...,  51.,  49.,  48.],
+          [150., 153., 153., ...,  45.,  46.,  49.],
+          [149., 153., 153., ...,  48.,  44.,  45.],
+          ...,
+          [-57., -52., -47., ...,  70.,  66.,  61.],
+          [-52., -47., -41., ...,  70.,  66.,  62.],
+          [-47., -42., -34., ...,  68.,  67.,  64.]],
+
+         [[140., 153., 135., ...,  47.,  47.,  46.],
+          [114.,  83., 120., ...,  49.,  48.,  47.],
+          [153., 111., 147., ...,  50.,  49.,  47.],
+          ...,
+          [-67., -63., -59., ...,  65.,  64.,  64.],
+          [-62., -58., -56., ...,  65.,  64.,  64.],
+          [-59., -54., -52., ...,  65.,  63.,  63.]],
+
+         ...,
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]],
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]],
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('blobbbbbbbbbbbbbbbbbbbbbbbbbbbsssssssssssssssssssssssssssss', {'gt_windows': (array([[3.1250000e-02, 3.8569803e+02]], dtype=float32), array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 1., 0.]], dtype=float32)), 'data': array([[[[[-57.,   9., -31., ...,  32.,  52.,  55.],
+          [-50., -17.,   4., ..., -44., -43., -24.],
+          [-59.,  17.,  -3., ..., -49., -51., -53.],
+          ...,
+          [ 85.,  96.,  97., ...,  76.,  79.,  77.],
+          [ 86.,  97., 101., ...,  76.,  79.,  77.],
+          [ 86.,  96.,  96., ...,  76.,  78.,  75.]],
+
+         [[ 10.,   2.,  11., ...,  66.,  64.,  63.],
+          [ -2.,  -5.,   0., ...,  60.,  61.,  64.],
+          [ -8., -11.,   0., ...,  61.,  57.,  58.],
+          ...,
+          [ 94.,  91.,  89., ...,  81.,  77.,  72.],
+          [ 88.,  85.,  84., ...,  81.,  77.,  73.],
+          [ 84.,  81.,  83., ...,  79.,  78.,  75.]],
+
+         [[ 16.,  26.,  -6., ...,  62.,  62.,  61.],
+          [ -9., -44., -23., ...,  64.,  63.,  62.],
+          [ 39., -23.,  -5., ...,  65.,  64.,  62.],
+          ...,
+          [113., 109., 102., ...,  73.,  73.,  73.],
+          [110., 108., 102., ...,  74.,  73.,  73.],
+          [107., 105., 101., ...,  74.,  72.,  72.]],
+
+         ...,
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]],
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]],
+
+         [[-12., -13., -16., ..., -12., -15., -15.],
+          [-16., -16., -16., ..., -11., -13., -14.],
+          [-18., -18., -18., ...,  -6.,  -8.,  -9.],
+          ...,
+          [ 39.,  43.,  43., ...,  85.,  80.,  74.],
+          [ 41.,  37.,  27., ...,  79.,  73.,  68.],
+          [ 36.,  25.,  21., ...,  80.,  76.,  73.]]],
+
+
+        [[[ 40., 105.,  70., ...,  25.,  45.,  48.],
+          [ 41.,  73., 108., ..., -51., -50., -31.],
+          [ 38., 121., 121., ..., -57., -59., -61.],
+          ...,
+          [ 19.,  34.,  37., ...,  73.,  74.,  72.],
+          [ 19.,  34.,  40., ...,  73.,  74.,  72.],
+          [ 18.,  30.,  35., ...,  73.,  73.,  70.]],
+
+         [[123., 120., 117., ...,  59.,  57.,  56.],
+          [121., 123., 116., ...,  53.,  54.,  57.],
+          [121., 121., 117., ...,  54.,  50.,  51.],
+          ...,
+          [ 15.,  17.,  18., ...,  76.,  72.,  67.],
+          [ 16.,  17.,  19., ...,  76.,  72.,  68.],
+          [ 16.,  17.,  23., ...,  74.,  73.,  70.]],
+
+         [[104., 116.,  99., ...,  55.,  55.,  54.],
+          [ 75.,  43.,  83., ...,  57.,  56.,  55.],
+          [127.,  70., 111., ...,  58.,  57.,  55.],
+          ...,
+          [ 19.,  19.,  19., ...,  70.,  70.,  70.],
+          [ 18.,  18.,  20., ...,  71.,  70.,  70.],
+          [ 17.,  19.,  20., ...,  71.,  69.,  69.]],
+
+         ...,
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]],
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]],
+
+         [[ 36.,  35.,  32., ...,  35.,  35.,  33.],
+          [ 32.,  32.,  32., ...,  38.,  37.,  36.],
+          [ 28.,  28.,  29., ...,  40.,  39.,  38.],
+          ...,
+          [ 40.,  44.,  44., ...,  89.,  85.,  79.],
+          [ 43.,  39.,  29., ...,  86.,  80.,  75.],
+          [ 38.,  27.,  23., ...,  87.,  83.,  80.]]],
+
+
+        [[[ 79., 144., 110., ...,  19.,  39.,  42.],
+          [ 81., 115., 147., ..., -57., -56., -37.],
+          [ 77., 153., 153., ..., -61., -63., -65.],
+          ...,
+          [-37., -23., -20., ...,  67.,  68.,  66.],
+          [-35., -21., -15., ...,  67.,  68.,  66.],
+          [-38., -23., -19., ...,  67.,  67.,  64.]],
+
+         [[151., 151., 153., ...,  51.,  49.,  48.],
+          [150., 153., 153., ...,  45.,  46.,  49.],
+          [149., 153., 153., ...,  48.,  44.,  45.],
+          ...,
+          [-57., -52., -47., ...,  70.,  66.,  61.],
+          [-52., -47., -41., ...,  70.,  66.,  62.],
+          [-47., -42., -34., ...,  68.,  67.,  64.]],
+
+         [[140., 153., 135., ...,  47.,  47.,  46.],
+          [114.,  83., 120., ...,  49.,  48.,  47.],
+          [153., 111., 147., ...,  50.,  49.,  47.],
+          ...,
+          [-67., -63., -59., ...,  65.,  64.,  64.],
+          [-62., -58., -56., ...,  65.,  64.,  64.],
+          [-59., -54., -52., ...,  65.,  63.,  63.]],
+
+         ...,
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]],
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]],
+
+         [[ -9., -10., -13., ...,   4.,   2.,   0.],
+          [-15., -15., -15., ...,   9.,   5.,   4.],
+          [-19., -19., -20., ...,  13.,  10.,   9.],
+          ...,
+          [ 45.,  49.,  49., ..., 103.,  97.,  91.],
+          [ 49.,  45.,  35., ...,  98.,  92.,  87.],
+          [ 44.,  33.,  29., ...,  99.,  95.,  92.]]]]], dtype=float32)})
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[-21.,  -8.,   7., ..., -25.,   1., -13.],
+          [-14.,   2.,  21., ...,  43.,  -8., -14.],
+          [ -3.,  11.,  34., ...,  32.,   6.,  29.],
+          ...,
+          [ 66.,  67.,  70., ...,  24.,  28.,  37.],
+          [ 68.,  69.,  72., ...,  28.,  32.,  40.],
+          [ 68.,  70.,  72., ...,  32.,  33.,  40.]],
+
+         [[ -5.,   2., -18., ..., 100.,  91.,  10.],
+          [ -7.,  -8.,  -5., ..., 104.,  89.,   2.],
+          [-13., -19., -14., ...,  80.,  96.,  -1.],
+          ...,
+          [ 66.,  66.,  67., ...,  24.,  30.,  36.],
+          [ 66.,  66.,  67., ...,  27.,  33.,  38.],
+          [ 66.,  66.,  67., ...,  28.,  34.,  38.]],
+
+         [[ 29.,  34.,  38., ...,  24.,  10.,  46.],
+          [ 12.,  31.,  35., ...,  44.,  30.,  67.],
+          [ -2.,  22.,  32., ...,  57.,  44.,  80.],
+          ...,
+          [ 63.,  64.,  64., ...,   5.,  52.,  82.],
+          [ 64.,  64.,  65., ...,  42.,  71.,  97.],
+          [ 63.,  64.,  65., ...,  73.,  94., 113.]],
+
+         ...,
+
+         [[-18., -14., -30., ...,   0.,   1.,   1.],
+          [  2.,  -8., -16., ...,   3.,   2.,   1.],
+          [  2.,  -4.,   9., ...,   3.,   4.,   3.],
+          ...,
+          [ 87.,  82.,  80., ...,  89.,  89.,  83.],
+          [ 86.,  81.,  80., ...,  79.,  83.,  82.],
+          [ 86.,  80.,  80., ...,  66.,  75.,  79.]],
+
+         [[-18., -14., -30., ...,   0.,   1.,   1.],
+          [  2.,  -8., -16., ...,   3.,   2.,   1.],
+          [  2.,  -4.,   9., ...,   3.,   4.,   3.],
+          ...,
+          [ 87.,  82.,  80., ...,  89.,  89.,  83.],
+          [ 86.,  81.,  80., ...,  79.,  83.,  82.],
+          [ 86.,  80.,  80., ...,  66.,  75.,  79.]],
+
+         [[-18., -14., -30., ...,   0.,   1.,   1.],
+          [  2.,  -8., -16., ...,   3.,   2.,   1.],
+          [  2.,  -4.,   9., ...,   3.,   4.,   3.],
+          ...,
+          [ 87.,  82.,  80., ...,  89.,  89.,  83.],
+          [ 86.,  81.,  80., ...,  79.,  83.,  82.],
+          [ 86.,  80.,  80., ...,  66.,  75.,  79.]]],
+
+
+        [[[ -4.,   0.,   3., ..., -42., -16., -35.],
+          [  1.,   7.,  13., ...,  23., -28., -36.],
+          [  6.,  10.,  17., ...,  11., -13.,  10.],
+          ...,
+          [ 54.,  54.,  57., ...,  15.,  20.,  25.],
+          [ 56.,  57.,  60., ...,  18.,  21.,  28.],
+          [ 56.,  58.,  60., ...,  20.,  21.,  28.]],
+
+         [[  3.,   5., -21., ...,  80.,  82.,  -6.],
+          [  4.,   0.,  -5., ...,  84.,  77., -16.],
+          [  3.,  -5.,  -5., ...,  61.,  83., -18.],
+          ...,
+          [ 54.,  53.,  54., ...,   7.,  15.,  23.],
+          [ 54.,  53.,  54., ...,  11.,  18.,  25.],
+          [ 54.,  53.,  54., ...,  13.,  21.,  24.]],
+
+         [[ 33.,  35.,  37., ..., -20., -21.,  38.],
+          [ 14.,  32.,  34., ..., -14., -10.,  54.],
+          [  0.,  22.,  30., ..., -11.,  -2.,  64.],
+          ...,
+          [ 51.,  53.,  53., ..., -13.,  35.,  65.],
+          [ 53.,  53.,  54., ...,  26.,  57.,  83.],
+          [ 52.,  53.,  54., ...,  60.,  83., 102.]],
+
+         ...,
+
+         [[-12., -11., -27., ...,  52.,  50.,  50.],
+          [ 11.,   1., -10., ...,  53.,  53.,  51.],
+          [ 10.,   4.,  15., ...,  54.,  53.,  52.],
+          ...,
+          [ 88.,  83.,  81., ...,  91.,  90.,  84.],
+          [ 87.,  82.,  81., ...,  82.,  85.,  84.],
+          [ 87.,  81.,  81., ...,  70.,  78.,  82.]],
+
+         [[-12., -11., -27., ...,  52.,  50.,  50.],
+          [ 11.,   1., -10., ...,  53.,  53.,  51.],
+          [ 10.,   4.,  15., ...,  54.,  53.,  52.],
+          ...,
+          [ 88.,  83.,  81., ...,  91.,  90.,  84.],
+          [ 87.,  82.,  81., ...,  82.,  85.,  84.],
+          [ 87.,  81.,  81., ...,  70.,  78.,  82.]],
+
+         [[-12., -11., -27., ...,  52.,  50.,  50.],
+          [ 11.,   1., -10., ...,  53.,  53.,  51.],
+          [ 10.,   4.,  15., ...,  54.,  53.,  52.],
+          ...,
+          [ 88.,  83.,  81., ...,  91.,  90.,  84.],
+          [ 87.,  82.,  81., ...,  82.,  85.,  84.],
+          [ 87.,  81.,  81., ...,  70.,  78.,  82.]]],
+
+
+        [[[ 24.,  39.,  50., ...,  35.,  61.,  57.],
+          [ 23.,  29.,  33., ..., 115.,  58.,  54.],
+          [ 28.,  23.,  16., ..., 105.,  75.,  98.],
+          ...,
+          [ 45.,  47.,  50., ...,   7.,  10.,  20.],
+          [ 47.,  48.,  51., ...,  13.,  13.,  23.],
+          [ 47.,  49.,  51., ...,  15.,  16.,  23.]],
+
+         [[ 36.,  58.,  60., ...,  82., 112.,  60.],
+          [ 33.,  43.,  61., ...,  98., 115.,  56.],
+          [ 29.,  32.,  48., ...,  90., 130.,  58.],
+          ...,
+          [ 45.,  46.,  47., ...,  13.,  14.,  20.],
+          [ 45.,  46.,  47., ...,  14.,  17.,  23.],
+          [ 45.,  46.,  47., ...,  12.,  16.,  21.]],
+
+         [[ 39.,  40.,  42., ..., -10., -11.,  48.],
+          [ 27.,  41.,  45., ..., -30., -20.,  51.],
+          [ 14.,  35.,  49., ..., -37., -18.,  60.],
+          ...,
+          [ 46.,  45.,  45., ...,  -4.,  52.,  88.],
+          [ 45.,  45.,  46., ...,  39.,  78., 110.],
+          [ 44.,  45.,  46., ...,  77., 105., 130.]],
+
+         ...,
+
+         [[-20., -17., -34., ...,  14.,  13.,  13.],
+          [  4.,  -6., -16., ...,  14.,  11.,  12.],
+          [  5.,  -1.,  10., ...,  12.,  10.,  10.],
+          ...,
+          [ 88.,  82.,  80., ...,  94.,  90.,  84.],
+          [ 86.,  81.,  80., ...,  86.,  88.,  87.],
+          [ 86.,  80.,  80., ...,  78.,  82.,  86.]],
+
+         [[-20., -17., -34., ...,  14.,  13.,  13.],
+          [  4.,  -6., -16., ...,  14.,  11.,  12.],
+          [  5.,  -1.,  10., ...,  12.,  10.,  10.],
+          ...,
+          [ 88.,  82.,  80., ...,  94.,  90.,  84.],
+          [ 86.,  81.,  80., ...,  86.,  88.,  87.],
+          [ 86.,  80.,  80., ...,  78.,  82.,  86.]],
+
+         [[-20., -17., -34., ...,  14.,  13.,  13.],
+          [  4.,  -6., -16., ...,  14.,  11.,  12.],
+          [  5.,  -1.,  10., ...,  12.,  10.,  10.],
+          ...,
+          [ 88.,  82.,  80., ...,  94.,  90.,  84.],
+          [ 86.,  81.,  80., ...,  86.,  88.,  87.],
+          [ 86.,  80.,  80., ...,  78.,  82.,  86.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+F0412 04:28:33.754988 29002 syncedmem.cpp:56] Check failed: error == cudaSuccess (2 vs. 0)  out of memory
+*** Check failure stack trace: ***
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[ 79.,  32.,  44., ...,   1.,  -2.,  -5.],
+          [ 44.,  26.,  46., ..., -13.,  -1.,  -3.],
+          [ 33.,  34.,  49., ..., -21.,  -8.,  20.],
+          ...,
+          [  2.,  22.,  51., ...,  65.,  65.,  65.],
+          [ 11.,  16.,  43., ...,  65.,  66.,  65.],
+          [ 15.,  12.,  30., ...,  66.,  66.,  66.]],
+
+         [[ 22.,  38.,  45., ...,  10.,  -7.,  -8.],
+          [ 31.,  56.,  64., ...,  -3.,  -1.,  -7.],
+          [ 42.,  59.,  77., ...,  -2.,  -6.,  -5.],
+          ...,
+          [ 26.,  63.,  78., ...,  66.,  66.,  66.],
+          [ 17.,  66.,  76., ...,  66.,  66.,  66.],
+          [ 12.,  73.,  76., ...,  66.,  66.,  67.]],
+
+         [[ 18., -10., -28., ...,  45.,  50.,  50.],
+          [-33., -24., -28., ...,  51.,  42.,  14.],
+          [-13., -14., -11., ...,  37.,   5.,  -5.],
+          ...,
+          [ 65.,  60.,  55., ...,  59.,  59.,  59.],
+          [ 55.,  56.,  50., ...,  59.,  59.,  60.],
+          [ 19.,  39.,  44., ...,  60.,  60.,  61.]],
+
+         ...,
+
+         [[  8.,   6.,   4., ...,  66.,  55.,  62.],
+          [  2.,   2.,   1., ...,  24.,  61.,  78.],
+          [  0.,   1.,   0., ...,   8.,  60.,  66.],
+          ...,
+          [ 90.,  88.,  84., ...,  83.,  83.,  84.],
+          [ 94.,  88.,  72., ...,  83.,  83.,  84.],
+          [ 90.,  72.,  62., ...,  84.,  84.,  84.]],
+
+         [[  8.,   6.,   4., ...,  66.,  55.,  62.],
+          [  2.,   2.,   1., ...,  24.,  61.,  78.],
+          [  0.,   1.,   0., ...,   8.,  60.,  66.],
+          ...,
+          [ 90.,  88.,  84., ...,  83.,  83.,  84.],
+          [ 94.,  88.,  72., ...,  83.,  83.,  84.],
+          [ 90.,  72.,  62., ...,  84.,  84.,  84.]],
+
+         [[  8.,   6.,   4., ...,  66.,  55.,  62.],
+          [  2.,   2.,   1., ...,  24.,  61.,  78.],
+          [  0.,   1.,   0., ...,   8.,  60.,  66.],
+          ...,
+          [ 90.,  88.,  84., ...,  83.,  83.,  84.],
+          [ 94.,  88.,  72., ...,  83.,  83.,  84.],
+          [ 90.,  72.,  62., ...,  84.,  84.,  84.]]],
+
+
+        [[[ 56.,  -8., -19., ...,   4.,  -1.,  -6.],
+          [ 23.,  -8.,  -5., ...,  -5.,   1.,  -2.],
+          [ 13.,   5.,   7., ...,  -7.,   0.,  26.],
+          ...,
+          [ -5.,  14.,  48., ...,  54.,  54.,  54.],
+          [  2.,   8.,  39., ...,  54.,  55.,  54.],
+          [  7.,   5.,  27., ...,  54.,  54.,  54.]],
+
+         [[-16., -18., -18., ...,  18.,   1.,   3.],
+          [-11.,  -7.,  -7., ...,   5.,  10.,   3.],
+          [ -3.,  -7.,   2., ...,   8.,   3.,   4.],
+          ...,
+          [ 16.,  54.,  73., ...,  54.,  54.,  54.],
+          [  5.,  57.,  70., ...,  54.,  54.,  54.],
+          [ -2.,  61.,  70., ...,  54.,  54.,  55.]],
+
+         [[  0., -30., -56., ...,  37.,  41.,  38.],
+          [-56., -49., -60., ...,  51.,  36.,   6.],
+          [-47., -51., -51., ...,  39.,   4., -10.],
+          ...,
+          [ 38.,  33.,  29., ...,  49.,  49.,  49.],
+          [ 31.,  30.,  25., ...,  49.,  49.,  50.],
+          [ -4.,  15.,  21., ...,  48.,  48.,  49.]],
+
+         ...,
+
+         [[ 57.,  55.,  53., ...,  55.,  55.,  65.],
+          [ 53.,  53.,  52., ...,  13.,  53.,  69.],
+          [ 52.,  53.,  52., ...,   4.,  51.,  55.],
+          ...,
+          [ 90.,  89.,  87., ...,  83.,  83.,  84.],
+          [ 95.,  91.,  76., ...,  84.,  83.,  84.],
+          [ 94.,  77.,  66., ...,  85.,  85.,  85.]],
+
+         [[ 57.,  55.,  53., ...,  55.,  55.,  65.],
+          [ 53.,  53.,  52., ...,  13.,  53.,  69.],
+          [ 52.,  53.,  52., ...,   4.,  51.,  55.],
+          ...,
+          [ 90.,  89.,  87., ...,  83.,  83.,  84.],
+          [ 95.,  91.,  76., ...,  84.,  83.,  84.],
+          [ 94.,  77.,  66., ...,  85.,  85.,  85.]],
+
+         [[ 57.,  55.,  53., ...,  55.,  55.,  65.],
+          [ 53.,  53.,  52., ...,  13.,  53.,  69.],
+          [ 52.,  53.,  52., ...,   4.,  51.,  55.],
+          ...,
+          [ 90.,  89.,  87., ...,  83.,  83.,  84.],
+          [ 95.,  91.,  76., ...,  84.,  83.,  84.],
+          [ 94.,  77.,  66., ...,  85.,  85.,  85.]]],
+
+
+        [[[ 66., -11., -32., ...,  58.,  39.,  29.],
+          [ 51.,  11.,   2., ...,  37.,  37.,  31.],
+          [ 69.,  56.,  50., ...,  25.,  32.,  58.],
+          ...,
+          [  1.,  26.,  69., ...,  45.,  45.,  45.],
+          [  7.,  20.,  59., ...,  45.,  46.,  45.],
+          [  9.,  15.,  44., ...,  45.,  45.,  45.]],
+
+         [[-21., -28., -35., ...,  37.,   9.,   4.],
+          [-31., -38., -49., ...,  24.,  21.,  10.],
+          [-27., -47., -51., ...,  27.,  20.,  19.],
+          ...,
+          [ 31.,  76., 100., ...,  45.,  45.,  45.],
+          [ 20.,  79.,  97., ...,  45.,  45.,  45.],
+          [ 11.,  82.,  96., ...,  45.,  45.,  46.]],
+
+         [[ 96.,  66.,  59., ...,  33.,  41.,  40.],
+          [ 24.,  34.,  30., ...,  47.,  42.,  14.],
+          [  3.,   0.,   0., ...,  42.,  17.,   7.],
+          ...,
+          [ 26.,  16.,   8., ...,  44.,  44.,  44.],
+          [ 21.,  15.,   8., ...,  44.,  44.,  45.],
+          [-10.,   4.,   8., ...,  43.,  43.,  44.]],
+
+         ...,
+
+         [[ 28.,  26.,  24., ...,  46.,  41.,  53.],
+          [ 21.,  21.,  20., ...,   5.,  43.,  61.],
+          [ 18.,  19.,  17., ...,  -5.,  43.,  47.],
+          ...,
+          [ 86.,  88.,  87., ...,  86.,  86.,  87.],
+          [ 94.,  91.,  78., ...,  84.,  86.,  87.],
+          [ 96.,  81.,  72., ...,  85.,  85.,  85.]],
+
+         [[ 28.,  26.,  24., ...,  46.,  41.,  53.],
+          [ 21.,  21.,  20., ...,   5.,  43.,  61.],
+          [ 18.,  19.,  17., ...,  -5.,  43.,  47.],
+          ...,
+          [ 86.,  88.,  87., ...,  86.,  86.,  87.],
+          [ 94.,  91.,  78., ...,  84.,  86.,  87.],
+          [ 96.,  81.,  72., ...,  85.,  85.,  85.]],
+
+         [[ 28.,  26.,  24., ...,  46.,  41.,  53.],
+          [ 21.,  21.,  20., ...,   5.,  43.,  61.],
+          [ 18.,  19.,  17., ...,  -5.,  43.,  47.],
+          ...,
+          [ 86.,  88.,  87., ...,  86.,  86.,  87.],
+          [ 94.,  91.,  78., ...,  84.,  86.,  87.],
+          [ 96.,  81.,  72., ...,  85.,  85.,  85.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[  0.,  30.,  50., ...,  69.,  79.,  77.],
+          [  8.,  15.,  46., ...,  87.,  86.,  76.],
+          [ 17.,   5.,   6., ..., 100.,  55.,  56.],
+          ...,
+          [ 68.,  68.,  67., ...,  70.,  72.,  18.],
+          [ 67.,  69.,  67., ...,  76.,  81.,  71.],
+          [ 67.,  69.,  66., ...,  84.,  79.,  81.]],
+
+         [[-52., -41.,  -8., ...,  40.,   9.,  78.],
+          [-43., -32.,  -4., ...,  87.,  55.,  55.],
+          [-27., -15.,   4., ...,  78.,  56.,  66.],
+          ...,
+          [ 68.,  69.,  69., ...,  36.,  29.,  25.],
+          [ 68.,  69.,  69., ...,  26.,  25.,  26.],
+          [ 67.,  68.,  68., ...,  40.,  31.,  39.]],
+
+         [[-31., -32., -21., ...,  64.,  80.,  80.],
+          [-63., -54., -51., ...,  62.,  83.,  88.],
+          [-68., -62., -63., ...,  83.,  84.,  79.],
+          ...,
+          [ 76.,  74.,  72., ...,  44.,  48.,  57.],
+          [ 73.,  71.,  71., ...,  41.,  48.,  52.],
+          [ 70.,  69.,  69., ...,  42.,  49.,  47.]],
+
+         ...,
+
+         [[  3.,  -3.,   7., ...,   2.,  -3.,  -7.],
+          [  6.,  17.,  23., ...,  -3., -10., -14.],
+          [ 26.,  30.,  40., ..., -13., -17., -15.],
+          ...,
+          [ 84.,  85.,  84., ...,  67.,  54.,  60.],
+          [ 84.,  83.,  82., ...,  77.,  64.,  61.],
+          [ 83.,  81.,  82., ...,  83.,  71.,  66.]],
+
+         [[  3.,  -3.,   7., ...,   2.,  -3.,  -7.],
+          [  6.,  17.,  23., ...,  -3., -10., -14.],
+          [ 26.,  30.,  40., ..., -13., -17., -15.],
+          ...,
+          [ 84.,  85.,  84., ...,  67.,  54.,  60.],
+          [ 84.,  83.,  82., ...,  77.,  64.,  61.],
+          [ 83.,  81.,  82., ...,  83.,  71.,  66.]],
+
+         [[  3.,  -3.,   7., ...,   2.,  -3.,  -7.],
+          [  6.,  17.,  23., ...,  -3., -10., -14.],
+          [ 26.,  30.,  40., ..., -13., -17., -15.],
+          ...,
+          [ 84.,  85.,  84., ...,  67.,  54.,  60.],
+          [ 84.,  83.,  82., ...,  77.,  64.,  61.],
+          [ 83.,  81.,  82., ...,  83.,  71.,  66.]]],
+
+
+        [[[-37.,   2.,  31., ...,  67.,  78.,  76.],
+          [-35., -17.,  24., ...,  84.,  82.,  71.],
+          [-34., -31., -16., ...,  96.,  51.,  50.],
+          ...,
+          [ 60.,  60.,  59., ...,  49.,  48.,  -5.],
+          [ 58.,  61.,  59., ...,  53.,  55.,  44.],
+          [ 58.,  61.,  58., ...,  59.,  52.,  50.]],
+
+         [[-75., -69., -31., ...,  38.,   7.,  80.],
+          [-72., -66., -33., ...,  85.,  55.,  56.],
+          [-64., -57., -33., ...,  79.,  59.,  72.],
+          ...,
+          [ 59.,  60.,  60., ...,  23.,  16.,   4.],
+          [ 59.,  60.,  60., ...,   4.,   1.,   2.],
+          [ 58.,  59.,  59., ...,  12.,   2.,  12.]],
+
+         [[-60., -62., -50., ...,  63.,  79.,  80.],
+          [-83., -78., -75., ...,  61.,  81.,  89.],
+          [-86., -84., -86., ...,  80.,  80.,  78.],
+          ...,
+          [ 65.,  65.,  63., ...,  32.,  37.,  47.],
+          [ 62.,  62.,  62., ...,  28.,  36.,  42.],
+          [ 59.,  60.,  60., ...,  30.,  36.,  37.]],
+
+         ...,
+
+         [[ 14.,   8.,  18., ...,  51.,  47.,  44.],
+          [ 16.,  25.,  29., ...,  49.,  42.,  37.],
+          [ 36.,  37.,  45., ...,  39.,  38.,  37.],
+          ...,
+          [ 85.,  86.,  85., ...,  72.,  61.,  67.],
+          [ 87.,  86.,  85., ...,  80.,  69.,  66.],
+          [ 86.,  84.,  85., ...,  85.,  77.,  71.]],
+
+         [[ 14.,   8.,  18., ...,  51.,  47.,  44.],
+          [ 16.,  25.,  29., ...,  49.,  42.,  37.],
+          [ 36.,  37.,  45., ...,  39.,  38.,  37.],
+          ...,
+          [ 85.,  86.,  85., ...,  72.,  61.,  67.],
+          [ 87.,  86.,  85., ...,  80.,  69.,  66.],
+          [ 86.,  84.,  85., ...,  85.,  77.,  71.]],
+
+         [[ 14.,   8.,  18., ...,  51.,  47.,  44.],
+          [ 16.,  25.,  29., ...,  49.,  42.,  37.],
+          [ 36.,  37.,  45., ...,  39.,  38.,  37.],
+          ...,
+          [ 85.,  86.,  85., ...,  72.,  61.,  67.],
+          [ 87.,  86.,  85., ...,  80.,  69.,  66.],
+          [ 86.,  84.,  85., ...,  85.,  77.,  71.]]],
+
+
+        [[[-50.,  -3.,  30., ...,  82.,  94.,  99.],
+          [-53., -21.,  24., ..., 101., 102.,  98.],
+          [-53., -35., -14., ..., 120.,  75.,  81.],
+          ...,
+          [ 50.,  50.,  49., ..., 153., 153., 113.],
+          [ 50.,  51.,  49., ..., 153., 153., 153.],
+          [ 50.,  51.,  48., ..., 153., 151., 153.]],
+
+         [[ 19.,   0.,   9., ...,  57.,  26.,  94.],
+          [  3., -16.,  -5., ..., 104.,  74.,  72.],
+          [-18., -31., -22., ...,  95.,  77.,  86.],
+          ...,
+          [ 51.,  52.,  52., ...,  80.,  97., 108.],
+          [ 51.,  52.,  52., ...,  94., 114., 129.],
+          [ 50.,  51.,  51., ..., 121., 130., 147.]],
+
+         [[ 62.,  70.,  85., ...,  78.,  94.,  99.],
+          [ 55.,  65.,  68., ...,  76.,  96., 105.],
+          [ 56.,  60.,  55., ...,  97.,  95.,  94.],
+          ...,
+          [ 56.,  57.,  55., ...,  34.,  35.,  42.],
+          [ 54.,  54.,  54., ...,  25.,  31.,  38.],
+          [ 51.,  52.,  52., ...,  25.,  29.,  32.]],
+
+         ...,
+
+         [[  7.,   1.,  11., ...,   8.,   2.,  -4.],
+          [ 11.,  20.,  24., ...,   4.,  -3., -11.],
+          [ 33.,  35.,  43., ...,  -6., -10.,  -8.],
+          ...,
+          [ 90.,  91.,  90., ...,  76.,  66.,  72.],
+          [ 91.,  90.,  89., ...,  84.,  73.,  70.],
+          [ 90.,  88.,  89., ...,  88.,  79.,  75.]],
+
+         [[  7.,   1.,  11., ...,   8.,   2.,  -4.],
+          [ 11.,  20.,  24., ...,   4.,  -3., -11.],
+          [ 33.,  35.,  43., ...,  -6., -10.,  -8.],
+          ...,
+          [ 90.,  91.,  90., ...,  76.,  66.,  72.],
+          [ 91.,  90.,  89., ...,  84.,  73.,  70.],
+          [ 90.,  88.,  89., ...,  88.,  79.,  75.]],
+
+         [[  7.,   1.,  11., ...,   8.,   2.,  -4.],
+          [ 11.,  20.,  24., ...,   4.,  -3., -11.],
+          [ 33.,  35.,  43., ...,  -6., -10.,  -8.],
+          ...,
+          [ 90.,  91.,  90., ...,  76.,  66.,  72.],
+          [ 91.,  90.,  89., ...,  84.,  73.,  70.],
+          [ 90.,  88.,  89., ...,  88.,  79.,  75.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[-52., -52., -52., ..., 112., 111., 112.],
+          [-51., -51., -52., ..., 112., 112., 114.],
+          [-52., -52., -53., ..., 113., 113., 114.],
+          ...,
+          [-13., -15., -18., ...,  89.,  89.,  90.],
+          [  1., -17.,  -8., ...,  83.,  85.,  84.],
+          [ 20., -16.,  -5., ...,  75.,  72.,  74.]],
+
+         [[ 20.,  -4., -27., ..., 103., 114., 116.],
+          [-50., -49., -49., ..., 114., 109., 114.],
+          [-52., -48., -48., ..., 111., 112., 114.],
+          ...,
+          [-16., -18., -20., ...,  89.,  90.,  88.],
+          [-15., -20., -17., ...,  88.,  89.,  88.],
+          [-14., -19., -17., ...,  89.,  90.,  87.]],
+
+         [[ 73.,  74.,  73., ...,  72.,  94., 108.],
+          [ 74.,  73.,  70., ...,  71.,  96., 106.],
+          [ 68.,  64.,  63., ...,  81., 102., 106.],
+          ...,
+          [-20., -19., -17., ..., 100.,  99.,  98.],
+          [-20., -21., -18., ..., 100.,  99.,  97.],
+          [-19., -20., -22., ..., 100.,  98.,  95.]],
+
+         ...,
+
+         [[  5.,   7.,   7., ..., -18., -16., -28.],
+          [ 18.,  21.,  27., ..., -11.,  -9., -31.],
+          [ 50.,  52.,  55., ...,  -8.,  -2., -36.],
+          ...,
+          [ 75.,  69.,  70., ...,  32.,  32.,  33.],
+          [ 77.,  69.,  68., ...,  32.,  35.,  33.],
+          [ 82.,  68.,  68., ...,  37.,  35.,  34.]],
+
+         [[  5.,   7.,   7., ..., -18., -16., -28.],
+          [ 18.,  21.,  27., ..., -11.,  -9., -31.],
+          [ 50.,  52.,  55., ...,  -8.,  -2., -36.],
+          ...,
+          [ 75.,  69.,  70., ...,  32.,  32.,  33.],
+          [ 77.,  69.,  68., ...,  32.,  35.,  33.],
+          [ 82.,  68.,  68., ...,  37.,  35.,  34.]],
+
+         [[  5.,   7.,   7., ..., -18., -16., -28.],
+          [ 18.,  21.,  27., ..., -11.,  -9., -31.],
+          [ 50.,  52.,  55., ...,  -8.,  -2., -36.],
+          ...,
+          [ 75.,  69.,  70., ...,  32.,  32.,  33.],
+          [ 77.,  69.,  68., ...,  32.,  35.,  33.],
+          [ 82.,  68.,  68., ...,  37.,  35.,  34.]]],
+
+
+        [[[-58., -58., -58., ...,  21.,  20.,  20.],
+          [-57., -57., -58., ...,  19.,  19.,  20.],
+          [-58., -58., -59., ...,  18.,  19.,  21.],
+          ...,
+          [ -8., -13., -17., ...,  -4.,  -4.,  -6.],
+          [  6., -15.,  -7., ...,  -5.,  -5.,  -7.],
+          [ 25., -14.,  -4., ...,  -7., -10.,  -9.]],
+
+         [[ 13., -12., -35., ...,  11.,  22.,  20.],
+          [-58., -57., -57., ...,  23.,  19.,  21.],
+          [-60., -56., -56., ...,  20.,  22.,  21.],
+          ...,
+          [-14., -17., -19., ...,  -3.,  -2.,  -3.],
+          [-13., -19., -16., ...,  -5.,  -4.,  -3.],
+          [-10., -18., -16., ...,  -4.,  -3.,  -5.]],
+
+         [[ 66.,  67.,  66., ...,  26.,  17.,  18.],
+          [ 67.,  66.,  63., ...,  19.,  19.,  18.],
+          [ 61.,  57.,  56., ...,  24.,  20.,  18.],
+          ...,
+          [-21., -23., -21., ...,   2.,   2.,   1.],
+          [-19., -23., -22., ...,   3.,   2.,   0.],
+          [-18., -22., -24., ...,   3.,   1.,   0.]],
+
+         ...,
+
+         [[ 45.,  44.,  42., ...,  25.,  17.,  -3.],
+          [ 50.,  53.,  56., ...,  29.,  24.,  -7.],
+          [ 75.,  76.,  77., ...,  30.,  30., -14.],
+          ...,
+          [ 83.,  77.,  78., ...,  33.,  33.,  34.],
+          [ 85.,  77.,  76., ...,  33.,  36.,  34.],
+          [ 91.,  79.,  79., ...,  40.,  38.,  37.]],
+
+         [[ 45.,  44.,  42., ...,  25.,  17.,  -3.],
+          [ 50.,  53.,  56., ...,  29.,  24.,  -7.],
+          [ 75.,  76.,  77., ...,  30.,  30., -14.],
+          ...,
+          [ 83.,  77.,  78., ...,  33.,  33.,  34.],
+          [ 85.,  77.,  76., ...,  33.,  36.,  34.],
+          [ 91.,  79.,  79., ...,  40.,  38.,  37.]],
+
+         [[ 45.,  44.,  42., ...,  25.,  17.,  -3.],
+          [ 50.,  53.,  56., ...,  29.,  24.,  -7.],
+          [ 75.,  76.,  77., ...,  30.,  30., -14.],
+          ...,
+          [ 83.,  77.,  78., ...,  33.,  33.,  34.],
+          [ 85.,  77.,  76., ...,  33.,  36.,  34.],
+          [ 91.,  79.,  79., ...,  40.,  38.,  37.]]],
+
+
+        [[[-62., -61., -61., ..., -58., -59., -60.],
+          [-60., -60., -61., ..., -59., -59., -60.],
+          [-61., -61., -62., ..., -60., -61., -61.],
+          ...,
+          [ -4.,  -7.,  -8., ..., -82., -82., -81.],
+          [ 10.,  -9.,   3., ..., -80., -80., -79.],
+          [ 29.,  -8.,   6., ..., -77., -78., -75.]],
+
+         [[  7., -16., -39., ..., -65., -58., -61.],
+          [-62., -61., -61., ..., -56., -62., -61.],
+          [-64., -60., -60., ..., -59., -59., -61.],
+          ...,
+          [ -8.,  -8., -10., ..., -83., -82., -82.],
+          [ -7., -10.,  -6., ..., -83., -82., -82.],
+          [ -4.,  -9.,  -6., ..., -80., -79., -81.]],
+
+         [[ 58.,  59.,  58., ...,  -2., -30., -44.],
+          [ 59.,  58.,  55., ..., -16., -34., -47.],
+          [ 53.,  49.,  48., ..., -18., -38., -49.],
+          ...,
+          [-16., -16., -14., ..., -79., -82., -84.],
+          [-14., -16., -15., ..., -81., -82., -84.],
+          [-13., -15., -17., ..., -81., -83., -84.]],
+
+         ...,
+
+         [[ 23.,  24.,  23., ..., -16., -15., -28.],
+          [ 34.,  38.,  42., ..., -11.,  -8., -30.],
+          [ 64.,  67.,  68., ..., -10.,  -2., -37.],
+          ...,
+          [ 95.,  89.,  90., ...,  38.,  38.,  39.],
+          [ 97.,  89.,  88., ...,  38.,  41.,  39.],
+          [100.,  90.,  90., ...,  44.,  42.,  41.]],
+
+         [[ 23.,  24.,  23., ..., -16., -15., -28.],
+          [ 34.,  38.,  42., ..., -11.,  -8., -30.],
+          [ 64.,  67.,  68., ..., -10.,  -2., -37.],
+          ...,
+          [ 95.,  89.,  90., ...,  38.,  38.,  39.],
+          [ 97.,  89.,  88., ...,  38.,  41.,  39.],
+          [100.,  90.,  90., ...,  44.,  42.,  41.]],
+
+         [[ 23.,  24.,  23., ..., -16., -15., -28.],
+          [ 34.,  38.,  42., ..., -11.,  -8., -30.],
+          [ 64.,  67.,  68., ..., -10.,  -2., -37.],
+          ...,
+          [ 95.,  89.,  90., ...,  38.,  38.,  39.],
+          [ 97.,  89.,  88., ...,  38.,  41.,  39.],
+          [100.,  90.,  90., ...,  44.,  42.,  41.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[ 42.,  52.,  64., ...,  46.,  42.,  41.],
+          [ 43.,  74.,  78., ...,  41.,  42.,  45.],
+          [ 74.,  53.,  77., ...,  45.,  41.,  49.],
+          ...,
+          [ 13.,  14.,  17., ...,  66.,  67.,  67.],
+          [ 14.,  12.,  20., ...,  67.,  67.,  67.],
+          [ 17.,  27.,  29., ...,  68.,  68.,  68.]],
+
+         [[ 86.,  78.,  92., ...,  46.,  18., -51.],
+          [ 83.,  79.,  85., ...,  43.,  38., -34.],
+          [ 86.,  83.,  77., ...,  40.,  38., -16.],
+          ...,
+          [ 61.,  62.,  62., ...,  67.,  66.,  65.],
+          [ 50.,  48.,  48., ...,  68.,  67.,  66.],
+          [ 36.,  32.,  37., ...,  67.,  67.,  67.]],
+
+         [[ 44.,  86.,  83., ...,  -1.,  29.,  49.],
+          [ 63.,  51.,  50., ..., -18.,  -6.,  35.],
+          [ 53.,  61.,  79., ..., -30., -30.,  14.],
+          ...,
+          [ 48.,  47.,  47., ...,  66.,  68.,  70.],
+          [ 55.,  53.,  55., ...,  66.,  69.,  72.],
+          [ 55.,  51.,  56., ...,  65.,  68.,  72.]],
+
+         ...,
+
+         [[-10., -11., -10., ..., -16., -12., -11.],
+          [ -8.,  -6.,  -4., ...,  -9., -10.,  -7.],
+          [ -4.,   0.,   1., ...,   6.,   0.,  -5.],
+          ...,
+          [ 69.,  64.,  63., ...,  79.,  79.,  79.],
+          [ 71.,  65.,  62., ...,  79.,  83.,  85.],
+          [ 68.,  66.,  60., ...,  82.,  85.,  87.]],
+
+         [[-10., -11., -10., ..., -16., -12., -11.],
+          [ -8.,  -6.,  -4., ...,  -9., -10.,  -7.],
+          [ -4.,   0.,   1., ...,   6.,   0.,  -5.],
+          ...,
+          [ 69.,  64.,  63., ...,  79.,  79.,  79.],
+          [ 71.,  65.,  62., ...,  79.,  83.,  85.],
+          [ 68.,  66.,  60., ...,  82.,  85.,  87.]],
+
+         [[-10., -11., -10., ..., -16., -12., -11.],
+          [ -8.,  -6.,  -4., ...,  -9., -10.,  -7.],
+          [ -4.,   0.,   1., ...,   6.,   0.,  -5.],
+          ...,
+          [ 69.,  64.,  63., ...,  79.,  79.,  79.],
+          [ 71.,  65.,  62., ...,  79.,  83.,  85.],
+          [ 68.,  66.,  60., ...,  82.,  85.,  87.]]],
+
+
+        [[[ 30.,  43.,  59., ...,  35.,  30.,  28.],
+          [ 35.,  68.,  77., ...,  32.,  30.,  30.],
+          [ 68.,  51.,  76., ...,  35.,  28.,  32.],
+          ...,
+          [ -3.,  -2.,  -1., ...,  58.,  59.,  59.],
+          [ -7.,  -6.,   2., ...,  59.,  59.,  59.],
+          [ -8.,   6.,   9., ...,  60.,  60.,  60.]],
+
+         [[ 84.,  80.,  91., ...,  40.,  11., -67.],
+          [ 81.,  81.,  84., ...,  38.,  29., -53.],
+          [ 83.,  82.,  76., ...,  37.,  29., -38.],
+          ...,
+          [ 52.,  47.,  49., ...,  58.,  57.,  56.],
+          [ 41.,  31.,  34., ...,  59.,  58.,  57.],
+          [ 29.,  17.,  21., ...,  58.,  58.,  58.]],
+
+         [[ 40.,  85.,  80., ..., -32., -15.,  -8.],
+          [ 60.,  52.,  49., ..., -46., -44., -14.],
+          [ 51.,  63.,  81., ..., -54., -62., -24.],
+          ...,
+          [ 43.,  43.,  41., ...,  57.,  59.,  62.],
+          [ 48.,  49.,  49., ...,  57.,  60.,  64.],
+          [ 44.,  46.,  49., ...,  56.,  59.,  63.]],
+
+         ...,
+
+         [[ 42.,  41.,  42., ...,   6.,   5.,   1.],
+          [ 43.,  44.,  46., ...,  12.,   7.,   7.],
+          [ 47.,  50.,  51., ...,  22.,  14.,   8.],
+          ...,
+          [ 73.,  71.,  70., ...,  81.,  81.,  81.],
+          [ 75.,  72.,  69., ...,  81.,  85.,  87.],
+          [ 72.,  73.,  67., ...,  84.,  87.,  88.]],
+
+         [[ 42.,  41.,  42., ...,   6.,   5.,   1.],
+          [ 43.,  44.,  46., ...,  12.,   7.,   7.],
+          [ 47.,  50.,  51., ...,  22.,  14.,   8.],
+          ...,
+          [ 73.,  71.,  70., ...,  81.,  81.,  81.],
+          [ 75.,  72.,  69., ...,  81.,  85.,  87.],
+          [ 72.,  73.,  67., ...,  84.,  87.,  88.]],
+
+         [[ 42.,  41.,  42., ...,   6.,   5.,   1.],
+          [ 43.,  44.,  46., ...,  12.,   7.,   7.],
+          [ 47.,  50.,  51., ...,  22.,  14.,   8.],
+          ...,
+          [ 73.,  71.,  70., ...,  81.,  81.,  81.],
+          [ 75.,  72.,  69., ...,  81.,  85.,  87.],
+          [ 72.,  73.,  67., ...,  84.,  87.,  88.]]],
+
+
+        [[[ 67.,  71.,  83., ...,  26.,  25.,  26.],
+          [ 79.,  99., 100., ...,  24.,  25.,  29.],
+          [118.,  84.,  99., ...,  30.,  25.,  31.],
+          ...,
+          [117., 125., 125., ...,  48.,  49.,  49.],
+          [134., 134., 135., ...,  49.,  49.,  49.],
+          [133., 140., 135., ...,  50.,  50.,  50.]],
+
+         [[ 99.,  93., 106., ...,  46.,  41.,   6.],
+          [ 96.,  94.,  99., ...,  38.,  51.,  11.],
+          [100.,  97.,  91., ...,  32.,  45.,  16.],
+          ...,
+          [ 52.,  58.,  60., ...,  50.,  49.,  48.],
+          [ 63.,  70.,  71., ...,  51.,  50.,  49.],
+          [ 85.,  94.,  94., ...,  50.,  50.,  50.]],
+
+         [[ 64., 106., 101., ...,  38.,  57.,  42.],
+          [ 81.,  75.,  70., ...,  56.,  65.,  79.],
+          [ 70.,  83., 101., ...,  60.,  70.,  97.],
+          ...,
+          [ 30.,  28.,  31., ...,  49.,  51.,  52.],
+          [ 35.,  34.,  39., ...,  49.,  52.,  54.],
+          [ 35.,  33.,  41., ...,  48.,  51.,  55.]],
+
+         ...,
+
+         [[ -3.,  -4.,  -3., ...,  -3.,  -3.,  -8.],
+          [ -5.,  -1.,   1., ...,   5.,  -1.,  -2.],
+          [ -1.,   5.,   6., ...,  16.,   8.,   1.],
+          ...,
+          [ 79.,  76.,  75., ...,  84.,  84.,  84.],
+          [ 81.,  77.,  74., ...,  84.,  88.,  90.],
+          [ 78.,  78.,  72., ...,  87.,  90.,  93.]],
+
+         [[ -3.,  -4.,  -3., ...,  -3.,  -3.,  -8.],
+          [ -5.,  -1.,   1., ...,   5.,  -1.,  -2.],
+          [ -1.,   5.,   6., ...,  16.,   8.,   1.],
+          ...,
+          [ 79.,  76.,  75., ...,  84.,  84.,  84.],
+          [ 81.,  77.,  74., ...,  84.,  88.,  90.],
+          [ 78.,  78.,  72., ...,  87.,  90.,  93.]],
+
+         [[ -3.,  -4.,  -3., ...,  -3.,  -3.,  -8.],
+          [ -5.,  -1.,   1., ...,   5.,  -1.,  -2.],
+          [ -1.,   5.,   6., ...,  16.,   8.,   1.],
+          ...,
+          [ 79.,  76.,  75., ...,  84.,  84.,  84.],
+          [ 81.,  77.,  74., ...,  84.,  88.,  90.],
+          [ 78.,  78.,  72., ...,  87.,  90.,  93.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[-49., -56., -35., ...,  58.,  56.,  54.],
+          [-35., -60., -43., ...,  57.,  56.,  54.],
+          [-44., -42., -31., ...,  56.,  55.,  53.],
+          ...,
+          [ 86.,  80.,  86., ...,  70.,  70.,  69.],
+          [ 90.,  87.,  90., ...,  72.,  70.,  69.],
+          [ 90.,  92.,  92., ...,  73.,  72.,  71.]],
+
+         [[-28., -36., -41., ...,  56.,  54.,  52.],
+          [-28., -23., -65., ...,  56.,  53.,  52.],
+          [-34., -32., -69., ...,  56.,  54.,  52.],
+          ...,
+          [100.,  95.,  87., ...,  68.,  71.,  76.],
+          [ 93.,  91.,  85., ...,  68.,  70.,  75.],
+          [ 90.,  86.,  84., ...,  68.,  69.,  73.]],
+
+         [[-48., -51., -40., ...,  53.,  53.,  53.],
+          [-35., -18.,  -2., ...,  53.,  52.,  53.],
+          [-39., -55., -42., ...,  54.,  53.,  55.],
+          ...,
+          [ 78.,  65.,  71., ...,  72.,  71.,  72.],
+          [ 80.,  64.,  65., ...,  73.,  75.,  74.],
+          [ 78.,  66.,  64., ...,  75.,  76.,  75.]],
+
+         ...,
+
+         [[-10.,  -8.,  -6., ..., -16., -17., -18.],
+          [-11.,  -8.,  -5., ..., -11., -13., -14.],
+          [-11.,  -9.,  -7., ..., -11., -11., -12.],
+          ...,
+          [ 55.,  60.,  62., ...,  89.,  88.,  76.],
+          [ 53.,  59.,  58., ...,  82.,  85.,  76.],
+          [ 54.,  58.,  59., ...,  83.,  82.,  83.]],
+
+         [[-10.,  -8.,  -6., ..., -16., -17., -18.],
+          [-11.,  -8.,  -5., ..., -11., -13., -14.],
+          [-11.,  -9.,  -7., ..., -11., -11., -12.],
+          ...,
+          [ 55.,  60.,  62., ...,  89.,  88.,  76.],
+          [ 53.,  59.,  58., ...,  82.,  85.,  76.],
+          [ 54.,  58.,  59., ...,  83.,  82.,  83.]],
+
+         [[-10.,  -8.,  -6., ..., -16., -17., -18.],
+          [-11.,  -8.,  -5., ..., -11., -13., -14.],
+          [-11.,  -9.,  -7., ..., -11., -11., -12.],
+          ...,
+          [ 55.,  60.,  62., ...,  89.,  88.,  76.],
+          [ 53.,  59.,  58., ...,  82.,  85.,  76.],
+          [ 54.,  58.,  59., ...,  83.,  82.,  83.]]],
+
+
+        [[[ 33.,  12.,  17., ...,  51.,  49.,  47.],
+          [ 46.,   8.,   9., ...,  50.,  49.,  47.],
+          [ 44.,  37.,  31., ...,  49.,  48.,  46.],
+          ...,
+          [ 24.,  20.,  21., ...,  63.,  60.,  59.],
+          [ 23.,  21.,  22., ...,  65.,  63.,  62.],
+          [ 21.,  21.,  23., ...,  66.,  65.,  64.]],
+
+         [[ 24.,  16.,  17., ...,  49.,  47.,  45.],
+          [ 34.,  36.,  -2., ...,  49.,  46.,  45.],
+          [ 47.,  40.,   1., ...,  49.,  47.,  45.],
+          ...,
+          [ 23.,  23.,  22., ...,  63.,  64.,  66.],
+          [ 23.,  24.,  23., ...,  61.,  63.,  65.],
+          [ 21.,  23.,  23., ...,  61.,  62.,  63.]],
+
+         [[ 12.,  -1.,  -5., ...,  46.,  46.,  46.],
+          [ 21.,  25.,  27., ...,  46.,  45.,  45.],
+          [  8., -18., -18., ...,  47.,  45.,  45.],
+          ...,
+          [ 11.,   8.,  27., ...,  68.,  66.,  65.],
+          [ 15.,  12.,  25., ...,  68.,  68.,  67.],
+          [ 17.,  18.,  27., ...,  70.,  69.,  68.]],
+
+         ...,
+
+         [[ 47.,  48.,  50., ...,  18.,  17.,  13.],
+          [ 45.,  48.,  51., ...,  23.,  21.,  17.],
+          [ 45.,  47.,  49., ...,  25.,  23.,  19.],
+          ...,
+          [ 62.,  67.,  67., ...,  89.,  89.,  76.],
+          [ 60.,  66.,  62., ...,  82.,  85.,  76.],
+          [ 58.,  65.,  63., ...,  85.,  84.,  83.]],
+
+         [[ 47.,  48.,  50., ...,  18.,  17.,  13.],
+          [ 45.,  48.,  51., ...,  23.,  21.,  17.],
+          [ 45.,  47.,  49., ...,  25.,  23.,  19.],
+          ...,
+          [ 62.,  67.,  67., ...,  89.,  89.,  76.],
+          [ 60.,  66.,  62., ...,  82.,  85.,  76.],
+          [ 58.,  65.,  63., ...,  85.,  84.,  83.]],
+
+         [[ 47.,  48.,  50., ...,  18.,  17.,  13.],
+          [ 45.,  48.,  51., ...,  23.,  21.,  17.],
+          [ 45.,  47.,  49., ...,  25.,  23.,  19.],
+          ...,
+          [ 62.,  67.,  67., ...,  89.,  89.,  76.],
+          [ 60.,  66.,  62., ...,  82.,  85.,  76.],
+          [ 58.,  65.,  63., ...,  85.,  84.,  83.]]],
+
+
+        [[[106.,  90.,  97., ...,  43.,  41.,  39.],
+          [122.,  87.,  94., ...,  42.,  41.,  39.],
+          [123., 121., 120., ...,  41.,  40.,  38.],
+          ...,
+          [-45., -44., -35., ...,  57.,  55.,  54.],
+          [-43., -42., -36., ...,  59.,  57.,  56.],
+          [-45., -41., -37., ...,  60.,  59.,  58.]],
+
+         [[109., 101., 102., ...,  41.,  39.,  37.],
+          [114., 119.,  81., ...,  41.,  38.,  37.],
+          [123., 119.,  80., ...,  41.,  39.,  39.],
+          ...,
+          [-51., -46., -37., ...,  57.,  58.,  61.],
+          [-51., -42., -34., ...,  55.,  57.,  60.],
+          [-51., -42., -32., ...,  55.,  56.,  58.]],
+
+         [[ 91.,  77.,  70., ...,  40.,  40.,  40.],
+          [102., 107., 103., ...,  40.,  39.,  41.],
+          [ 95.,  69.,  61., ...,  41.,  41.,  40.],
+          ...,
+          [-38., -22.,  15., ...,  59.,  60.,  59.],
+          [-34., -21.,   8., ...,  62.,  62.,  61.],
+          [-30., -14.,   9., ...,  64.,  63.,  62.]],
+
+         ...,
+
+         [[ -6.,  -2.,   0., ...,  -4.,  -5.,  -7.],
+          [ -5.,  -2.,   1., ...,   2.,   0.,  -2.],
+          [ -5.,  -3.,  -1., ...,   4.,   2.,   0.],
+          ...,
+          [ 67.,  72.,  71., ...,  92.,  89.,  79.],
+          [ 65.,  71.,  68., ...,  85.,  88.,  79.],
+          [ 64.,  70.,  69., ...,  88.,  87.,  86.]],
+
+         [[ -6.,  -2.,   0., ...,  -4.,  -5.,  -7.],
+          [ -5.,  -2.,   1., ...,   2.,   0.,  -2.],
+          [ -5.,  -3.,  -1., ...,   4.,   2.,   0.],
+          ...,
+          [ 67.,  72.,  71., ...,  92.,  89.,  79.],
+          [ 65.,  71.,  68., ...,  85.,  88.,  79.],
+          [ 64.,  70.,  69., ...,  88.,  87.,  86.]],
+
+         [[ -6.,  -2.,   0., ...,  -4.,  -5.,  -7.],
+          [ -5.,  -2.,   1., ...,   2.,   0.,  -2.],
+          [ -5.,  -3.,  -1., ...,   4.,   2.,   0.],
+          ...,
+          [ 67.,  72.,  71., ...,  92.,  89.,  79.],
+          [ 65.,  71.,  68., ...,  85.,  88.,  79.],
+          [ 64.,  70.,  69., ...,  88.,  87.,  86.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[-62., -56., -55., ...,  54.,  52.,  48.],
+          [-41., -48., -45., ...,  52.,  49.,  51.],
+          [-34., -38., -15., ...,  49.,  50.,  51.],
+          ...,
+          [ 98., 114.,  90., ...,  74.,  73.,  65.],
+          [113., 100.,  87., ...,  71.,  68.,  58.],
+          [113.,  94.,  91., ...,  72.,  70.,  59.]],
+
+         [[-40., -40., -15., ...,  47.,  47.,  49.],
+          [-26., -30., -40., ...,  47.,  46.,  49.],
+          [-55., -47., -40., ...,  48.,  47.,  49.],
+          ...,
+          [ 80.,  71.,  69., ...,  72.,  75.,  71.],
+          [ 79.,  80.,  72., ...,  71.,  67.,  69.],
+          [ 82., 100.,  76., ...,  77.,  70.,  69.]],
+
+         [[-30.,  71.,  90., ...,  54.,  57.,  56.],
+          [-27.,  36.,  90., ...,  55.,  54.,  56.],
+          [-29.,  13.,  74., ...,  51.,  52.,  57.],
+          ...,
+          [ 68.,  73.,  66., ...,  74.,  71.,  73.],
+          [ 62.,  79.,  65., ...,  72.,  70.,  71.],
+          [ 62.,  78.,  66., ...,  71.,  71.,  72.]],
+
+         ...,
+
+         [[ -7.,  -4.,  -3., ...,  -8.,  -8.,  -9.],
+          [ -9.,  -8.,  -6., ...,  -7.,  -3.,  -3.],
+          [ -7.,  -6.,  -7., ...,  -6.,  -5.,  -6.],
+          ...,
+          [ 61.,  54.,  56., ...,  84.,  85.,  90.],
+          [ 57.,  57.,  64., ...,  89.,  85.,  87.],
+          [ 52.,  60.,  67., ...,  90.,  84.,  85.]],
+
+         [[ -7.,  -4.,  -3., ...,  -8.,  -8.,  -9.],
+          [ -9.,  -8.,  -6., ...,  -7.,  -3.,  -3.],
+          [ -7.,  -6.,  -7., ...,  -6.,  -5.,  -6.],
+          ...,
+          [ 61.,  54.,  56., ...,  84.,  85.,  90.],
+          [ 57.,  57.,  64., ...,  89.,  85.,  87.],
+          [ 52.,  60.,  67., ...,  90.,  84.,  85.]],
+
+         [[ -7.,  -4.,  -3., ...,  -8.,  -8.,  -9.],
+          [ -9.,  -8.,  -6., ...,  -7.,  -3.,  -3.],
+          [ -7.,  -6.,  -7., ...,  -6.,  -5.,  -6.],
+          ...,
+          [ 61.,  54.,  56., ...,  84.,  85.,  90.],
+          [ 57.,  57.,  64., ...,  89.,  85.,  87.],
+          [ 52.,  60.,  67., ...,  90.,  84.,  85.]]],
+
+
+        [[[  7.,  18.,  12., ...,  44.,  42.,  41.],
+          [ 29.,  21.,  14., ...,  44.,  41.,  42.],
+          [ 35.,  24.,  40., ...,  40.,  42.,  42.],
+          ...,
+          [ 31.,  51.,  30., ...,  65.,  64.,  56.],
+          [ 45.,  34.,  22., ...,  62.,  59.,  49.],
+          [ 45.,  26.,  24., ...,  63.,  61.,  50.]],
+
+         [[ 18.,   8.,  19., ...,  41.,  41.,  42.],
+          [ 25.,  16.,  -8., ...,  42.,  40.,  42.],
+          [ -3.,   5.,  -1., ...,  44.,  42.,  42.],
+          ...,
+          [ 26.,  23.,  25., ...,  63.,  64.,  60.],
+          [ 22.,  28.,  21., ...,  62.,  56.,  58.],
+          [ 22.,  43.,  20., ...,  68.,  59.,  60.]],
+
+         [[-17.,  71.,  85., ...,  47.,  47.,  46.],
+          [ -3.,  42.,  87., ...,  50.,  48.,  47.],
+          [  1.,  23.,  73., ...,  47.,  48.,  48.],
+          ...,
+          [ 41.,  57.,  54., ...,  65.,  62.,  64.],
+          [ 33.,  61.,  51., ...,  63.,  61.,  62.],
+          [ 29.,  55.,  48., ...,  62.,  62.,  63.]],
+
+         ...,
+
+         [[ 47.,  49.,  50., ...,  22.,  21.,  20.],
+          [ 42.,  43.,  45., ...,  23.,  27.,  29.],
+          [ 44.,  45.,  44., ...,  27.,  28.,  29.],
+          ...,
+          [ 65.,  57.,  59., ...,  85.,  86.,  92.],
+          [ 61.,  60.,  67., ...,  90.,  86.,  89.],
+          [ 56.,  64.,  71., ...,  91.,  85.,  86.]],
+
+         [[ 47.,  49.,  50., ...,  22.,  21.,  20.],
+          [ 42.,  43.,  45., ...,  23.,  27.,  29.],
+          [ 44.,  45.,  44., ...,  27.,  28.,  29.],
+          ...,
+          [ 65.,  57.,  59., ...,  85.,  86.,  92.],
+          [ 61.,  60.,  67., ...,  90.,  86.,  89.],
+          [ 56.,  64.,  71., ...,  91.,  85.,  86.]],
+
+         [[ 47.,  49.,  50., ...,  22.,  21.,  20.],
+          [ 42.,  43.,  45., ...,  23.,  27.,  29.],
+          [ 44.,  45.,  44., ...,  27.,  28.,  29.],
+          ...,
+          [ 65.,  57.,  59., ...,  85.,  86.,  92.],
+          [ 61.,  60.,  67., ...,  90.,  86.,  89.],
+          [ 56.,  64.,  71., ...,  91.,  85.,  86.]]],
+
+
+        [[[ 96., 103.,  94., ...,  39.,  37.,  33.],
+          [118., 109., 102., ...,  40.,  37.,  34.],
+          [124., 113., 128., ...,  38.,  38.,  34.],
+          ...,
+          [-29.,  -4., -14., ...,  57.,  56.,  48.],
+          [-18., -22., -21., ...,  54.,  51.,  41.],
+          [-18., -30., -20., ...,  55.,  53.,  42.]],
+
+         [[ 97.,  85.,  82., ...,  37.,  37.,  36.],
+          [107.,  95.,  60., ...,  36.,  36.,  36.],
+          [ 82.,  85.,  69., ...,  35.,  36.,  36.],
+          ...,
+          [-19.,  -9.,   3., ...,  55.,  56.,  52.],
+          [-26., -13., -10., ...,  54.,  48.,  50.],
+          [-29.,  -5., -20., ...,  60.,  51.,  52.]],
+
+         [[ 47., 114., 112., ...,  34.,  35.,  42.],
+          [ 59.,  86., 116., ...,  37.,  38.,  45.],
+          [ 62.,  66., 102., ...,  37.,  38.,  46.],
+          ...,
+          [ 34.,  53.,  49., ...,  57.,  54.,  56.],
+          [ 28.,  57.,  48., ...,  55.,  53.,  54.],
+          [ 29.,  55.,  50., ...,  54.,  54.,  55.]],
+
+         ...,
+
+         [[ -3.,   1.,   2., ...,   6.,   7.,   6.],
+          [ -6.,  -5.,  -3., ...,   7.,  11.,  14.],
+          [ -4.,  -3.,  -4., ...,   8.,   9.,  12.],
+          ...,
+          [ 71.,  61.,  63., ...,  90.,  91.,  95.],
+          [ 67.,  64.,  71., ...,  95.,  91.,  92.],
+          [ 62.,  70.,  77., ...,  96.,  90.,  91.]],
+
+         [[ -3.,   1.,   2., ...,   6.,   7.,   6.],
+          [ -6.,  -5.,  -3., ...,   7.,  11.,  14.],
+          [ -4.,  -3.,  -4., ...,   8.,   9.,  12.],
+          ...,
+          [ 71.,  61.,  63., ...,  90.,  91.,  95.],
+          [ 67.,  64.,  71., ...,  95.,  91.,  92.],
+          [ 62.,  70.,  77., ...,  96.,  90.,  91.]],
+
+         [[ -3.,   1.,   2., ...,   6.,   7.,   6.],
+          [ -6.,  -5.,  -3., ...,   7.,  11.,  14.],
+          [ -4.,  -3.,  -4., ...,   8.,   9.,  12.],
+          ...,
+          [ 71.,  61.,  63., ...,  90.,  91.,  95.],
+          [ 67.,  64.,  71., ...,  95.,  91.,  92.],
+          [ 62.,  70.,  77., ...,  96.,  90.,  91.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[112., 112., 110., ..., -51., -51., -52.],
+          [113., 113., 113., ..., -52., -52., -52.],
+          [117., 115., 113., ..., -52., -52., -52.],
+          ...,
+          [ 85.,  83.,  82., ..., -17.,   1.,  42.],
+          [ 72.,  75.,  77., ..., -16.,  20.,  43.],
+          [ 70.,  73.,  74., ...,  -7.,  27.,  42.]],
+
+         [[109., 114., 112., ..., -49., -50., -41.],
+          [112., 111., 111., ..., -48., -52., -46.],
+          [113., 110., 112., ..., -51., -54., -50.],
+          ...,
+          [ 89.,  88.,  89., ..., -20., -15., -15.],
+          [ 90.,  89.,  90., ..., -19., -14.,   2.],
+          [ 87.,  87.,  88., ..., -13.,  -3.,  28.]],
+
+         [[ 96.,  71.,  45., ...,  73.,  74.,  70.],
+          [102.,  81.,  44., ...,  64.,  68.,  68.],
+          [104.,  88.,  58., ...,  65.,  68.,  66.],
+          ...,
+          [ 99., 100., 102., ..., -21., -20., -14.],
+          [ 98., 100., 104., ..., -20., -19., -16.],
+          [ 96.,  99., 103., ..., -13., -17.,  12.]],
+
+         ...,
+
+         [[ -9., -11., -13., ...,  21.,  18.,  13.],
+          [ -2.,  -8., -16., ...,  52.,  50.,  46.],
+          [ -8., -14., -20., ...,  65.,  63.,  58.],
+          ...,
+          [ 35.,  32.,  35., ...,  69.,  77.,  77.],
+          [ 35.,  37.,  36., ...,  68.,  82.,  74.],
+          [ 37.,  33.,  34., ...,  69.,  77.,  75.]],
+
+         [[ -9., -11., -13., ...,  21.,  18.,  13.],
+          [ -2.,  -8., -16., ...,  52.,  50.,  46.],
+          [ -8., -14., -20., ...,  65.,  63.,  58.],
+          ...,
+          [ 35.,  32.,  35., ...,  69.,  77.,  77.],
+          [ 35.,  37.,  36., ...,  68.,  82.,  74.],
+          [ 37.,  33.,  34., ...,  69.,  77.,  75.]],
+
+         [[ -9., -11., -13., ...,  21.,  18.,  13.],
+          [ -2.,  -8., -16., ...,  52.,  50.,  46.],
+          [ -8., -14., -20., ...,  65.,  63.,  58.],
+          ...,
+          [ 35.,  32.,  35., ...,  69.,  77.,  77.],
+          [ 35.,  37.,  36., ...,  68.,  82.,  74.],
+          [ 37.,  33.,  34., ...,  69.,  77.,  75.]]],
+
+
+        [[[ 19.,  19.,  17., ..., -57., -57., -58.],
+          [ 19.,  18.,  20., ..., -58., -58., -58.],
+          [ 21.,  18.,  20., ..., -59., -59., -59.],
+          ...,
+          [ -5.,  -5.,  -3., ..., -15.,   6.,  48.],
+          [-10.,  -7.,  -4., ..., -14.,  25.,  49.],
+          [ -8.,  -6.,  -5., ...,  -5.,  31.,  46.]],
+
+         [[ 19.,  23.,  19., ..., -57., -58., -49.],
+          [ 22.,  20.,  18., ..., -56., -60., -54.],
+          [ 22.,  20.,  17., ..., -57., -60., -56.],
+          ...,
+          [ -4.,  -5.,  -3., ..., -19., -13., -13.],
+          [ -3.,  -4.,  -5., ..., -18., -10.,   7.],
+          [ -6.,  -6.,  -5., ..., -11.,   2.,  34.]],
+
+         [[ 19.,  19.,  40., ...,  66.,  67.,  63.],
+          [ 20.,  24.,  25., ...,  57.,  61.,  61.],
+          [ 17.,  20.,  25., ...,  58.,  61.,  59.],
+          ...,
+          [  2.,   3.,   4., ..., -23., -19., -13.],
+          [  1.,   3.,   4., ..., -22., -18., -15.],
+          [  1.,   2.,   3., ..., -15., -16.,  14.]],
+
+         ...,
+
+         [[ 24.,  29.,  32., ...,  53.,  50.,  48.],
+          [ 30.,  30.,  28., ...,  76.,  75.,  72.],
+          [ 19.,  21.,  21., ...,  81.,  79.,  77.],
+          ...,
+          [ 36.,  33.,  38., ...,  77.,  85.,  85.],
+          [ 38.,  40.,  39., ...,  79.,  91.,  83.],
+          [ 40.,  36.,  37., ...,  80.,  86.,  84.]],
+
+         [[ 24.,  29.,  32., ...,  53.,  50.,  48.],
+          [ 30.,  30.,  28., ...,  76.,  75.,  72.],
+          [ 19.,  21.,  21., ...,  81.,  79.,  77.],
+          ...,
+          [ 36.,  33.,  38., ...,  77.,  85.,  85.],
+          [ 38.,  40.,  39., ...,  79.,  91.,  83.],
+          [ 40.,  36.,  37., ...,  80.,  86.,  84.]],
+
+         [[ 24.,  29.,  32., ...,  53.,  50.,  48.],
+          [ 30.,  30.,  28., ...,  76.,  75.,  72.],
+          [ 19.,  21.,  21., ...,  81.,  79.,  77.],
+          ...,
+          [ 36.,  33.,  38., ...,  77.,  85.,  85.],
+          [ 38.,  40.,  39., ...,  79.,  91.,  83.],
+          [ 40.,  36.,  37., ...,  80.,  86.,  84.]]],
+
+
+        [[[-59., -59., -61., ..., -60., -60., -61.],
+          [-61., -60., -56., ..., -61., -61., -61.],
+          [-60., -60., -56., ..., -59., -59., -59.],
+          ...,
+          [-80., -80., -80., ...,  -9.,  10.,  50.],
+          [-78., -77., -76., ...,  -8.,  29.,  51.],
+          [-72., -73., -72., ...,   1.,  33.,  46.]],
+
+         [[-62., -56., -57., ..., -61., -62., -53.],
+          [-59., -59., -58., ..., -60., -64., -58.],
+          [-60., -61., -61., ..., -60., -64., -60.],
+          ...,
+          [-82., -83., -83., ..., -10.,  -7.,  -7.],
+          [-79., -80., -83., ...,  -9.,  -4.,  11.],
+          [-80., -80., -79., ...,  -5.,   6.,  36.]],
+
+         [[-34., -16.,  27., ...,  58.,  59.,  55.],
+          [-38., -18.,   7., ...,  49.,  53.,  53.],
+          [-44., -26.,   1., ...,  52.,  53.,  51.],
+          ...,
+          [-82., -81., -77., ..., -16., -14.,  -8.],
+          [-83., -81., -79., ..., -15., -13., -10.],
+          [-83., -82., -80., ...,  -8., -11.,  17.]],
+
+         ...,
+
+         [[ -8., -11., -12., ...,  38.,  34.,  31.],
+          [ -2., -10., -16., ...,  67.,  64.,  61.],
+          [-11., -16., -21., ...,  77.,  73.,  70.],
+          ...,
+          [ 41.,  38.,  42., ...,  89.,  97.,  97.],
+          [ 42.,  44.,  43., ...,  90., 100.,  92.],
+          [ 44.,  40.,  41., ...,  91.,  95.,  93.]],
+
+         [[ -8., -11., -12., ...,  38.,  34.,  31.],
+          [ -2., -10., -16., ...,  67.,  64.,  61.],
+          [-11., -16., -21., ...,  77.,  73.,  70.],
+          ...,
+          [ 41.,  38.,  42., ...,  89.,  97.,  97.],
+          [ 42.,  44.,  43., ...,  90., 100.,  92.],
+          [ 44.,  40.,  41., ...,  91.,  95.,  93.]],
+
+         [[ -8., -11., -12., ...,  38.,  34.,  31.],
+          [ -2., -10., -16., ...,  67.,  64.,  61.],
+          [-11., -16., -21., ...,  77.,  73.,  70.],
+          ...,
+          [ 41.,  38.,  42., ...,  89.,  97.,  97.],
+          [ 42.,  44.,  43., ...,  90., 100.,  92.],
+          [ 44.,  40.,  41., ...,  91.,  95.,  93.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[ 45.,  45.,  47., ..., -74., -41., -43.],
+          [ 44.,  44.,  47., ..., -77., -30., -43.],
+          [ 44.,  42.,  46., ...,  24., -18., -39.],
+          ...,
+          [ 52.,  69.,  65., ...,  46.,  95.,  67.],
+          [ 64.,  68.,  64., ...,  49.,  99.,  72.],
+          [ 68.,  62.,  58., ...,  69.,  97.,  76.]],
+
+         [[ 54.,  54.,  53., ..., 100.,  73., -28.],
+          [ 52.,  51.,  49., ...,  36.,  45.,  19.],
+          [ 52.,  52.,  50., ...,  87.,  27., -52.],
+          ...,
+          [ 68.,  69.,  68., ...,  75.,  62.,  68.],
+          [ 66.,  60.,  70., ...,  73.,  77.,  61.],
+          [ 55.,  45.,  69., ...,  55.,  92.,  56.]],
+
+         [[ 52.,  52.,  52., ...,  85.,  44.,  81.],
+          [ 48.,  51.,  53., ...,  82.,  55.,  80.],
+          [ 45.,  51.,  52., ...,  68.,  75.,  84.],
+          ...,
+          [ 71.,  77.,  77., ...,  70.,  75.,  70.],
+          [ 76.,  81.,  79., ...,  76.,  81.,  71.],
+          [ 71.,  75.,  75., ...,  73.,  80.,  66.]],
+
+         ...,
+
+         [[-17., -15., -13., ...,  -5.,  -3.,  -2.],
+          [-19., -15.,  -8., ...,  -9.,  -6.,  -4.],
+          [ -7.,  -6.,  -2., ..., -11.,  -6.,  -6.],
+          ...,
+          [ 75.,  74.,  83., ...,  67.,  63.,  62.],
+          [ 80.,  83.,  89., ...,  69.,  65.,  62.],
+          [ 82.,  86.,  90., ...,  72.,  66.,  65.]],
+
+         [[-17., -15., -13., ...,  -5.,  -3.,  -2.],
+          [-19., -15.,  -8., ...,  -9.,  -6.,  -4.],
+          [ -7.,  -6.,  -2., ..., -11.,  -6.,  -6.],
+          ...,
+          [ 75.,  74.,  83., ...,  67.,  63.,  62.],
+          [ 80.,  83.,  89., ...,  69.,  65.,  62.],
+          [ 82.,  86.,  90., ...,  72.,  66.,  65.]],
+
+         [[-17., -15., -13., ...,  -5.,  -3.,  -2.],
+          [-19., -15.,  -8., ...,  -9.,  -6.,  -4.],
+          [ -7.,  -6.,  -2., ..., -11.,  -6.,  -6.],
+          ...,
+          [ 75.,  74.,  83., ...,  67.,  63.,  62.],
+          [ 80.,  83.,  89., ...,  69.,  65.,  62.],
+          [ 82.,  86.,  90., ...,  72.,  66.,  65.]]],
+
+
+        [[[ 40.,  40.,  40., ..., -74., -18.,   1.],
+          [ 39.,  39.,  40., ..., -75.,  -2.,   7.],
+          [ 39.,  37.,  39., ...,  24.,  10.,   6.],
+          ...,
+          [ 43.,  60.,  56., ...,  11.,  47.,  14.],
+          [ 55.,  59.,  55., ...,   3.,  43.,  13.],
+          [ 59.,  53.,  49., ...,  15.,  36.,  13.]],
+
+         [[ 44.,  44.,  44., ...,  99.,  77., -11.],
+          [ 41.,  40.,  42., ...,  34.,  46.,  31.],
+          [ 41.,  41.,  42., ...,  82.,  26., -39.],
+          ...,
+          [ 59.,  60.,  57., ...,  55.,  31.,  30.],
+          [ 57.,  51.,  59., ...,  51.,  39.,  17.],
+          [ 46.,  36.,  58., ...,  28.,  47.,   4.]],
+
+         [[ 47.,  46.,  44., ...,  84.,  42.,  78.],
+          [ 43.,  47.,  44., ...,  79.,  51.,  76.],
+          [ 38.,  47.,  43., ...,  63.,  72.,  80.],
+          ...,
+          [ 62.,  68.,  68., ...,  59.,  64.,  61.],
+          [ 67.,  72.,  70., ...,  63.,  70.,  60.],
+          [ 62.,  66.,  66., ...,  60.,  67.,  55.]],
+
+         ...,
+
+         [[  8.,  11.,  13., ...,  48.,  50.,  51.],
+          [ 10.,  15.,  23., ...,  44.,  47.,  49.],
+          [ 23.,  27.,  31., ...,  42.,  45.,  45.],
+          ...,
+          [ 77.,  76.,  85., ...,  68.,  64.,  63.],
+          [ 82.,  85.,  91., ...,  72.,  68.,  65.],
+          [ 84.,  88.,  92., ...,  75.,  69.,  68.]],
+
+         [[  8.,  11.,  13., ...,  48.,  50.,  51.],
+          [ 10.,  15.,  23., ...,  44.,  47.,  49.],
+          [ 23.,  27.,  31., ...,  42.,  45.,  45.],
+          ...,
+          [ 77.,  76.,  85., ...,  68.,  64.,  63.],
+          [ 82.,  85.,  91., ...,  72.,  68.,  65.],
+          [ 84.,  88.,  92., ...,  75.,  69.,  68.]],
+
+         [[  8.,  11.,  13., ...,  48.,  50.,  51.],
+          [ 10.,  15.,  23., ...,  44.,  47.,  49.],
+          [ 23.,  27.,  31., ...,  42.,  45.,  45.],
+          ...,
+          [ 77.,  76.,  85., ...,  68.,  64.,  63.],
+          [ 82.,  85.,  91., ...,  72.,  68.,  65.],
+          [ 84.,  88.,  92., ...,  75.,  69.,  68.]]],
+
+
+        [[[ 34.,  34.,  34., ..., -38.,  41.,  74.],
+          [ 33.,  33.,  32., ..., -31.,  64.,  85.],
+          [ 33.,  31.,  31., ...,  80.,  84.,  92.],
+          ...,
+          [ 35.,  52.,  48., ...,  27.,  44., -11.],
+          [ 47.,  51.,  47., ...,  35.,  45., -11.],
+          [ 51.,  45.,  41., ...,  57.,  41., -12.]],
+
+         [[ 40.,  39.,  36., ..., 120., 101.,  25.],
+          [ 39.,  38.,  36., ...,  59.,  75.,  74.],
+          [ 39.,  39.,  38., ..., 109.,  61.,   8.],
+          ...,
+          [ 51.,  52.,  49., ...,  49.,  25.,  21.],
+          [ 49.,  43.,  51., ...,  41.,  30.,   3.],
+          [ 38.,  28.,  50., ...,  21.,  35., -17.]],
+
+         [[ 41.,  36.,  40., ..., 105.,  61.,  99.],
+          [ 43.,  38.,  42., ..., 100.,  71.,  97.],
+          [ 48.,  44.,  43., ...,  87.,  89., 100.],
+          ...,
+          [ 54.,  60.,  60., ...,  51.,  55.,  53.],
+          [ 59.,  64.,  62., ...,  56.,  61.,  52.],
+          [ 54.,  58.,  58., ...,  55.,  60.,  47.]],
+
+         ...,
+
+         [[  0.,   1.,   2., ...,   0.,   2.,   3.],
+          [  2.,   5.,  11., ...,  -4.,  -1.,   1.],
+          [ 13.,  16.,  19., ...,  -6.,  -3.,  -3.],
+          ...,
+          [ 80.,  79.,  88., ...,  73.,  69.,  68.],
+          [ 85.,  88.,  94., ...,  76.,  72.,  69.],
+          [ 87.,  91.,  95., ...,  79.,  73.,  72.]],
+
+         [[  0.,   1.,   2., ...,   0.,   2.,   3.],
+          [  2.,   5.,  11., ...,  -4.,  -1.,   1.],
+          [ 13.,  16.,  19., ...,  -6.,  -3.,  -3.],
+          ...,
+          [ 80.,  79.,  88., ...,  73.,  69.,  68.],
+          [ 85.,  88.,  94., ...,  76.,  72.,  69.],
+          [ 87.,  91.,  95., ...,  79.,  73.,  72.]],
+
+         [[  0.,   1.,   2., ...,   0.,   2.,   3.],
+          [  2.,   5.,  11., ...,  -4.,  -1.,   1.],
+          [ 13.,  16.,  19., ...,  -6.,  -3.,  -3.],
+          ...,
+          [ 80.,  79.,  88., ...,  73.,  69.,  68.],
+          [ 85.,  88.,  94., ...,  76.,  72.,  69.],
+          [ 87.,  91.,  95., ...,  79.,  73.,  72.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[ 43.,  41.,  47., ...,  72.,  59.,  58.],
+          [ 35.,  43.,  55., ...,  64.,  62.,  64.],
+          [ 41.,  40.,  52., ...,  70.,  60.,  59.],
+          ...,
+          [ 35.,  34.,  35., ...,  69.,  70.,  70.],
+          [ 41.,  36.,  28., ...,  69.,  69.,  69.],
+          [ 37.,  32.,  34., ...,  69.,  69.,  69.]],
+
+         [[ -3.,  -8., -37., ...,  62.,  60.,  63.],
+          [  3.,   7., -26., ...,  61.,  70.,  68.],
+          [ 73.,  85.,  45., ...,  63.,  71.,  73.],
+          ...,
+          [ 37.,  56.,  64., ...,  71.,  69.,  65.],
+          [111.,  72.,  94., ...,  70.,  70.,  67.],
+          [105.,  81., 111., ...,  69.,  69.,  69.]],
+
+         [[ 26.,  45.,  59., ...,  16.,  73.,  91.],
+          [ -9.,  48.,  38., ...,  66.,  79.,  81.],
+          [-13.,  12.,  -9., ...,  70.,  79.,  25.],
+          ...,
+          [122., 114.,  99., ...,  66.,  66.,  66.],
+          [121., 115., 108., ...,  65.,  66.,  66.],
+          [123., 119., 110., ...,  64.,  65.,  66.]],
+
+         ...,
+
+         [[ 15.,  16.,  17., ...,  -2.,  -5.,  -1.],
+          [ 14.,  16.,  18., ...,  13.,  -3.,   0.],
+          [ 18.,  20.,  15., ...,  41.,  26.,  -1.],
+          ...,
+          [ 57.,  50.,  39., ...,  77.,  80.,  81.],
+          [ 54.,  52.,  51., ...,  76.,  76.,  76.],
+          [ 48.,  45.,  46., ...,  79.,  74.,  73.]],
+
+         [[ 15.,  16.,  17., ...,  -2.,  -5.,  -1.],
+          [ 14.,  16.,  18., ...,  13.,  -3.,   0.],
+          [ 18.,  20.,  15., ...,  41.,  26.,  -1.],
+          ...,
+          [ 57.,  50.,  39., ...,  77.,  80.,  81.],
+          [ 54.,  52.,  51., ...,  76.,  76.,  76.],
+          [ 48.,  45.,  46., ...,  79.,  74.,  73.]],
+
+         [[ 15.,  16.,  17., ...,  -2.,  -5.,  -1.],
+          [ 14.,  16.,  18., ...,  13.,  -3.,   0.],
+          [ 18.,  20.,  15., ...,  41.,  26.,  -1.],
+          ...,
+          [ 57.,  50.,  39., ...,  77.,  80.,  81.],
+          [ 54.,  52.,  51., ...,  76.,  76.,  76.],
+          [ 48.,  45.,  46., ...,  79.,  74.,  73.]]],
+
+
+        [[[ 57.,  55.,  57., ...,  94.,  88.,  90.],
+          [ 52.,  59.,  68., ...,  90.,  93.,  96.],
+          [ 58.,  58.,  68., ...,  96.,  91.,  90.],
+          ...,
+          [ 24.,  21.,  23., ...,  57.,  58.,  58.],
+          [ 30.,  25.,  17., ...,  57.,  57.,  57.],
+          [ 27.,  22.,  26., ...,  57.,  57.,  57.]],
+
+         [[-16., -25., -56., ...,  85.,  81.,  83.],
+          [ -4.,  -1., -40., ...,  84.,  88.,  85.],
+          [ 71.,  83.,  38., ...,  90.,  89.,  87.],
+          ...,
+          [ 22.,  47.,  63., ...,  59.,  57.,  53.],
+          [ 94.,  61.,  97., ...,  58.,  58.,  55.],
+          [ 83.,  69., 116., ...,  57.,  58.,  58.]],
+
+         [[  1.,  11.,  15., ...,  31.,  77.,  84.],
+          [-34.,  22.,   8., ...,  80.,  83.,  73.],
+          [-38., -13., -33., ...,  83.,  81.,  15.],
+          ...,
+          [117., 107.,  89., ...,  53.,  53.,  53.],
+          [115., 108.,  98., ...,  52.,  53.,  53.],
+          [114., 109.,  99., ...,  51.,  52.,  53.]],
+
+         ...,
+
+         [[ 54.,  51.,  46., ...,  -2.,  -9.,  -5.],
+          [ 50.,  47.,  41., ...,  10.,  -6.,  -3.],
+          [ 51.,  47.,  37., ...,  38.,  23.,  -4.],
+          ...,
+          [ 69.,  63.,  52., ...,  81.,  84.,  85.],
+          [ 67.,  65.,  67., ...,  80.,  80.,  80.],
+          [ 61.,  60.,  62., ...,  82.,  79.,  78.]],
+
+         [[ 54.,  51.,  46., ...,  -2.,  -9.,  -5.],
+          [ 50.,  47.,  41., ...,  10.,  -6.,  -3.],
+          [ 51.,  47.,  37., ...,  38.,  23.,  -4.],
+          ...,
+          [ 69.,  63.,  52., ...,  81.,  84.,  85.],
+          [ 67.,  65.,  67., ...,  80.,  80.,  80.],
+          [ 61.,  60.,  62., ...,  82.,  79.,  78.]],
+
+         [[ 54.,  51.,  46., ...,  -2.,  -9.,  -5.],
+          [ 50.,  47.,  41., ...,  10.,  -6.,  -3.],
+          [ 51.,  47.,  37., ...,  38.,  23.,  -4.],
+          ...,
+          [ 69.,  63.,  52., ...,  81.,  84.,  85.],
+          [ 67.,  65.,  67., ...,  80.,  80.,  80.],
+          [ 61.,  60.,  62., ...,  82.,  79.,  78.]]],
+
+
+        [[[ 78.,  76.,  82., ..., 109., 110., 114.],
+          [ 74.,  79.,  85., ..., 110., 117., 121.],
+          [ 80.,  78.,  82., ..., 121., 115., 114.],
+          ...,
+          [ 16.,  19.,  25., ...,  48.,  49.,  49.],
+          [ 22.,  23.,  15., ...,  48.,  48.,  48.],
+          [ 22.,  18.,  22., ...,  48.,  48.,  48.]],
+
+         [[ 65.,  61.,  33., ..., 104., 104., 109.],
+          [ 53.,  55.,  21., ..., 105., 114., 113.],
+          [112., 122.,  78., ..., 112., 115., 118.],
+          ...,
+          [ -2.,  23.,  44., ...,  50.,  48.,  44.],
+          [ 70.,  36.,  73., ...,  49.,  49.,  46.],
+          [ 60.,  41.,  88., ...,  48.,  46.,  46.]],
+
+         [[ 54.,  60.,  57., ...,  53., 107., 131.],
+          [ 59., 112.,  99., ..., 104., 115., 123.],
+          [ 73.,  98.,  80., ..., 110., 117.,  70.],
+          ...,
+          [141., 129., 107., ...,  46.,  46.,  46.],
+          [141., 132., 116., ...,  45.,  46.,  46.],
+          [142., 135., 120., ...,  44.,  45.,  46.]],
+
+         ...,
+
+         [[ 18.,  20.,  22., ...,  -6., -12.,  -8.],
+          [ 17.,  18.,  22., ...,   7.,  -9.,  -6.],
+          [ 20.,  23.,  20., ...,  37.,  20.,  -7.],
+          ...,
+          [ 83.,  80.,  69., ...,  83.,  86.,  87.],
+          [ 84.,  82.,  83., ...,  82.,  82.,  82.],
+          [ 79.,  78.,  78., ...,  86.,  83.,  82.]],
+
+         [[ 18.,  20.,  22., ...,  -6., -12.,  -8.],
+          [ 17.,  18.,  22., ...,   7.,  -9.,  -6.],
+          [ 20.,  23.,  20., ...,  37.,  20.,  -7.],
+          ...,
+          [ 83.,  80.,  69., ...,  83.,  86.,  87.],
+          [ 84.,  82.,  83., ...,  82.,  82.,  82.],
+          [ 79.,  78.,  78., ...,  86.,  83.,  82.]],
+
+         [[ 18.,  20.,  22., ...,  -6., -12.,  -8.],
+          [ 17.,  18.,  22., ...,   7.,  -9.,  -6.],
+          [ 20.,  23.,  20., ...,  37.,  20.,  -7.],
+          ...,
+          [ 83.,  80.,  69., ...,  83.,  86.,  87.],
+          [ 84.,  82.,  83., ...,  82.,  82.,  82.],
+          [ 79.,  78.,  78., ...,  86.,  83.,  82.]]]]], dtype=float32))
+99
+(array([0]), array([97]))
+('somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', array([[[[[ 95.,  63.,  34., ..., -20.,  17.,   3.],
+          [ 93.,  75.,  37., ..., -26.,   9.,   0.],
+          [ 91.,  79.,  32., ..., -22.,   1.,  -2.],
+          ...,
+          [  8.,   7.,  47., ...,  64.,  64.,  65.],
+          [  9.,   4.,  36., ...,  64.,  64.,  65.],
+          [ 11.,   2.,  22., ...,  65.,  65.,  65.]],
+
+         [[  2., -34., -32., ...,  49.,  39.,  45.],
+          [ 35.,   4.,  10., ...,  36.,  35.,  17.],
+          [ 58.,  22.,  38., ...,  27.,  10.,  -7.],
+          ...,
+          [  1.,  34.,  72., ...,  67.,  67.,  66.],
+          [  4.,  30.,  64., ...,  66.,  66.,  66.],
+          [ 10.,  26.,  63., ...,  66.,  66.,  66.]],
+
+         [[ 18.,   8.,  38., ...,  44.,  41.,  36.],
+          [-21.,  95.,   0., ...,  47.,  44.,  43.],
+          [-40.,  18., -10., ...,  49.,  45.,  50.],
+          ...,
+          [ 67.,  70.,  62., ...,  59.,  60.,  60.],
+          [ 74.,  69.,  60., ...,  59.,  58.,  58.],
+          [ 68.,  65.,  60., ...,  59.,  59.,  59.]],
+
+         ...,
+
+         [[ 11.,  10.,   9., ...,  62.,   4., -11.],
+          [ 13.,  11.,   9., ...,  49.,  38.,   1.],
+          [  8.,   8.,   6., ...,  56.,  66.,  55.],
+          ...,
+          [ 91.,  87.,  84., ...,  88.,  91.,  92.],
+          [ 93.,  94.,  86., ...,  84.,  86.,  87.],
+          [ 96.,  90.,  88., ...,  84.,  83.,  83.]],
+
+         [[ 11.,  10.,   9., ...,  62.,   4., -11.],
+          [ 13.,  11.,   9., ...,  49.,  38.,   1.],
+          [  8.,   8.,   6., ...,  56.,  66.,  55.],
+          ...,
+          [ 91.,  87.,  84., ...,  88.,  91.,  92.],
+          [ 93.,  94.,  86., ...,  84.,  86.,  87.],
+          [ 96.,  90.,  88., ...,  84.,  83.,  83.]],
+
+         [[ 11.,  10.,   9., ...,  62.,   4., -11.],
+          [ 13.,  11.,   9., ...,  49.,  38.,   1.],
+          [  8.,   8.,   6., ...,  56.,  66.,  55.],
+          ...,
+          [ 91.,  87.,  84., ...,  88.,  91.,  92.],
+          [ 93.,  94.,  86., ...,  84.,  86.,  87.],
+          [ 96.,  90.,  88., ...,  84.,  83.,  83.]]],
+
+
+        [[[ 84.,  36., -10., ..., -31.,  14.,   2.],
+          [ 85.,  48.,  -7., ..., -35.,   7.,  -2.],
+          [ 82.,  56.,  -8., ..., -24.,   4.,  -1.],
+          ...,
+          [ -1.,  -1.,  39., ...,  53.,  53.,  54.],
+          [  0.,  -3.,  28., ...,  53.,  53.,  54.],
+          [  4.,  -5.,  14., ...,  54.,  54.,  54.]],
+
+         [[ -9., -56., -63., ...,  36.,  35.,  45.],
+          [ 25., -27., -36., ...,  32.,  39.,  23.],
+          [ 47., -16., -18., ...,  29.,  18.,   1.],
+          ...,
+          [ -5.,  27.,  65., ...,  55.,  55.,  54.],
+          [ -4.,  21.,  57., ...,  54.,  54.,  54.],
+          [  1.,  16.,  54., ...,  54.,  54.,  54.]],
+
+         [[-28., -33.,  -4., ...,  31.,  30.,  29.],
+          [-52.,  69., -26., ...,  35.,  34.,  32.],
+          [-64.,   0., -30., ...,  41.,  37.,  41.],
+          ...,
+          [ 40.,  44.,  34., ...,  49.,  50.,  50.],
+          [ 48.,  42.,  32., ...,  49.,  48.,  48.],
+          [ 43.,  38.,  33., ...,  49.,  49.,  49.]],
+
+         ...,
+
+         [[ 60.,  60.,  59., ...,  63.,  10.,   4.],
+          [ 61.,  59.,  57., ...,  39.,  33.,   7.],
+          [ 56.,  57.,  55., ...,  40.,  55.,  55.],
+          ...,
+          [ 90.,  87.,  84., ...,  89.,  91.,  92.],
+          [ 91.,  92.,  86., ...,  84.,  86.,  87.],
+          [ 93.,  90.,  89., ...,  85.,  83.,  83.]],
+
+         [[ 60.,  60.,  59., ...,  63.,  10.,   4.],
+          [ 61.,  59.,  57., ...,  39.,  33.,   7.],
+          [ 56.,  57.,  55., ...,  40.,  55.,  55.],
+          ...,
+          [ 90.,  87.,  84., ...,  89.,  91.,  92.],
+          [ 91.,  92.,  86., ...,  84.,  86.,  87.],
+          [ 93.,  90.,  89., ...,  85.,  83.,  83.]],
+
+         [[ 60.,  60.,  59., ...,  63.,  10.,   4.],
+          [ 61.,  59.,  57., ...,  39.,  33.,   7.],
+          [ 56.,  57.,  55., ...,  40.,  55.,  55.],
+          ...,
+          [ 90.,  87.,  84., ...,  89.,  91.,  92.],
+          [ 91.,  92.,  86., ...,  84.,  86.,  87.],
+          [ 93.,  90.,  89., ...,  85.,  83.,  83.]]],
+
+
+        [[[ 89.,  29., -30., ...,  68.,  79.,  37.],
+          [ 95.,  47., -21., ...,  57.,  70.,  39.],
+          [104.,  66., -11., ...,  55.,  58.,  39.],
+          ...,
+          [  5.,   7.,  53., ...,  44.,  44.,  45.],
+          [  5.,   3.,  40., ...,  44.,  44.,  45.],
+          [  4.,   1.,  26., ...,  45.,  45.,  45.]],
+
+         [[ 43.,  11.,   8., ...,  59.,  42.,  41.],
+          [ 43.,  -3., -12., ...,  69.,  53.,  25.],
+          [ 45., -21., -28., ...,  72.,  37.,   9.],
+          ...,
+          [  2.,  44.,  89., ...,  46.,  46.,  45.],
+          [  4.,  37.,  79., ...,  45.,  45.,  45.],
+          [  7.,  31.,  76., ...,  45.,  45.,  45.]],
+
+         [[ 66.,  44.,  76., ...,  42.,  35.,  29.],
+          [ 66., 153.,  69., ...,  36.,  30.,  30.],
+          [ 50.,  96.,  66., ...,  37.,  33.,  41.],
+          ...,
+          [ 21.,  23.,  12., ...,  44.,  45.,  46.],
+          [ 33.,  25.,  11., ...,  44.,  43.,  44.],
+          [ 36.,  26.,  16., ...,  44.,  44.,  44.]],
+
+         ...,
+
+         [[ 31.,  31.,  30., ...,  46.,  -6., -15.],
+          [ 34.,  32.,  30., ...,  25.,  20.,  -9.],
+          [ 29.,  28.,  26., ...,  29.,  46.,  41.],
+          ...,
+          [ 83.,  82.,  79., ...,  89.,  94.,  95.],
+          [ 86.,  87.,  82., ...,  87.,  89.,  90.],
+          [ 90.,  86.,  88., ...,  85.,  86.,  86.]],
+
+         [[ 31.,  31.,  30., ...,  46.,  -6., -15.],
+          [ 34.,  32.,  30., ...,  25.,  20.,  -9.],
+          [ 29.,  28.,  26., ...,  29.,  46.,  41.],
+          ...,
+          [ 83.,  82.,  79., ...,  89.,  94.,  95.],
+          [ 86.,  87.,  82., ...,  87.,  89.,  90.],
+          [ 90.,  86.,  88., ...,  85.,  86.,  86.]],
+
+         [[ 31.,  31.,  30., ...,  46.,  -6., -15.],
+          [ 34.,  32.,  30., ...,  25.,  20.,  -9.],
+          [ 29.,  28.,  26., ...,  29.,  46.,  41.],
+          ...,
+          [ 83.,  82.,  79., ...,  89.,  94.,  95.],
+          [ 86.,  87.,  82., ...,  87.,  89.,  90.],
+          [ 90.,  86.,  88., ...,  85.,  86.,  86.]]]]], dtype=float32))
+99
+(array([0]), array([97]))

@@ -79,8 +79,8 @@ if __name__ == '__main__':
         caffe.set_random_seed(cfg.RNG_SEED)
 
     # set up caffe
-    # caffe.set_device(args.gpu_id)
-    caffe.set_mode_cpu()
+    caffe.set_device(args.gpu_id)
+    caffe.set_mode_gpu()
 
     path = './preprocess/activityNet/'
     roidb = get_train_roidb(path)
