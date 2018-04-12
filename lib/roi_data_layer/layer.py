@@ -126,9 +126,25 @@ class RoIDataLayer(caffe.Layer):
         for blob_name, blob in blobs.iteritems():
             top_ind = self._name_to_top_map[blob_name]
             # Reshape net's input blobs
-            top[top_ind].reshape(*(blob.shape))
-            # Copy data into net's input blobs
-            top[top_ind].data[...] = blob.astype(np.float32, copy=False)
+            try:
+                 blob1, blob2 = blob
+                a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
+                # Reshape net's input blobs
+                # print(a)
+                top[top_ind].reshape(*(a))
+                # print(blob1)
+                # print(blob2)
+                blob3 = ([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
+                blob3 = np.asarray(blob3)
+                # print(blob3)
+                # print(np.concatenate(blob1, blob2))
+
+                # Copy data into net's input blobs
+                top[top_ind].data[...] = blob3.astype(np.float32, copy=False)
+            except:
+                top[top_ind].reshape(*(blob.shape))
+                # Copy data into net's input blobs
+                top[top_ind].data[...] = blob.astype(np.float32, copy=False)
 
     def backward(self, top, propagate_down, bottom):
         """This layer does not propagate gradients."""
