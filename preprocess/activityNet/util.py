@@ -8,7 +8,7 @@ from operator import itemgetter
 import subprocess
 import shutil
 import os, errno
-# import cv2
+import cv2
 from sklearn.preprocessing import MultiLabelBinarizer
 def generate_classes(data):
   class_list = []
