@@ -50,6 +50,7 @@ class RoIDataLayer(caffe.Layer):
     def set_roidb(self, roidb):
         """Set the roidb to be used by this layer during training."""
         self._roidb = roidb
+        print("tempppppppppppppppppppppppppppp",roidb)
         self._shuffle_roidb_inds()
         if cfg.TRAIN.USE_PREFETCH:
           self._blob_queue = Queue(10)
