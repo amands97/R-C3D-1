@@ -85,8 +85,9 @@ if __name__ == '__main__':
     path = './preprocess/activityNet/'
     roidb = get_train_roidb(path)
     print '{:d} roidb entries'.format(len(roidb))
-    print(roidb[0])
+    # print(roidb[0])
     print("print done")
+    print(roidb)
     output_dir = './experiments/best_activitynet/snapshot/'
     print 'Output will be saved to `{:s}`'.format(output_dir)
 
