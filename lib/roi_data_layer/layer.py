@@ -131,10 +131,11 @@ class RoIDataLayer(caffe.Layer):
             # Reshape net's input blobs
             print(a)
             top[top_ind].reshape(*(a))
-            print(blob1 )
+            print(blob1)
             print(blob2)
             blob = ([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
-            
+            blob = np.asarray(blob)
+            print(blob)
             # print(np.concatenate(blob1, blob2))
 
             # Copy data into net's input blobs
