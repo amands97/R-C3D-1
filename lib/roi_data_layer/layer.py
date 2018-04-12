@@ -79,7 +79,7 @@ class RoIDataLayer(caffe.Layer):
 
         # data blob: holds a batch of N videos, each with 3 channels
         idx = 0
-        top[idx].reshape(cfg.TRAIN.VIDEO_BATCH, 3, max(cfg.TRAIN.LENGTH),
+        top[idx].reshape(cfg.TRAIN.VIDEO_BATCH, 103, max(cfg.TRAIN.LENGTH),
                          cfg.TRAIN.CROP_SIZE, cfg.TRAIN.CROP_SIZE)
         self._name_to_top_map['data'] = idx
         idx += 1
