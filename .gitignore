@@ -1,4 +1,7 @@
 **/*.mp4
+caffe3d/
+caffe3d/**/*
+lib/setup.py
 pretrain/activitynet_iter_30000_3fps.caffemodel
 preprocess/activityNet/videos/
 snapshot/activitynet_iter_135000.caffemodel
