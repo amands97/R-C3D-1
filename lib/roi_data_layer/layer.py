@@ -133,6 +133,7 @@ class RoIDataLayer(caffe.Layer):
             top[top_ind].reshape(*(a))
             print(blob1 )
             print(blob2)
+            print(zip(blob1, blob2))
             print(np.concatenate(blob1, blob2))
 
             # Copy data into net's input blobs
