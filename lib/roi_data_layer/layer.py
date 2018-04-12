@@ -133,7 +133,7 @@ class RoIDataLayer(caffe.Layer):
             top[top_ind].reshape(*(a))
             print(blob1 )
             print(blob2)
-            print([np.concatenate([x[0], x[1]]) forx in zip(blob1, blob2)])
+            print([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
             
             # print(np.concatenate(blob1, blob2))
 
