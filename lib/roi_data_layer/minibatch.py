@@ -35,8 +35,8 @@ def get_minibatch(roidb, num_classes):
     if cfg.TRAIN.HAS_RPN:
         assert len(roidb) == 1, "Single batch only"
         # gt windows: (x1, x2, cls)
-        print(len(roidb[0]['gt_classes'][0]))
-        print(np.where(roidb[0]['gt_classes'] != 0))
+        # print(len(roidb[0]['gt_classes'][0]))
+        # print(np.where(roidb[0]['gt_classes'] != 0))
         # print(np.where(roidb[0]['gt_classes'][0] != 1))
         # print(np.where(roidb[0]['gt_classes'][98] != 97))
         # print(np.where(roidb[0]['gt_classes'][99] != 98))
@@ -121,5 +121,5 @@ def _get_video_blob(roidb, scale_inds):
 
     # Create a blob to hold the input images
     blob = video_list_to_blob(processed_videos)
-    print("somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", blob)
+    # print("somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", blob)
     return blob
