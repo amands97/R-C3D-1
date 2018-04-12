@@ -50,13 +50,17 @@ class RoIDataLayer(caffe.Layer):
     def set_roidb(self, roidb):
         """Set the roidb to be used by this layer during training."""
         self._roidb = roidb
+        print("tempppppppppppppppppppppppppppp",roidb)
         self._shuffle_roidb_inds()
+        print("tempppppppppppppppppppppppppppp",roidb)
+        
         if cfg.TRAIN.USE_PREFETCH:
           self._blob_queue = Queue(10)
           self._prefetch_process = BlobFetcher(self._blob_queue,
                                                self._roidb,
                                                self._num_classes)
           self._prefetch_process.start()
+          print("maaaaasdfdfdsfadf")
           # Terminate the child process when the parent exists
           def cleanup():
               print 'Terminating BlobFetcher'
@@ -122,13 +126,25 @@ class RoIDataLayer(caffe.Layer):
         """Get blobs and copy them into this layer's top blob vector."""
 
         blobs = self._get_next_minibatch()
-        
+        # print(blobs)
         for blob_name, blob in blobs.iteritems():
+            # print("blob", blob)
             top_ind = self._name_to_top_map[blob_name]
+            # print(blob)
+            blob1, blob2 = blob
+            a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
             # Reshape net's input blobs
-            top[top_ind].reshape(*(blob.shape))
+            # print(a)
+            top[top_ind].reshape(*(a))
+            # print(blob1)
+            # print(blob2)
+            blob3 = ([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
+            blob3 = np.asarray(blob3)
+            # print(blob3)
+            # print(np.concatenate(blob1, blob2))
+
             # Copy data into net's input blobs
-            top[top_ind].data[...] = blob.astype(np.float32, copy=False)
+            top[top_ind].data[...] = blob3.astype(np.float32, copy=False)
 
     def backward(self, top, propagate_down, bottom):
         """This layer does not propagate gradients."""
@@ -160,11 +176,14 @@ class BlobFetcher(Process):
     def _get_next_minibatch_inds(self):
         """Return the roidb indices for the next minibatch."""
         # TODO(rbg): remove duplicated code
+        print("db_indssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", db_inds)
+        
         if self._cur + cfg.TRAIN.VIDEO_BATCH >= len(self._roidb):
             self._shuffle_roidb_inds()
 
         db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.VIDEO_BATCH]
         self._cur += cfg.TRAIN.VIDEO_BATCH
+        print("db_inds", db_inds)
         return db_inds
 
     def run(self):
@@ -172,5 +191,7 @@ class BlobFetcher(Process):
         while True:
             db_inds = self._get_next_minibatch_inds()
             minibatch_db = [self._roidb[i] for i in db_inds]
+            print("minibatch\n\n\n", minibatch_db)
             blobs = get_minibatch(minibatch_db, self._num_classes)
+            
             self._queue.put(blobs)
