@@ -124,7 +124,7 @@ class RoIDataLayer(caffe.Layer):
         blobs = self._get_next_minibatch()
         print(blobs)
         for blob_name, blob in blobs.iteritems():
-            print("blob", blob)
+            # print("blob", blob)
             top_ind = self._name_to_top_map[blob_name]
             # print(blob)
             blob1, blob2 = blob
@@ -136,7 +136,7 @@ class RoIDataLayer(caffe.Layer):
             # print(blob2)
             blob3 = ([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
             blob3 = np.asarray(blob3)
-            print(blob3)
+            # print(blob3)
             # print(np.concatenate(blob1, blob2))
 
             # Copy data into net's input blobs
