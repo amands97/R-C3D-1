@@ -121,5 +121,5 @@ def _get_video_blob(roidb, scale_inds):
 
     # Create a blob to hold the input images
     blob = video_list_to_blob(processed_videos)
-    
+    print("somethingggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", blob)
     return blob
