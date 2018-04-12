@@ -181,6 +181,7 @@ class BlobFetcher(Process):
 
         db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.VIDEO_BATCH]
         self._cur += cfg.TRAIN.VIDEO_BATCH
+        print("db_inds", db_inds)
         return db_inds
 
     def run(self):
