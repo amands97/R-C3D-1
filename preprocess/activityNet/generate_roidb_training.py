@@ -124,7 +124,7 @@ def generate_roidb(split, segment1, segment2):
             rois2 = rois2[overlap > overlap_thresh]
 
           # Append data
-          if len(rois) > 0:
+          if len(rois1) > 0:
             rois1[:,0] = np.maximum(start, rois1[:,0])
             rois1[:,1] = np.minimum(end, rois1[:,1])
             tmp = generate_roi(rois1, rois2, vid, start, end, stride, split)
