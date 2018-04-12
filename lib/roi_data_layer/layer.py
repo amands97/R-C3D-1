@@ -176,6 +176,8 @@ class BlobFetcher(Process):
     def _get_next_minibatch_inds(self):
         """Return the roidb indices for the next minibatch."""
         # TODO(rbg): remove duplicated code
+        print("db_indssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", db_inds)
+        
         if self._cur + cfg.TRAIN.VIDEO_BATCH >= len(self._roidb):
             self._shuffle_roidb_inds()
 
