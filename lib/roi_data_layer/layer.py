@@ -57,6 +57,7 @@ class RoIDataLayer(caffe.Layer):
                                                self._roidb,
                                                self._num_classes)
           self._prefetch_process.start()
+          print("maaaaasdfdfdsfadf")
           # Terminate the child process when the parent exists
           def cleanup():
               print 'Terminating BlobFetcher'
