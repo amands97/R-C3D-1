@@ -52,6 +52,8 @@ class RoIDataLayer(caffe.Layer):
         self._roidb = roidb
         print("tempppppppppppppppppppppppppppp",roidb)
         self._shuffle_roidb_inds()
+        print("tempppppppppppppppppppppppppppp",roidb)
+        
         if cfg.TRAIN.USE_PREFETCH:
           self._blob_queue = Queue(10)
           self._prefetch_process = BlobFetcher(self._blob_queue,
