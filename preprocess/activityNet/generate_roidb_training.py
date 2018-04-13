@@ -15,7 +15,7 @@ import numpy as np
 from util import *
 
 FPS = 25
-LENGTH = 100
+LENGTH = 30
 min_length = 0
 overlap_thresh = 0.1
 STEP = LENGTH / 4
