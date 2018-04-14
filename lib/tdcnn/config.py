@@ -79,6 +79,7 @@ __C.TRAIN.SNAPSHOT_INFIX = ''
 __C.TRAIN.USE_PREFETCH = False
 
 # Normalize the targets (subtract empirical mean, divide by empirical stddev)
+# __C.TRAIN.TWIN_NORMALIZE_TARGETS = True
 __C.TRAIN.TWIN_NORMALIZE_TARGETS = True
 # Deprecated (inside weights)
 __C.TRAIN.TWIN_INSIDE_WEIGHTS = (1.0, 1.0)
