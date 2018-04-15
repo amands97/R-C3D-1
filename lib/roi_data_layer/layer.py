@@ -45,25 +45,26 @@ class RoIDataLayer(caffe.Layer):
         else:
             db_inds = self._get_next_minibatch_inds()
             minibatch_db = [self._roidb[i] for i in db_inds]
+            print(minibatch_db)
             return get_minibatch(minibatch_db, self._num_classes)
 
     def set_roidb(self, roidb):
         """Set the roidb to be used by this layer during training."""
         self._roidb = roidb
         self._shuffle_roidb_inds()
-        if cfg.TRAIN.USE_PREFETCH:
-          self._blob_queue = Queue(10)
-          self._prefetch_process = BlobFetcher(self._blob_queue,
-                                               self._roidb,
-                                               self._num_classes)
-          self._prefetch_process.start()
-          # Terminate the child process when the parent exists
-          def cleanup():
-              print 'Terminating BlobFetcher'
-              self._prefetch_process.terminate()
-              self._prefetch_process.join()
-          import atexit
-          atexit.register(cleanup)
+        # if cfg.TRAIN.USE_PREFETCH:
+        #   self._blob_queue = Queue(10)
+        #   self._prefetch_process = BlobFetcher(self._blob_queue,
+        #                                        self._roidb,
+        #                                        self._num_classes)
+        #   self._prefetch_process.start()
+        #   # Terminate the child process when the parent exists
+        #   def cleanup():
+        #       print 'Terminating BlobFetcher'
+        #       self._prefetch_process.terminate()
+        #       self._prefetch_process.join()
+        #   import atexit
+        #   atexit.register(cleanup)
 
     def setup(self, bottom, top):
         """Setup the RoIDataLayer."""
@@ -127,6 +128,7 @@ class RoIDataLayer(caffe.Layer):
             top_ind = self._name_to_top_map[blob_name]
             # Reshape net's input blobs
             try:
+                print(sdsds)
                 blob1, blob2 = blob
                 a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
                 # Reshape net's input blobs
