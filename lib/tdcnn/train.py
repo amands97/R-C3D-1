@@ -98,7 +98,9 @@ class SolverWrapper(object):
         while self.solver.iter < max_iters:
             # Make one SGD update
             timer.tic()
+            print("trying")
             self.solver.step(1)
+            print("done another iteration")
             timer.toc()
             if self.solver.iter % (10 * self.solver_param.display) == 0:
                 print 'speed: {:.3f}s / iter'.format(timer.average_time)

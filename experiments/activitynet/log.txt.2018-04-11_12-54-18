@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "./experiments/activitynet/train_net.py", line 11, in <module>
-    import caffe
-  File "/data/aman/R-C3D/experiments/activitynet/test/../../../caffe3d/python/caffe/__init__.py", line 1, in <module>
-  File "/data/aman/R-C3D/experiments/activitynet/test/../../../caffe3d/python/caffe/pycaffe.py", line 13, in <module>
-ImportError: libopenblas.so.0: cannot open shared object file: No such file or directory
