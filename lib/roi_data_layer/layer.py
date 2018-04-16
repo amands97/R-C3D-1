@@ -82,7 +82,7 @@ class RoIDataLayer(caffe.Layer):
         idx += 1
 
         if cfg.TRAIN.HAS_RPN:
-            top[idx].reshape(1, 3)
+            top[idx].reshape(1, 101)
             self._name_to_top_map['gt_windows'] = idx
             idx += 1
         else:
