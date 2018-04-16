@@ -1,0 +1,9 @@
+Failed to include caffe_pb2, things might go wrong!
+Traceback (most recent call last):
+  File "./experiments/activitynet/train_net.py", line 11, in <module>
+    import caffe
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/__init__.py", line 4, in <module>
+    from .proto.caffe_pb2 import TRAIN, TEST
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/proto/caffe_pb2.py", line 1010, in <module>
+    has_default_value=True, default_value=str("constant", "utf-8"),
+TypeError: decoding str is not supported

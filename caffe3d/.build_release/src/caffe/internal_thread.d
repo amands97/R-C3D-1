@@ -22,8 +22,7 @@
  /usr/local/cuda/include/vector_functions.hpp \
  /usr/local/cuda/include/curand.h /usr/local/cuda/include/driver_types.h \
  include/caffe/util/math_functions.hpp \
- include/caffe/util/mkl_alternate.hpp /data/aman/openblas/include/cblas.h \
- /data/aman/openblas/include/openblas_config.h
+ include/caffe/util/mkl_alternate.hpp
 
 include/caffe/internal_thread.hpp:
 
@@ -80,7 +79,3 @@ include/caffe/util/device_alternate.hpp:
 include/caffe/util/math_functions.hpp:
 
 include/caffe/util/mkl_alternate.hpp:
-
-/data/aman/openblas/include/cblas.h:
-
-/data/aman/openblas/include/openblas_config.h:

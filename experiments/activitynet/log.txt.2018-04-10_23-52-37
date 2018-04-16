@@ -1,0 +1,34 @@
+
+(train_net.py:24525): Gdk-CRITICAL **: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+Traceback (most recent call last):
+  File "./experiments/activitynet/train_net.py", line 11, in <module>
+    import caffe
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/__init__.py", line 1, in <module>
+    from .pycaffe import Net, SGDSolver, NesterovSolver, AdaGradSolver, RMSPropSolver, AdaDeltaSolver, AdamSolver
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/pycaffe.py", line 15, in <module>
+    import caffe.io
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/io.py", line 2, in <module>
+    import skimage.io
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/__init__.py", line 15, in <module>
+    reset_plugins()
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/manage_plugins.py", line 93, in reset_plugins
+    _load_preferred_plugins()
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/manage_plugins.py", line 73, in _load_preferred_plugins
+    _set_plugin(p_type, preferred_plugins['all'])
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/manage_plugins.py", line 85, in _set_plugin
+    use_plugin(plugin, kind=plugin_type)
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/manage_plugins.py", line 255, in use_plugin
+    _load(name)
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/manage_plugins.py", line 299, in _load
+    fromlist=[modname])
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/io/_plugins/matplotlib_plugin.py", line 3, in <module>
+    import matplotlib.pyplot as plt
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/matplotlib/pyplot.py", line 115, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/matplotlib/backends/__init__.py", line 62, in pylab_setup
+    [backend_name], 0)
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/matplotlib/backends/backend_gtk3agg.py", line 9, in <module>
+    from . import backend_agg, backend_gtk3
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/matplotlib/backends/backend_gtk3.py", line 32, in <module>
+    cursors.MOVE          : Gdk.Cursor.new(Gdk.CursorType.FLEUR),
+TypeError: constructor returned NULL
