@@ -23,8 +23,7 @@
  /usr/local/cuda/include/curand.h /usr/local/cuda/include/driver_types.h \
  .build_release/src/caffe/proto/caffe.pb.h include/caffe/syncedmem.hpp \
  include/caffe/util/math_functions.hpp \
- include/caffe/util/mkl_alternate.hpp /data/aman/openblas/include/cblas.h \
- /data/aman/openblas/include/openblas_config.h
+ include/caffe/util/mkl_alternate.hpp
 
 include/caffe/blob.hpp:
 
@@ -85,7 +84,3 @@ include/caffe/syncedmem.hpp:
 include/caffe/util/math_functions.hpp:
 
 include/caffe/util/mkl_alternate.hpp:
-
-/data/aman/openblas/include/cblas.h:
-
-/data/aman/openblas/include/openblas_config.h:
