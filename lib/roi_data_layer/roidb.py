@@ -91,6 +91,7 @@ def add_twin_regression_targets(roidb):
         print "Normalizing targets"
         for item in roidb:
             targets = item['twin_targets']
+            print(targets)
             for cls in xrange(1, num_classes):
                 cls_inds = np.where(targets[:, 0] == cls)[0]
                 item['twin_targets'][cls_inds, 1:] -= means[cls, :]
