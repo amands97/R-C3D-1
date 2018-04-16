@@ -54,6 +54,7 @@ def add_twin_regression_targets(roidb):
                 _compute_targets(rois, max_overlaps, max_classes)
 
     if cfg.TRAIN.TWIN_NORMALIZE_TARGETS_PRECOMPUTED:
+        print("precimputed")
         # Use fixed / precomputed "means" and "stds" instead of empirical values
         means = np.tile(
                 np.array(cfg.TRAIN.TWIN_NORMALIZE_MEANS), (num_classes, 1))
