@@ -27,8 +27,7 @@
  include/caffe/syncedmem.hpp include/caffe/data_transformer.hpp \
  include/caffe/layer.hpp include/caffe/layer_factory.hpp \
  include/caffe/util/math_functions.hpp \
- include/caffe/util/mkl_alternate.hpp /data/aman/openblas/include/cblas.h \
- /data/aman/openblas/include/openblas_config.h include/caffe/parallel.hpp \
+ include/caffe/util/mkl_alternate.hpp include/caffe/parallel.hpp \
  include/caffe/solver.hpp include/caffe/net.hpp \
  include/caffe/solver_factory.hpp
 
@@ -107,10 +106,6 @@ include/caffe/layer_factory.hpp:
 include/caffe/util/math_functions.hpp:
 
 include/caffe/util/mkl_alternate.hpp:
-
-/data/aman/openblas/include/cblas.h:
-
-/data/aman/openblas/include/openblas_config.h:
 
 include/caffe/parallel.hpp:
 
