@@ -95,7 +95,7 @@ class RoIDataLayer(caffe.Layer):
 
             # labels blob: R categorical labels in [0, ..., K] for K foreground
             # classes plus background
-            top[idx].reshape(1)
+            top[idx].reshape(99)
             self._name_to_top_map['labels'] = idx
             idx += 1
 
