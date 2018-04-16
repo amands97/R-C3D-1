@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "./experiments/activitynet/train_net.py", line 11, in <module>
+    import caffe
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/__init__.py", line 1, in <module>
+    from .pycaffe import Net, SGDSolver, NesterovSolver, AdaGradSolver, RMSPropSolver, AdaDeltaSolver, AdamSolver
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/pycaffe.py", line 15, in <module>
+    import caffe.io
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../caffe3d/python/caffe/io.py", line 4, in <module>
+    from skimage.transform import resize
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/transform/__init__.py", line 1, in <module>
+    from .hough_transform import (hough_line, hough_line_peaks,
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/transform/hough_transform.py", line 4, in <module>
+    from ._hough_transform import (_hough_circle,
+  File "skimage/transform/_hough_transform.pyx", line 13, in init skimage.transform._hough_transform (skimage/transform/_hough_transform.c:24803)
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/draw/__init__.py", line 1, in <module>
+    from .draw import (circle, ellipse, set_color, polygon_perimeter,
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/draw/draw.py", line 4, in <module>
+    from .._shared._geometry import polygon_clip
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/skimage/_shared/_geometry.py", line 4, in <module>
+    from matplotlib import path, transforms
+  File "/data/gpu/prannay/aman/cv/lib/python3.4/site-packages/matplotlib/__init__.py", line 127, in <module>
+    from . import cbook
+ImportError: cannot import name 'cbook'

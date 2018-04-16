@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "./experiments/activitynet/train_net.py", line 20, in <module>
+    from tdcnn.train import train_net
+  File "/data/gpu/prannay/aman/R-C3D-1/experiments/activitynet/../../lib/tdcnn/train.py", line 16
+    import google.protobuf.text_format
+    ^
+IndentationError: unexpected indent

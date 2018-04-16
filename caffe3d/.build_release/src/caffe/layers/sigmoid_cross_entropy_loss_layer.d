@@ -26,9 +26,7 @@
  .build_release/src/caffe/proto/caffe.pb.h include/caffe/syncedmem.hpp \
  include/caffe/layer.hpp include/caffe/layer_factory.hpp \
  include/caffe/util/math_functions.hpp \
- include/caffe/util/mkl_alternate.hpp /data/aman/openblas/include/cblas.h \
- /data/aman/openblas/include/openblas_config.h \
- include/caffe/layers/loss_layer.hpp \
+ include/caffe/util/mkl_alternate.hpp include/caffe/layers/loss_layer.hpp \
  include/caffe/layers/sigmoid_layer.hpp \
  include/caffe/layers/neuron_layer.hpp
 
@@ -97,10 +95,6 @@ include/caffe/layer_factory.hpp:
 include/caffe/util/math_functions.hpp:
 
 include/caffe/util/mkl_alternate.hpp:
-
-/data/aman/openblas/include/cblas.h:
-
-/data/aman/openblas/include/openblas_config.h:
 
 include/caffe/layers/loss_layer.hpp:
 

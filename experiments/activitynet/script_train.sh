@@ -2,7 +2,7 @@
 
 export PYTHONUNBUFFERED=true
 
-GPU_ID=3
+GPU_ID=1
 EX_DIR=activitynet
 
 LOG="experiments/${EX_DIR}/log.txt.`date +'%Y-%m-%d_%H-%M-%S'`"
