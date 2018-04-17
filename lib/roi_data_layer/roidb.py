@@ -43,7 +43,7 @@ def add_twin_regression_targets(roidb):
     """Add information needed to train time window regressors."""
     assert len(roidb) > 0
     assert 'max_classes' in roidb[0], 'Did you call prepare_roidb first?'
-    print(roidb)
+    # print(roidb)
     # Infer number of classes from the number of columns in gt_overlaps
     num_classes = cfg.NUM_CLASSES
     for item in roidb:
@@ -80,18 +80,18 @@ def add_twin_regression_targets(roidb):
         stds = np.sqrt(squared_sums / class_counts - means ** 2)
 
     print 'twin target means:'
-    print means
-    print means[1:, :].mean(axis=0) # ignore bg class
+    # print means
+    # print means[1:, :].mean(axis=0) # ignore bg class
     print 'twin target stdevs:'
-    print stds
-    print stds[1:, :].mean(axis=0) # ignore bg class
+    # print stds
+    # print stds[1:, :].mean(axis=0) # ignore bg class
 
     # Normalize targets
     if cfg.TRAIN.TWIN_NORMALIZE_TARGETS:
         print "Normalizing targets"
         for item in roidb:
             targets = item['twin_targets']
-            print(targets)
+            # print(targets)
             for cls in xrange(1, num_classes):
                 cls_inds = np.where(targets[:, 0] == cls)[0]
                 item['twin_targets'][cls_inds, 1:] -= means[cls, :]
@@ -123,8 +123,8 @@ def _compute_targets(rois, overlaps, labels):
     gt_assignment = ex_gt_overlaps.argmax(axis=1)
     gt_rois = rois[gt_inds[gt_assignment], :]
     ex_rois = rois[ex_inds, :]
-    print(rois.shape[0])
-    print(labels[0].shape[0])
+    # print(rois.shape[0])
+    # print(labels[0].shape[0])
     targets1 = np.zeros((rois.shape[0], 99), dtype=np.float32)
     targets2 = np.zeros((rois.shape[0], 2), dtype=np.float32)
     targets1[ex_inds] = labels[ex_inds]
