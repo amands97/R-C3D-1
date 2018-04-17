@@ -93,6 +93,7 @@ class ProposalTargetLayer(caffe.Layer):
             print 'ratio: {:.3f}'.format(float(self._fg_num) / float(self._bg_num))
 
         # sampled rois
+        print(rois)
         top[0].reshape(*rois.shape)
         top[0].data[...] = rois
 
