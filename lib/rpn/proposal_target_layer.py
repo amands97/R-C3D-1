@@ -97,7 +97,7 @@ class ProposalTargetLayer(caffe.Layer):
         # print(rois)
         top[0].reshape(*rois.shape)
         top[0].data[...] = rois
-
+        print(("labels-----", labels))
         # classification labels
         top[1].reshape(*labels.shape)
         top[1].data[...] = labels

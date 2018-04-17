@@ -53,7 +53,6 @@ class AnchorTargetLayer(caffe.Layer):
 
         A = self._num_anchors
         # labels
-        # print("labels---", top[0].data)
         top[0].reshape(1, 1, A * length, height, width)
         # twin_targets
         top[1].reshape(1, A * 2, length, height, width)
@@ -277,7 +276,7 @@ def _compute_targets(ex_rois, gt_rois):
 
     assert ex_rois.shape[0] == gt_rois.shape[0]
     assert ex_rois.shape[1] == 2
-    print(gt_rois)
+    # print(gt_rois)
     assert gt_rois.shape[1] == 101
 
     return twin_transform(ex_rois, gt_rois[:, :2]).astype(np.float32, copy=False)
