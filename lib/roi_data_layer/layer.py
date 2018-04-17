@@ -83,7 +83,7 @@ class RoIDataLayer(caffe.Layer):
 
         if cfg.TRAIN.HAS_RPN:
             top[idx].reshape(1, 101)
-            self._name_to_top_map['gt_boxes'] = idx
+            self._name_to_top_map['gt_windows'] = idx
             idx += 1
         else:
             # rois blob: holds R regions of interest, each is a 3-tuple
