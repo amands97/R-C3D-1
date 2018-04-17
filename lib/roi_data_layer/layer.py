@@ -130,7 +130,7 @@ class RoIDataLayer(caffe.Layer):
         """Get blobs and copy them into this layer's top blob vector."""
 
         blobs = self._get_next_minibatch()
-        print("bilobbbbbbbbbbbbbbbbbbbbbbbbbbbsssssssssssssssssssssssssssss", blobs)
+        # print("bilobbbbbbbbbbbbbbbbbbbbbbbbbbbsssssssssssssssssssssssssssss")
         for blob_name, blob in blobs.iteritems():
             top_ind = self._name_to_top_map[blob_name]
             # Reshape net's input blobs
@@ -147,7 +147,7 @@ class RoIDataLayer(caffe.Layer):
                 # print(blob2)
                 blob3 = ([np.concatenate([x[0], x[1]]) for x in zip(blob1, blob2)])
                 blob3 = np.asarray(blob3)
-                print(blob3)
+                # print(blob3)
                 # print(np.concatenate(blob1, blob2))
                 print("doinasdasdadad111")
 
@@ -156,7 +156,7 @@ class RoIDataLayer(caffe.Layer):
                 print("doinasdasdadad")
             except:
                 print("thihs\n\n\n\n\n")
-                print(blob)
+                # print(blob)
                 print(blob.shape)
                 top[top_ind].reshape(*(blob.shape))
                 # Copy data into net's input blobs
