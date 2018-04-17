@@ -158,6 +158,7 @@ class RoIDataLayer(caffe.Layer):
                 print("thihs\n\n\n\n\n")
                 # print(blob)
                 print(blob.shape)
+                print(blob_name, top_ind)
                 top[top_ind].reshape(*(blob.shape))
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob.astype(np.float32, copy=False)
