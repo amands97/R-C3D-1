@@ -143,9 +143,11 @@ class RoIDataLayer(caffe.Layer):
                 blob3 = np.asarray(blob3)
                 print(blob3)
                 # print(np.concatenate(blob1, blob2))
+                print("doinasdasdadad111")
 
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob3.astype(np.float32, copy=False)
+                print("doinasdasdadad")
             except:
                 print("thihs\n\n\n\n\n")
                 print(blob)
