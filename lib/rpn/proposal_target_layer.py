@@ -58,7 +58,7 @@ class ProposalTargetLayer(caffe.Layer):
         # Include ground-truth wins in the set of candidate rois
         zeros = np.zeros((gt_wins.shape[0], 1), dtype=gt_wins.dtype)
         all_rois = np.vstack(
-            (all_rois, np.hstack((zeros, gt_wins[:, :-1])))
+            (all_rois, np.hstack((zeros, gt_wins[:, :2])))
         )
 
         # Sanity check: single batch only
