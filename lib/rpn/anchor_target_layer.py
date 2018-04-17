@@ -277,6 +277,6 @@ def _compute_targets(ex_rois, gt_rois):
     assert ex_rois.shape[0] == gt_rois.shape[0]
     assert ex_rois.shape[1] == 2
     print(gt_rois)
-    assert gt_rois.shape[1] == 3
+    assert gt_rois.shape[1] == 101
 
     return twin_transform(ex_rois, gt_rois[:, :2]).astype(np.float32, copy=False)
