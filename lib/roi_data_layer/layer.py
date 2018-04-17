@@ -135,9 +135,9 @@ class RoIDataLayer(caffe.Layer):
             top_ind = self._name_to_top_map[blob_name]
             # Reshape net's input blobs
             try:
-                print("got tuple")
                 print(blob_name)
                 blob1, blob2 = blob
+                print("got tuple")
 
                 a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
                 # Reshape net's input blobs
@@ -161,6 +161,7 @@ class RoIDataLayer(caffe.Layer):
                 top[top_ind].reshape(*(blob.shape))
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob.astype(np.float32, copy=False)
+                print(top[top_ind].data.shape())
                 print("doinasdasdadad")
 
     def backward(self, top, propagate_down, bottom):
