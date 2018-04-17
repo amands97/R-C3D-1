@@ -52,19 +52,19 @@ class RoIDataLayer(caffe.Layer):
         """Set the roidb to be used by this layer during training."""
         self._roidb = roidb
         self._shuffle_roidb_inds()
-        # if cfg.TRAIN.USE_PREFETCH:
-        #   self._blob_queue = Queue(10)
-        #   self._prefetch_process = BlobFetcher(self._blob_queue,
-        #                                        self._roidb,
-        #                                        self._num_classes)
-        #   self._prefetch_process.start()
-        #   # Terminate the child process when the parent exists
-        #   def cleanup():
-        #       print 'Terminating BlobFetcher'
-        #       self._prefetch_process.terminate()
-        #       self._prefetch_process.join()
-        #   import atexit
-        #   atexit.register(cleanup)
+        if cfg.TRAIN.USE_PREFETCH:
+          self._blob_queue = Queue(10)
+          self._prefetch_process = BlobFetcher(self._blob_queue,
+                                               self._roidb,
+                                               self._num_classes)
+          self._prefetch_process.start()
+          # Terminate the child process when the parent exists
+          def cleanup():
+              print 'Terminating BlobFetcher'
+              self._prefetch_process.terminate()
+              self._prefetch_process.join()
+          import atexit
+          atexit.register(cleanup)
 
     def setup(self, bottom, top):
         """Setup the RoIDataLayer."""
@@ -83,7 +83,7 @@ class RoIDataLayer(caffe.Layer):
 
         if cfg.TRAIN.HAS_RPN:
             top[idx].reshape(1, 101)
-            self._name_to_top_map['gt_windows'] = idx
+            self._name_to_top_map['gt_boxes'] = idx
             idx += 1
         else:
             # rois blob: holds R regions of interest, each is a 3-tuple
