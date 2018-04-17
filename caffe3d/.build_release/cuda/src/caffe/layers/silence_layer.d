@@ -1,16 +1,16 @@
 .build_release/cuda/src/caffe/layers/silence_layer.o : src/caffe/layers/silence_layer.cu \
     /usr/include/stdc-predef.h \
-    /usr/local/cuda/include/cuda_runtime.h \
-    /usr/local/cuda/include/host_config.h \
+    /data/gpu/prannay/aman//include/cuda_runtime.h \
+    /data/gpu/prannay/aman//include/host_config.h \
     /usr/include/features.h \
     /usr/include/x86_64-linux-gnu/sys/cdefs.h \
     /usr/include/x86_64-linux-gnu/bits/wordsize.h \
     /usr/include/x86_64-linux-gnu/gnu/stubs.h \
     /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
-    /usr/local/cuda/include/builtin_types.h \
-    /usr/local/cuda/include/device_types.h \
-    /usr/local/cuda/include/host_defines.h \
-    /usr/local/cuda/include/driver_types.h \
+    /data/gpu/prannay/aman//include/builtin_types.h \
+    /data/gpu/prannay/aman//include/device_types.h \
+    /data/gpu/prannay/aman//include/host_defines.h \
+    /data/gpu/prannay/aman//include/driver_types.h \
     /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h \
     /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h \
     /usr/include/limits.h \
@@ -21,17 +21,17 @@
     /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
     /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
     /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
-    /usr/local/cuda/include/surface_types.h \
-    /usr/local/cuda/include/texture_types.h \
-    /usr/local/cuda/include/vector_types.h \
-    /usr/local/cuda/include/library_types.h \
-    /usr/local/cuda/include/channel_descriptor.h \
-    /usr/local/cuda/include/cuda_runtime_api.h \
-    /usr/local/cuda/include/cuda_device_runtime_api.h \
-    /usr/local/cuda/include/driver_functions.h \
-    /usr/local/cuda/include/vector_functions.h \
-    /usr/local/cuda/include/vector_functions.hpp \
-    /usr/local/cuda/include/common_functions.h \
+    /data/gpu/prannay/aman//include/surface_types.h \
+    /data/gpu/prannay/aman//include/texture_types.h \
+    /data/gpu/prannay/aman//include/vector_types.h \
+    /data/gpu/prannay/aman//include/library_types.h \
+    /data/gpu/prannay/aman//include/channel_descriptor.h \
+    /data/gpu/prannay/aman//include/cuda_runtime_api.h \
+    /data/gpu/prannay/aman//include/cuda_device_runtime_api.h \
+    /data/gpu/prannay/aman//include/driver_functions.h \
+    /data/gpu/prannay/aman//include/vector_functions.h \
+    /data/gpu/prannay/aman//include/vector_functions.hpp \
+    /data/gpu/prannay/aman//include/common_functions.h \
     /usr/include/string.h \
     /usr/include/xlocale.h \
     /usr/include/x86_64-linux-gnu/bits/string3.h \
@@ -73,7 +73,7 @@
     /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
     /usr/include/x86_64-linux-gnu/bits/stdlib.h \
     /usr/include/assert.h \
-    /usr/local/cuda/include/math_functions.h \
+    /data/gpu/prannay/aman//include/math_functions.h \
     /usr/include/math.h \
     /usr/include/x86_64-linux-gnu/bits/huge_val.h \
     /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
@@ -87,38 +87,38 @@
     /usr/include/c++/4.8/bits/cpp_type_traits.h \
     /usr/include/c++/4.8/ext/type_traits.h \
     /usr/include/c++/4.8/cstdlib \
-    /usr/local/cuda/include/math_functions.hpp \
-    /usr/local/cuda/include/math_functions_dbl_ptx3.h \
-    /usr/local/cuda/include/math_functions_dbl_ptx3.hpp \
-    /usr/local/cuda/include/cuda_surface_types.h \
-    /usr/local/cuda/include/cuda_texture_types.h \
-    /usr/local/cuda/include/device_functions.h \
-    /usr/local/cuda/include/device_functions.hpp \
-    /usr/local/cuda/include/device_atomic_functions.h \
-    /usr/local/cuda/include/device_atomic_functions.hpp \
-    /usr/local/cuda/include/device_double_functions.h \
-    /usr/local/cuda/include/device_double_functions.hpp \
-    /usr/local/cuda/include/sm_20_atomic_functions.h \
-    /usr/local/cuda/include/sm_20_atomic_functions.hpp \
-    /usr/local/cuda/include/sm_32_atomic_functions.h \
-    /usr/local/cuda/include/sm_32_atomic_functions.hpp \
-    /usr/local/cuda/include/sm_35_atomic_functions.h \
-    /usr/local/cuda/include/sm_60_atomic_functions.h \
-    /usr/local/cuda/include/sm_60_atomic_functions.hpp \
-    /usr/local/cuda/include/sm_20_intrinsics.h \
-    /usr/local/cuda/include/sm_20_intrinsics.hpp \
-    /usr/local/cuda/include/sm_30_intrinsics.h \
-    /usr/local/cuda/include/sm_30_intrinsics.hpp \
-    /usr/local/cuda/include/sm_32_intrinsics.h \
-    /usr/local/cuda/include/sm_32_intrinsics.hpp \
-    /usr/local/cuda/include/sm_35_intrinsics.h \
-    /usr/local/cuda/include/sm_61_intrinsics.h \
-    /usr/local/cuda/include/sm_61_intrinsics.hpp \
-    /usr/local/cuda/include/surface_functions.h \
-    /usr/local/cuda/include/texture_fetch_functions.h \
-    /usr/local/cuda/include/texture_indirect_functions.h \
-    /usr/local/cuda/include/surface_indirect_functions.h \
-    /usr/local/cuda/include/device_launch_parameters.h \
+    /data/gpu/prannay/aman//include/math_functions.hpp \
+    /data/gpu/prannay/aman//include/math_functions_dbl_ptx3.h \
+    /data/gpu/prannay/aman//include/math_functions_dbl_ptx3.hpp \
+    /data/gpu/prannay/aman//include/cuda_surface_types.h \
+    /data/gpu/prannay/aman//include/cuda_texture_types.h \
+    /data/gpu/prannay/aman//include/device_functions.h \
+    /data/gpu/prannay/aman//include/device_functions.hpp \
+    /data/gpu/prannay/aman//include/device_atomic_functions.h \
+    /data/gpu/prannay/aman//include/device_atomic_functions.hpp \
+    /data/gpu/prannay/aman//include/device_double_functions.h \
+    /data/gpu/prannay/aman//include/device_double_functions.hpp \
+    /data/gpu/prannay/aman//include/sm_20_atomic_functions.h \
+    /data/gpu/prannay/aman//include/sm_20_atomic_functions.hpp \
+    /data/gpu/prannay/aman//include/sm_32_atomic_functions.h \
+    /data/gpu/prannay/aman//include/sm_32_atomic_functions.hpp \
+    /data/gpu/prannay/aman//include/sm_35_atomic_functions.h \
+    /data/gpu/prannay/aman//include/sm_60_atomic_functions.h \
+    /data/gpu/prannay/aman//include/sm_60_atomic_functions.hpp \
+    /data/gpu/prannay/aman//include/sm_20_intrinsics.h \
+    /data/gpu/prannay/aman//include/sm_20_intrinsics.hpp \
+    /data/gpu/prannay/aman//include/sm_30_intrinsics.h \
+    /data/gpu/prannay/aman//include/sm_30_intrinsics.hpp \
+    /data/gpu/prannay/aman//include/sm_32_intrinsics.h \
+    /data/gpu/prannay/aman//include/sm_32_intrinsics.hpp \
+    /data/gpu/prannay/aman//include/sm_35_intrinsics.h \
+    /data/gpu/prannay/aman//include/sm_61_intrinsics.h \
+    /data/gpu/prannay/aman//include/sm_61_intrinsics.hpp \
+    /data/gpu/prannay/aman//include/surface_functions.h \
+    /data/gpu/prannay/aman//include/texture_fetch_functions.h \
+    /data/gpu/prannay/aman//include/texture_indirect_functions.h \
+    /data/gpu/prannay/aman//include/surface_indirect_functions.h \
+    /data/gpu/prannay/aman//include/device_launch_parameters.h \
     /usr/include/c++/4.8/vector \
     /usr/include/c++/4.8/bits/stl_algobase.h \
     /usr/include/c++/4.8/bits/functexcept.h \
@@ -281,12 +281,14 @@
     /usr/include/c++/4.8/bits/stl_set.h \
     /usr/include/c++/4.8/bits/stl_multiset.h \
     ./include/caffe/util/device_alternate.hpp \
-    /usr/local/cuda/include/cublas_v2.h \
-    /usr/local/cuda/include/cublas_api.h \
-    /usr/local/cuda/include/cuComplex.h \
-    /usr/local/cuda/include/cuda_fp16.h \
-    /usr/local/cuda/include/cuda.h \
-    /usr/local/cuda/include/curand.h \
+    /data/gpu/prannay/aman//include/cublas_v2.h \
+    /data/gpu/prannay/aman//include/cublas_api.h \
+    /data/gpu/prannay/aman//include/cuComplex.h \
+    /data/gpu/prannay/aman//include/cuda_fp16.h \
+    /data/gpu/prannay/aman//include/cuda.h \
+    /data/gpu/prannay/aman//include/curand.h \
+    ./include/caffe/util/cudnn.hpp \
+    /data/gpu/prannay/aman//include/cudnn.h \
     .build_release/src/caffe/proto/caffe.pb.h \
     /usr/include/google/protobuf/stubs/common.h \
     /usr/include/google/protobuf/generated_message_util.h \
