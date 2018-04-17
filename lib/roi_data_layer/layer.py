@@ -101,14 +101,17 @@ class RoIDataLayer(caffe.Layer):
             
             self._name_to_top_map['labels'] = idx
             idx += 1
-
+            print("some\n\n\n\n\n\n\n\ns")
             if cfg.TRAIN.BBOX_REG:
                 # bbox_targets blob: R bounding-box regression targets with 2
                 # targets per class
                 top[idx].reshape(1, self._num_classes * 2)
+                print("some2\n\n\n\n\n\n\n\ns")
+                
                 self._name_to_top_map['bbox_targets'] = idx
                 idx += 1
-
+                print("some3\n\n\n\n\n\n\n\ns")
+                
                 # bbox_inside_weights blob: At most 2 targets per roi are active;
                 # thisbinary vector sepcifies the subset of active targets
                 top[idx].reshape(1, self._num_classes * 2)
