@@ -132,7 +132,9 @@ class RoIDataLayer(caffe.Layer):
             # Reshape net's input blobs
             try:
                 print("got tuple")
+                print(blob_name)
                 blob1, blob2 = blob
+
                 a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
                 # Reshape net's input blobs
                 # print(a)
