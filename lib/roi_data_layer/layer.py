@@ -150,7 +150,7 @@ class RoIDataLayer(caffe.Layer):
                 # print(blob3)
                 # print(np.concatenate(blob1, blob2))
                 print("doinasdasdadad111")
-
+                print(blob3.shape)
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob3.astype(np.float32, copy=False)
                 print("doinasdasdadad")
@@ -162,7 +162,7 @@ class RoIDataLayer(caffe.Layer):
                 top[top_ind].reshape(*(blob.shape))
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob.astype(np.float32, copy=False)
-                print(top[top_ind])
+                # print(top[top_ind])
                 print("doinasdasdadad")
 
     def backward(self, top, propagate_down, bottom):
