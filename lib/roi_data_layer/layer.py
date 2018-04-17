@@ -45,7 +45,7 @@ class RoIDataLayer(caffe.Layer):
         else:
             db_inds = self._get_next_minibatch_inds()
             minibatch_db = [self._roidb[i] for i in db_inds]
-            print(minibatch_db)
+            # print(minibatch_db)
             return get_minibatch(minibatch_db, self._num_classes)
 
     def set_roidb(self, roidb):
@@ -96,22 +96,22 @@ class RoIDataLayer(caffe.Layer):
 
             # labels blob: R categorical labels in [0, ..., K] for K foreground
             # classes plus background
-            print("toppppppppppppppppppppppppppppppppppppppppppppppppppppppp", top[idx])
+            # print("toppppppppppppppppppppppppppppppppppppppppppppppppppppppp", top[idx])
             top[idx].reshape(99)
-            print("toppppppppppppppppppppppppppppppppppppppppppppppppppppppp", top[idx])
+            # print("toppppppppppppppppppppppppppppppppppppppppppppppppppppppp", top[idx])
             
             self._name_to_top_map['labels'] = idx
             idx += 1
-            print("some\n\n\n\n\n\n\n\ns")
+            # print("some\n\n\n\n\n\n\n\ns")
             if cfg.TRAIN.BBOX_REG:
                 # bbox_targets blob: R bounding-box regression targets with 2
                 # targets per class
                 top[idx].reshape(1, self._num_classes * 2)
-                print("some2\n\n\n\n\n\n\n\ns")
+                # print("some2\n\n\n\n\n\n\n\ns")
                 
                 self._name_to_top_map['bbox_targets'] = idx
                 idx += 1
-                print("some3\n\n\n\n\n\n\n\ns")
+                # print("some3\n\n\n\n\n\n\n\ns")
                 
                 # bbox_inside_weights blob: At most 2 targets per roi are active;
                 # thisbinary vector sepcifies the subset of active targets
@@ -135,9 +135,9 @@ class RoIDataLayer(caffe.Layer):
             top_ind = self._name_to_top_map[blob_name]
             # Reshape net's input blobs
             try:
-                print(blob_name)
+                # print(blob_name)
                 blob1, blob2 = blob
-                print("got tuple")
+                # print("got tuple")
 
                 a = ((blob1.shape)[0], + (blob1.shape)[1] +  (blob2.shape)[1])
                 # Reshape net's input blobs
@@ -149,21 +149,21 @@ class RoIDataLayer(caffe.Layer):
                 blob3 = np.asarray(blob3)
                 # print(blob3)
                 # print(np.concatenate(blob1, blob2))
-                print("doinasdasdadad111")
-                print(blob3.shape)
+                # print("doinasdasdadad111")
+                # print(blob3.shape)
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob3.astype(np.float32, copy=False)
-                print("doinasdasdadad")
+                # print("doinasdasdadad")
             except:
-                print("thihs\n\n\n\n\n")
+                # print("thihs\n\n\n\n\n")
                 # print(blob)
-                print(blob.shape)
-                print(blob_name, top_ind)
+                # print(blob.shape)
+                # print(blob_name, top_ind)
                 top[top_ind].reshape(*(blob.shape))
                 # Copy data into net's input blobs
                 top[top_ind].data[...] = blob.astype(np.float32, copy=False)
                 # print(top[top_ind])
-                print("doinasdasdadad")
+                # print("doinasdasdadad")
 
     def backward(self, top, propagate_down, bottom):
         """This layer does not propagate gradients."""

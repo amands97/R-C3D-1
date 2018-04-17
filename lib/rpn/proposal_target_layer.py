@@ -50,7 +50,7 @@ class ProposalTargetLayer(caffe.Layer):
         # TODO(rbg): it's annoying that sometimes I have extra info before
         # and other times after box coordinates -- normalize to one format
         gt_wins = bottom[1].data
-        print(all_rois, gt_wins)
+        # print(all_rois, gt_wins)
         # loss
         if self._sample == 'Hard':
           loss = bottom[2].data
@@ -94,7 +94,7 @@ class ProposalTargetLayer(caffe.Layer):
             print 'ratio: {:.3f}'.format(float(self._fg_num) / float(self._bg_num))
 
         # sampled rois
-        print(rois)
+        # print(rois)
         top[0].reshape(*rois.shape)
         top[0].data[...] = rois
 
