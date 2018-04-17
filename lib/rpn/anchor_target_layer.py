@@ -53,7 +53,7 @@ class AnchorTargetLayer(caffe.Layer):
 
         A = self._num_anchors
         # labels
-        print("labels", top[0])
+        print("labels---", top[0])
         top[0].reshape(1, 1, A * length, height, width)
         # twin_targets
         top[1].reshape(1, A * 2, length, height, width)
