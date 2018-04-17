@@ -17,7 +17,7 @@ DEBUG = False
 
 def get_minibatch(roidb, num_classes):
     """Given a roidb, construct a minibatch sampled from it."""
-    print("roidb", roidb)
+    # print("roidb", roidb)
     num_videos = len(roidb)
     # Sample random scales to use for each video in this batch
     random_scale_inds = npr.randint(0, high=len(cfg.TRAIN.LENGTH),
