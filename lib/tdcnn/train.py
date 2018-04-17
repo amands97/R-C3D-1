@@ -114,7 +114,7 @@ class SolverWrapper(object):
         return model_paths
 
 def train_net(solver_prototxt, roidb, output_dir,
-              pretrained_model=None, max_iters=40000):
+              pretrained_model=None, max_iters=400):
     """Train a R-C3D network."""
 
     #roidb = filter_roidb(roidb)
