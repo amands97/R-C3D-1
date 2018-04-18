@@ -766,7 +766,7 @@ layer {
    bottom: "cls_score"
    bottom: "labels"
    top: "accuarcy"
-   #include: { phase: TEST }
+   include: { phase: TEST }
    accuracy_param {
         ignore_label: -1
    }
