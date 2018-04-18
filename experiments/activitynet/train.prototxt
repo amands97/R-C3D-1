@@ -15,7 +15,7 @@ layer {
   python_param {
     module: 'roi_data_layer.layer'
     layer: 'RoIDataLayer'
-    param_str: "'num_classes': 100"
+    param_str: "'num_classes': 200"
   }
 }
 
@@ -626,7 +626,7 @@ layer {
   python_param {
     module: 'rpn.proposal_target_layer'
     layer: 'ProposalTargetLayer'
-    param_str: "'num_classes': 99"
+    param_str: "'num_classes': 200"
   }
 }
 
