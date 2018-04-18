@@ -704,7 +704,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 99
+    num_output: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -743,8 +743,8 @@ layer {
 layer {
   name: "loss_cls"
   type: "SigmoidCrossEntropyLoss"
-  bottom: "labels"
   bottom: "cls_score"
+  bottom: "labels"
   propagate_down: 1
   propagate_down: 0
   top: "loss_cls"
