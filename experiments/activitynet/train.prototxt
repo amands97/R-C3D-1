@@ -779,9 +779,9 @@ layer {
     bottom: "cls_score"
     bottom: "labels"
     top: "accuracy"
-    include {
-        phase: TEST
-    }
+    #include {
+    #    phase: TEST
+    #}
     python_param {
         module: "accuracy_layer"
         layer: "AccuracyLayer"
