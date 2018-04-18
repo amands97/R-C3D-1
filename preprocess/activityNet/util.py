@@ -32,7 +32,7 @@ def generate_segment(split, data, classes):
   video_list = set(os.listdir(VIDEO_PATH))
   # get time windows based on video key
   a = []
-  for i in range(1,100):
+  for i in range(1,200):
     a.append(i)
   for vid, vinfo in data['database'].iteritems():
     vid_name = [v for v in video_list if vid in v]
