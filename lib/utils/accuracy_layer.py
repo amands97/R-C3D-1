@@ -41,19 +41,18 @@ class AccuracyLayer(caffe.Layer):
         # Renaming for clarity
         predictions = bottom[0].data
         ground_truth = bottom[1].data
-    
         num_correct = 0.0
     
         # NumPy magic - get top K predictions for each datum
         # top_predictions = (-predictions).argsort()[:, :self.top_k]
-		top_predictions = predictions
+        top_predictions = predictions
         for batch_index, predictions in enumerate(top_predictions):
-			print(ground_truth[batch_index])
+            print(ground_truth[batch_index])
             if ground_truth[batch_index] in predictions:
                 num_correct += 1
     
         # Accuracy is averaged over the batch
         top[0].data[0] = num_correct / len(ground_truth)
-		print("accuracy: ", num_correct / len(ground_truth))
+        print("accuracy: ", num_correct / len(ground_truth))
     
 def backward(self, top, propagate_dow
