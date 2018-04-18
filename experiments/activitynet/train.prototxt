@@ -776,8 +776,8 @@ layer {
 layer {
     name: "accuracy"
     type: "Python"
-    bottom: "pred"
-    bottom: "label"
+    bottom: "cls_score"
+    bottom: "labels"
     top: "accuracy"
     include {
         phase: TEST
