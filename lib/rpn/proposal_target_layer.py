@@ -81,11 +81,11 @@ class ProposalTargetLayer(caffe.Layer):
           labels, rois, twin_targets, twin_inside_weights = _sample_rois(
               all_rois, gt_wins, fg_rois_per_image,
               rois_per_image, self._num_classes)
-        print("labels we got", labels)
+        # print("labels we got", labels)
         # print((labels > 0))
-        print("a", (labels > 0).sum())
+        # print("a", (labels > 0).sum())
         labels2 = np.sum(labels, axis=1)
-        print(labels2)
+        # print(labels2)
         # print()
         print 'num fg: {}'.format((labels2 > 0).sum())
         # print 'num fg: {}'.format((labels > 0).sum())
@@ -104,9 +104,9 @@ class ProposalTargetLayer(caffe.Layer):
         # print(rois)
         top[0].reshape(*rois.shape)
         top[0].data[...] = rois
-        print(("labels-----", labels))
+        # print(("labels-----", labels))
         # classification labels
-        print(labels.shape)
+        # print(labels.shape)
         top[1].reshape(*labels.shape)
         top[1].data[...] = labels
 
@@ -122,7 +122,7 @@ class ProposalTargetLayer(caffe.Layer):
         # twin_outside_weights
         top[4].reshape(*twin_inside_weights.shape)
         top[4].data[...] = np.array(twin_inside_weights > 0).astype(np.float32)
-        print("this part is done")
+        # print("this part is done")
     
     def backward(self, top, propagate_down, bottom):
         """This layer does not propagate gradients."""
