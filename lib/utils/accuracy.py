@@ -54,5 +54,6 @@ class AccuracyLayer(caffe.Layer):
     
         # Accuracy is averaged over the batch
         top[0].data[0] = num_correct / len(ground_truth)
+		print("accuracy: ", num_correct / len(ground_truth))
     
 def backward(self, top, propagate_dow
