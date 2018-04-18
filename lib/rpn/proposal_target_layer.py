@@ -106,10 +106,13 @@ class ProposalTargetLayer(caffe.Layer):
         top[0].data[...] = rois
         print(("labels-----", labels))
         # classification labels
+        print(*labels.shape)
+        
         top[1].reshape(*labels.shape)
         top[1].data[...] = labels
 
-        # twin_targets
+        # twin_targets 
+        print(*twin_targets.shape)
         top[2].reshape(*twin_targets.shape)
         top[2].data[...] = twin_targets
 
