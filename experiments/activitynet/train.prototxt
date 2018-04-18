@@ -695,7 +695,6 @@ layer {
   type: "InnerProduct"
   bottom: "fc6"
   top: "cls_score"
-  num_output: 99
   param {
     lr_mult: 1
     decay_mult: 1
@@ -705,7 +704,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 201
+    num_output: 19899
     weight_filler {
       type: "gaussian"
       std: 0.01
