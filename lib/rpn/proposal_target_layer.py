@@ -112,7 +112,7 @@ class ProposalTargetLayer(caffe.Layer):
         top[1].data[...] = labels
 
         # twin_targets 
-        print(*twin_targets.shape)
+        # print(*twin_targets.shape)
         top[2].reshape(*twin_targets.shape)
         top[2].data[...] = twin_targets
 
