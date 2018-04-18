@@ -84,6 +84,10 @@ class ProposalTargetLayer(caffe.Layer):
         print("labels we got", labels)
         print((labels > 0))
         print("a", (labels > 0).sum())
+        labels2 = np.sum(labels, axis=1)
+        print(labels2)
+        # print()
+        print 'num fg: {}'.format((labels2 > 0).sum())
         print 'num fg: {}'.format((labels > 0).sum())
         print 'num bg: {}'.format((labels == 0).sum())
         if DEBUG:
