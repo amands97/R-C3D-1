@@ -82,6 +82,8 @@ class ProposalTargetLayer(caffe.Layer):
               all_rois, gt_wins, fg_rois_per_image,
               rois_per_image, self._num_classes)
         print("labels we got", labels)
+        print((labels > 0))
+        print("a", (labels > 0).sum())
         print 'num fg: {}'.format((labels > 0).sum())
         print 'num bg: {}'.format((labels == 0).sum())
         if DEBUG:
