@@ -639,7 +639,6 @@ layer {
   bottom: "rois"
   top: "pool5"
   roi_pooling_param {
-    num_output: 99
     pooled_w: 4
     pooled_h: 4
     pooled_l: 1
