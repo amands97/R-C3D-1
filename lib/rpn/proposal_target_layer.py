@@ -174,7 +174,7 @@ def _sample_rois(all_rois, gt_wins, fg_rois_per_image, rois_per_image, num_class
         np.ascontiguousarray(gt_wins[:, :2], dtype=np.float))
     gt_assignment = overlaps.argmax(axis=1)
     max_overlaps = overlaps.max(axis=1)
-    labels = gt_wins[gt_assignment, 2]
+    labels = gt_wins[gt_assignment, 2:]
 
     # Select foreground RoIs as those with >= FG_THRESH overlap
     fg_inds = np.where(max_overlaps >= cfg.TRAIN.FG_THRESH)[0]
@@ -221,7 +221,7 @@ def _sample_all_rois(all_rois, gt_wins, num_classes):
         np.ascontiguousarray(gt_wins[:, :2], dtype=np.float))
     gt_assignment = overlaps.argmax(axis=1)
     max_overlaps = overlaps.max(axis=1)
-    labels = gt_wins[gt_assignment, 2]
+    labels = gt_wins[gt_assignment, 2:]
 
     labels = labels
     rois = all_rois
@@ -244,7 +244,7 @@ def _sample_hard_rois(all_rois, gt_wins, fg_rois_per_image, rois_per_image, num_
         np.ascontiguousarray(gt_wins[:, :2], dtype=np.float))
     gt_assignment = overlaps.argmax(axis=1)
     max_overlaps = overlaps.max(axis=1)
-    labels = gt_wins[gt_assignment, 2]
+    labels = gt_wins[gt_assignment, 2:]
 
     # Select foreground RoIs as those with >= FG_THRESH overlap
     fg_inds = np.where(max_overlaps >= cfg.TRAIN.FG_THRESH)[0]
