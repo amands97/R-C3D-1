@@ -163,7 +163,7 @@ def _compute_targets(ex_rois, gt_rois, labels):
                 / np.array(cfg.TRAIN.TWIN_NORMALIZE_STDS))
     print("labels-----------",labels[:, 0])
     print(np.hstack((labels[:, 0][:, np.newaxis], targets)).astype(np.float32, copy=False))
-    print(np.hstack((labels, targets)).astype(np.float32, copy=False))     
+    print(np.hstack((labels, targets)).astype(np.float32, copy=False)[0])     
          
     return np.hstack(
             (labels[:, np.newaxis], targets)).astype(np.float32, copy=False)
