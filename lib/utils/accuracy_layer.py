@@ -47,7 +47,7 @@ class AccuracyLayer(caffe.Layer):
         # top_predictions = (-predictions).argsort()[:, :self.top_k]
         top_predictions = predictions
         for batch_index, predictions in enumerate(top_predictions):
-            print(ground_truth[batch_index])
+            # print(ground_truth[batch_index])
             if ground_truth[batch_index] in predictions:
                 num_correct += 1
     
