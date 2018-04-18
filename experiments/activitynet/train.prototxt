@@ -783,7 +783,7 @@ layer {
     #    phase: TEST
     #}
     python_param {
-        module: "accuracy_layer"
+        module: "utils.accuracy_layer"
         layer: "AccuracyLayer"
         param_str: "{\"top_k\": 2}"
         }
