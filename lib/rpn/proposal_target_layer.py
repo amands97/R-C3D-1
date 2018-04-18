@@ -161,7 +161,7 @@ def _compute_targets(ex_rois, gt_rois, labels):
         # Optionally normalize targets by a precomputed mean and stdev
         targets = ((targets - np.array(cfg.TRAIN.TWIN_NORMALIZE_MEANS))
                 / np.array(cfg.TRAIN.TWIN_NORMALIZE_STDS))
-    print("labels-----------",labels)
+    print("labels-----------",labels[:, 0])
     print(np.hstack((labels[:, np.newaxis], targets)).astype(np.float32, copy=False))     
     return np.hstack(
             (labels[:, np.newaxis], targets)).astype(np.float32, copy=False)
