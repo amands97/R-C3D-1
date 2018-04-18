@@ -34,7 +34,7 @@ class ProposalTargetLayer(caffe.Layer):
         # sampled rois (0, x1, x2)
         top[0].reshape(1, 3)
         # labels
-        top[1].reshape(1, 99)
+        top[1].reshape(1, 200)
         # twin_targets
         top[2].reshape(1, self._num_classes * 2)
         # twin_inside_weights
