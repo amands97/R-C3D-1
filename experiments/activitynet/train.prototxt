@@ -740,16 +740,16 @@ layer {
     }
   }
 }
-layer {
-  name: "loss_cls"
-  type: "SigmoidCrossEntropyLoss"
-  bottom: "cls_score"
-  bottom: "labels"
-  propagate_down: 1
-  propagate_down: 0
-  top: "loss_cls"
-  loss_weight: 1
-}
+#layer {
+#  name: "loss_cls"
+#  type: "SigmoidCrossEntropyLoss"
+#  bottom: "cls_score"
+#  bottom: "labels"
+#  propagate_down: 1
+#  propagate_down: 0
+#  top: "loss_cls"
+#  loss_weight: 1
+#}
 layer {
   name: "loss_twin"
   type: "SmoothL1Loss"
