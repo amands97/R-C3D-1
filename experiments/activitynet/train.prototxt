@@ -742,7 +742,7 @@ layer {
 }
 layer {
   name: "loss_cls"
-  type: "SoftmaxWithLoss"
+  type: "SigmoidCrossEntropyLossLayer"
   bottom: "cls_score"
   bottom: "labels"
   propagate_down: 1
