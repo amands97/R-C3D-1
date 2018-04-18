@@ -743,8 +743,8 @@ layer {
 layer {
   name: "loss_cls"
   type: "SigmoidCrossEntropyLoss"
-  bottom: "cls_score"
   bottom: "labels"
+  bottom: "cls_score"
   propagate_down: 1
   propagate_down: 0
   top: "loss_cls"
