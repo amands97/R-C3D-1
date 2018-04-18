@@ -760,17 +760,32 @@ layer {
   top: "loss_twin"
   loss_weight: 1
 }
+#layer {
+#   name: "accuarcy"
+#   type: "Accuracy"
+#   bottom: "cls_score"
+#   bottom: "labels"
+#   top: "accuarcy"
+#   include: { phase: TEST }
+#   accuracy_param {
+#        ignore_label: -1
+#   }
+#   propagate_down: false
+#   propagate_down: false
+#}
 layer {
-   name: "accuarcy"
-   type: "Accuracy"
-   bottom: "cls_score"
-   bottom: "labels"
-   top: "accuarcy"
-   include: { phase: TEST }
-   accuracy_param {
-        ignore_label: -1
-   }
-   propagate_down: false
-   propagate_down: false
+    name: "accuracy"
+    type: "Python"
+    bottom: "pred"
+    bottom: "label"
+    top: "accuracy"
+    include {
+        phase: TEST
+    }
+    python_param {
+        module: "accuracy_layer"
+        layer: "AccuracyLayer"
+        param_str: "{\"top_k\": 2}"
+        }
 }
 
