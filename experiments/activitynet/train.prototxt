@@ -484,7 +484,7 @@ layer {
     decay_mult: 0
   }
   convolution_param {
-    num_output:  7400       # 74   # 2(bg/fg) * 37(anchors)
+    num_output:  74       # 74   # 2(bg/fg) * 37(anchors)
     kernel_size: 1
     kernel_size: 1
     kernel_size: 1
