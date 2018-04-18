@@ -55,4 +55,5 @@ class AccuracyLayer(caffe.Layer):
         top[0].data[0] = num_correct / len(ground_truth)
         print("accuracy: ", num_correct / len(ground_truth))
     
-def backward(self, top, propagate_dow
+def backward(self, top, propagate_down, bottom):
+    pass
