@@ -695,6 +695,7 @@ layer {
   type: "InnerProduct"
   bottom: "fc6"
   top: "cls_score"
+  num_output: 99
   param {
     lr_mult: 1
     decay_mult: 1
