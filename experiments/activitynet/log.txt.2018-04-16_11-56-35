@@ -1,4 +1,0 @@
-  File "./experiments/activitynet/train_net.py", line 88
-    print '{:d} roidb entries'.format(len(roidb))
-                             ^
-SyntaxError: invalid syntax

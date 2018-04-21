@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "./experiments/activitynet/train_net.py", line 11, in <module>
-    import caffe
-ImportError: bad magic number in 'caffe': b'\x03\xf3\r\n'
