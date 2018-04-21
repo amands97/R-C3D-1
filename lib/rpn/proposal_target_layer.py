@@ -54,7 +54,6 @@ class ProposalTargetLayer(caffe.Layer):
         # loss
         if self._sample == 'Hard':
           loss = bottom[2].data
-
         # Include ground-truth wins in the set of candidate rois
         zeros = np.zeros((gt_wins.shape[0], 1), dtype=gt_wins.dtype)
         all_rois = np.vstack(
@@ -64,7 +63,6 @@ class ProposalTargetLayer(caffe.Layer):
         # Sanity check: single batch only
         assert np.all(all_rois[:, 0] == 0), \
                 'Only single item batches are supported'
-
 
         if self._sample == "All":
           labels, rois, twin_targets, twin_inside_weights = _sample_all_rois(
