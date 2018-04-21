@@ -1,0 +1,2246 @@
+Called with args:
+Namespace(cfg_file='./experiments/activitynet/td_cnn_end2end.yml', gpu_id=0, max_iters=350000, pretrained_model='./pretrain/activitynet_iter_30000_3fps.caffemodel', randomize=False, set_cfgs=None, solver='./experiments/activitynet/solver.prototxt')
+Using config:
+{'DEDUP_BOXES': 0.125,
+ 'EPS': 1e-14,
+ 'FPS': 25,
+ 'GPU_ID': 0,
+ 'INPUT': 'video',
+ 'NUM_CLASSES': 201,
+ 'PIXEL_MEANS': array([[[ 90,  98, 102]]]),
+ 'PIXEL_MEANS_FLOW': array([128]),
+ 'RNG_SEED': 3,
+ 'TEST': {'CROP_SIZE': 112,
+          'FRAME_SIZE': [128, 171],
+          'HAS_RPN': True,
+          'LENGTH': [768],
+          'MAX_SIZE': 1000,
+          'NMS': 0.4,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 0,
+          'RPN_NMS_THRESH': 0.9,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SVM': False,
+          'TWIN_REG': True},
+ 'TRAIN': {'BATCH_SIZE': 128,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.1,
+           'CINPUT': False,
+           'CROP_SIZE': 112,
+           'FG_FRACTION': 0.5,
+           'FG_THRESH': 0.5,
+           'FRAME_SIZE': [128, 171],
+           'HAS_RPN': True,
+           'LENGTH': [768],
+           'OHEM_LOSS_ONLY_CLASSIFICATION': False,
+           'OHEM_LOSS_ONLY_LOCALIZATION': False,
+           'OHEM_NMS_THRESH': 0.7,
+           'OHEM_USE_NMS': True,
+           'PROPOSAL_METHOD': 'gt',
+           'RANDOM': False,
+           'RPN_BATCHSIZE': 64,
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 0,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.8,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'RPN_TWIN_INSIDE_WEIGHTS': [1.0, 1.0],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 1000,
+           'TWIN_INSIDE_WEIGHTS': [1.0, 1.0],
+           'TWIN_NORMALIZE_MEANS': [0.0, 0.0],
+           'TWIN_NORMALIZE_STDS': [0.1, 0.2],
+           'TWIN_NORMALIZE_TARGETS': False,
+           'TWIN_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'TWIN_REG': True,
+           'TWIN_THRESH': 0.5,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': False,
+           'VIDEO_BATCH': 1},
+ 'USE_GPU_NMS': True}
+44988 roidb entries
+Output will be saved to `./experiments/best_activitynet/snapshot/`
+Computing bounding-box regression targets...
+precimputed
+twin target means:
+twin target stdevs:
+NOT normalizing targets
+done
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0421 19:11:03.999387 17066 solver.cpp:48] Initializing solver from parameters: 
+train_net: "./experiments/activitynet/train.prototxt"
+base_lr: 0.0001
+display: 1
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+stepsize: 350000
+snapshot: 0
+snapshot_prefix: "./experiments/activitynet/snapshot/activitynet"
+average_loss: 100
+iter_size: 1
+I0421 19:11:03.999419 17066 solver.cpp:81] Creating training net from train_net file: ./experiments/activitynet/train.prototxt
+I0421 19:11:04.000461 17066 net.cpp:58] Initializing net from parameters: 
+name: "activitynet"
+state {
+  phase: TRAIN
+}
+layer {
+  name: "data"
+  type: "Python"
+  top: "data"
+  top: "gt_boxes"
+  python_param {
+    module: "roi_data_layer.layer"
+    layer: "RoIDataLayer"
+    param_str: "\'num_classes\': 200"
+  }
+}
+layer {
+  name: "conv1a"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1a"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 64
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu1a"
+  type: "ReLU"
+  bottom: "conv1a"
+  top: "conv1a"
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1a"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 1
+    kernel_size: 2
+    kernel_size: 2
+    stride: 1
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv2a"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2a"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 128
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu2a"
+  type: "ReLU"
+  bottom: "conv2a"
+  top: "conv2a"
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2a"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv3a"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv3a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu3a"
+  type: "ReLU"
+  bottom: "conv3a"
+  top: "conv3a"
+}
+layer {
+  name: "conv3b"
+  type: "Convolution"
+  bottom: "conv3a"
+  top: "conv3b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu3b"
+  type: "ReLU"
+  bottom: "conv3b"
+  top: "conv3b"
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv3b"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv4a"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv4a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu4a"
+  type: "ReLU"
+  bottom: "conv4a"
+  top: "conv4a"
+}
+layer {
+  name: "conv4b"
+  type: "Convolution"
+  bottom: "conv4a"
+  top: "conv4b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu4b"
+  type: "ReLU"
+  bottom: "conv4b"
+  top: "conv4b"
+}
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv4b"
+  top: "pool4"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    kernel_size: 2
+    kernel_size: 2
+    stride: 2
+    stride: 2
+    stride: 2
+  }
+}
+layer {
+  name: "conv5a"
+  type: "Convolution"
+  bottom: "pool4"
+  top: "conv5a"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu5a"
+  type: "ReLU"
+  bottom: "conv5a"
+  top: "conv5a"
+}
+layer {
+  name: "conv5b"
+  type: "Convolution"
+  bottom: "conv5a"
+  top: "conv5b"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu5b"
+  type: "ReLU"
+  bottom: "conv5b"
+  top: "conv5b"
+}
+layer {
+  name: "rpn_conv/3x3"
+  type: "Convolution"
+  bottom: "conv5b"
+  top: "rpn/output"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    stride: 1
+    stride: 2
+    stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_relu/3x3"
+  type: "ReLU"
+  bottom: "rpn/output"
+  top: "rpn/output"
+}
+layer {
+  name: "rpn_conv/3x3_2"
+  type: "Convolution"
+  bottom: "rpn/output"
+  top: "rpn/output_2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    pad: 1
+    pad: 1
+    kernel_size: 3
+    kernel_size: 3
+    kernel_size: 3
+    stride: 1
+    stride: 2
+    stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_relu/3x3_2"
+  type: "ReLU"
+  bottom: "rpn/output_2"
+  top: "rpn/output_2"
+}
+layer {
+  name: "rpn/output_pool"
+  type: "Pooling"
+  bottom: "rpn/output_2"
+  top: "rpn/output_pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 1
+    kernel_size: 2
+    kernel_size: 2
+  }
+}
+layer {
+  name: "rpn_cls_score"
+  type: "Convolution"
+  bottom: "rpn/output_pool"
+  top: "rpn_cls_score"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 74
+    kernel_size: 1
+    kernel_size: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_twin_pred"
+  type: "Convolution"
+  bottom: "rpn/output_pool"
+  top: "rpn_twin_pred"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 74
+    kernel_size: 1
+    kernel_size: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "rpn_cls_score_reshape"
+  type: "Reshape"
+  bottom: "rpn_cls_score"
+  top: "rpn_cls_score_reshape"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 2
+      dim: -1
+      dim: 0
+      dim: 0
+    }
+  }
+}
+layer {
+  name: "rpn-data"
+  type: "Python"
+  bottom: "rpn_cls_score"
+  bottom: "gt_boxes"
+  bottom: "data"
+  top: "rpn_labels"
+  top: "rpn_twin_targets"
+  top: "rpn_twin_inside_weights"
+  top: "rpn_twin_outside_weights"
+  python_param {
+    module: "rpn.anchor_target_layer"
+    layer: "AnchorTargetLayer"
+    param_str: "\'feat_stride\': 8 \n\'scales\': !!python/tuple [1,1.25, 1.5,1.75, 2,2.5, 3,3.5, 4,4.5, 5,5.5, 6,7, 8,9,10,11,12,14,16,18,20,22,24,28,32,36,40,44,52,60,68,76,84,92,100]"
+  }
+}
+layer {
+  name: "rpn_loss_cls"
+  type: "SoftmaxWithLoss"
+  bottom: "rpn_cls_score_reshape"
+  bottom: "rpn_labels"
+  top: "rpn_cls_loss"
+  loss_weight: 1
+  propagate_down: true
+  propagate_down: false
+  loss_param {
+    ignore_label: -1
+    normalize: true
+  }
+}
+layer {
+  name: "rpn_loss_twin"
+  type: "SmoothL1Loss"
+  bottom: "rpn_twin_pred"
+  bottom: "rpn_twin_targets"
+  bottom: "rpn_twin_inside_weights"
+  bottom: "rpn_twin_outside_weights"
+  top: "rpn_loss_twin"
+  loss_weight: 1
+  smooth_l1_loss_param {
+    sigma: 3
+  }
+}
+layer {
+  name: "rpn_accuarcy"
+  type: "Accuracy"
+  bottom: "rpn_cls_score_reshape"
+  bottom: "rpn_labels"
+  top: "rpn_accuarcy"
+  top: "rpn_accuarcy_class"
+  propagate_down: false
+  propagate_down: false
+  accuracy_param {
+    ignore_label: -1
+  }
+}
+layer {
+  name: "rpn_cls_prob"
+  type: "Softmax"
+  bottom: "rpn_cls_score_reshape"
+  top: "rpn_cls_prob"
+}
+layer {
+  name: "rpn_cls_prob_reshape"
+  type: "Reshape"
+  bottom: "rpn_cls_prob"
+  top: "rpn_cls_prob_reshape"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 74
+      dim: -1
+      dim: 0
+      dim: 0
+    }
+  }
+}
+layer {
+  name: "proposal"
+  type: "Python"
+  bottom: "rpn_cls_prob_reshape"
+  bottom: "rpn_twin_pred"
+  top: "rpn_rois"
+  include {
+    phase: TRAIN
+  }
+  python_param {
+    module: "rpn.proposal_layer"
+    layer: "ProposalLayer"
+    param_str: "\'feat_stride\': 8 \n\'scales\': !!python/tuple [1,1.25, 1.5,1.75, 2,2.5, 3,3.5, 4,4.5, 5,5.5, 6,7, 8,9,10,11,12,14,16,18,20,22,24,28,32,36,40,44,52,60,68,76,84,92,100]"
+  }
+}
+layer {
+  name: "roi-data"
+  type: "Python"
+  bottom: "rpn_rois"
+  bottom: "gt_boxes"
+  top: "rois"
+  top: "labels"
+  top: "twin_targets"
+  top: "twin_inside_weights"
+  top: "twin_outside_weights"
+  python_param {
+    module: "rpn.proposal_target_layer"
+    layer: "ProposalTargetLayer"
+    param_str: "\'num_classes\': 200"
+  }
+}
+layer {
+  name: "roi_pool5"
+  type: "ROIPooling"
+  bottom: "conv5b"
+  bottom: "rois"
+  top: "pool5"
+  roi_pooling_param {
+    pooled_h: 4
+    pooled_w: 4
+    spatial_scale: 0.0625
+    pooled_l: 1
+    temporal_scale: 0.125
+  }
+}
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "cls_score"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "cls_score"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 200
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "twin_pred"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "twin_pred"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 400
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "loss_cls"
+  type: "SigmoidCrossEntropyLoss"
+  bottom: "cls_score"
+  bottom: "labels"
+  top: "loss_cls"
+  loss_weight: 1
+  propagate_down: true
+  propagate_down: false
+}
+layer {
+  name: "loss_twin"
+  type: "SmoothL1Loss"
+  bottom: "twin_pred"
+  bottom: "twin_targets"
+  bottom: "twin_inside_weights"
+  bottom: "twin_outside_weights"
+  top: "loss_twin"
+  loss_weight: 1
+}
+layer {
+  name: "accuracy"
+  type: "Python"
+  bottom: "cls_score"
+  bottom: "labels"
+  top: "accuracy"
+  python_param {
+    module: "utils.accuracy_layer"
+    layer: "AccuracyLayer"
+    param_str: "{\"top_k\": 2}"
+  }
+}
+I0421 19:11:04.000658 17066 layer_factory.hpp:77] Creating layer data
+I0421 19:11:04.025897 17066 net.cpp:100] Creating Layer data
+I0421 19:11:04.025923 17066 net.cpp:408] data -> data
+I0421 19:11:04.025936 17066 net.cpp:408] data -> gt_boxes
+setting up
+has rpn
+RoiDataLayer: name_to_top: {'gt_windows': 1, 'data': 0}
+I0421 19:11:04.040019 17066 net.cpp:150] Setting up data
+I0421 19:11:04.040041 17066 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0421 19:11:04.040046 17066 net.cpp:157] Top shape: 1 101 (101)
+I0421 19:11:04.040050 17066 net.cpp:165] Memory required for data: 115605908
+I0421 19:11:04.040055 17066 layer_factory.hpp:77] Creating layer data_data_0_split
+I0421 19:11:04.040066 17066 net.cpp:100] Creating Layer data_data_0_split
+I0421 19:11:04.040071 17066 net.cpp:434] data_data_0_split <- data
+I0421 19:11:04.040077 17066 net.cpp:408] data_data_0_split -> data_data_0_split_0
+I0421 19:11:04.040086 17066 net.cpp:408] data_data_0_split -> data_data_0_split_1
+I0421 19:11:04.040132 17066 net.cpp:150] Setting up data_data_0_split
+I0421 19:11:04.040143 17066 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0421 19:11:04.040151 17066 net.cpp:157] Top shape: 1 3 768 112 112 (28901376)
+I0421 19:11:04.040155 17066 net.cpp:165] Memory required for data: 346816916
+I0421 19:11:04.040161 17066 layer_factory.hpp:77] Creating layer gt_boxes_data_1_split
+I0421 19:11:04.040169 17066 net.cpp:100] Creating Layer gt_boxes_data_1_split
+I0421 19:11:04.040194 17066 net.cpp:434] gt_boxes_data_1_split <- gt_boxes
+I0421 19:11:04.040204 17066 net.cpp:408] gt_boxes_data_1_split -> gt_boxes_data_1_split_0
+I0421 19:11:04.040213 17066 net.cpp:408] gt_boxes_data_1_split -> gt_boxes_data_1_split_1
+I0421 19:11:04.040261 17066 net.cpp:150] Setting up gt_boxes_data_1_split
+I0421 19:11:04.040271 17066 net.cpp:157] Top shape: 1 101 (101)
+I0421 19:11:04.040274 17066 net.cpp:157] Top shape: 1 101 (101)
+I0421 19:11:04.040277 17066 net.cpp:165] Memory required for data: 346817724
+I0421 19:11:04.040282 17066 layer_factory.hpp:77] Creating layer conv1a
+I0421 19:11:04.040297 17066 net.cpp:100] Creating Layer conv1a
+I0421 19:11:04.040303 17066 net.cpp:434] conv1a <- data_data_0_split_0
+I0421 19:11:04.040313 17066 net.cpp:408] conv1a -> conv1a
+I0421 19:11:04.239509 17066 net.cpp:150] Setting up conv1a
+I0421 19:11:04.239539 17066 net.cpp:157] Top shape: 1 64 768 112 112 (616562688)
+I0421 19:11:04.239545 17066 net.cpp:165] Memory required for data: 2813068476
+I0421 19:11:04.239578 17066 layer_factory.hpp:77] Creating layer relu1a
+I0421 19:11:04.239598 17066 net.cpp:100] Creating Layer relu1a
+I0421 19:11:04.239606 17066 net.cpp:434] relu1a <- conv1a
+I0421 19:11:04.239616 17066 net.cpp:395] relu1a -> conv1a (in-place)
+I0421 19:11:04.240175 17066 net.cpp:150] Setting up relu1a
+I0421 19:11:04.240191 17066 net.cpp:157] Top shape: 1 64 768 112 112 (616562688)
+I0421 19:11:04.240198 17066 net.cpp:165] Memory required for data: 5279319228
+I0421 19:11:04.240205 17066 layer_factory.hpp:77] Creating layer pool1
+I0421 19:11:04.240237 17066 net.cpp:100] Creating Layer pool1
+I0421 19:11:04.240247 17066 net.cpp:434] pool1 <- conv1a
+I0421 19:11:04.240257 17066 net.cpp:408] pool1 -> pool1
+I0421 19:11:04.240489 17066 net.cpp:150] Setting up pool1
+I0421 19:11:04.240505 17066 net.cpp:157] Top shape: 1 64 768 56 56 (154140672)
+I0421 19:11:04.240511 17066 net.cpp:165] Memory required for data: 5895881916
+I0421 19:11:04.240519 17066 layer_factory.hpp:77] Creating layer conv2a
+I0421 19:11:04.240537 17066 net.cpp:100] Creating Layer conv2a
+I0421 19:11:04.240545 17066 net.cpp:434] conv2a <- pool1
+I0421 19:11:04.240556 17066 net.cpp:408] conv2a -> conv2a
+I0421 19:11:04.253190 17066 net.cpp:150] Setting up conv2a
+I0421 19:11:04.253221 17066 net.cpp:157] Top shape: 1 128 768 56 56 (308281344)
+I0421 19:11:04.253227 17066 net.cpp:165] Memory required for data: 7129007292
+I0421 19:11:04.253244 17066 layer_factory.hpp:77] Creating layer relu2a
+I0421 19:11:04.253269 17066 net.cpp:100] Creating Layer relu2a
+I0421 19:11:04.253278 17066 net.cpp:434] relu2a <- conv2a
+I0421 19:11:04.253288 17066 net.cpp:395] relu2a -> conv2a (in-place)
+I0421 19:11:04.253726 17066 net.cpp:150] Setting up relu2a
+I0421 19:11:04.253739 17066 net.cpp:157] Top shape: 1 128 768 56 56 (308281344)
+I0421 19:11:04.253744 17066 net.cpp:165] Memory required for data: 8362132668
+I0421 19:11:04.253751 17066 layer_factory.hpp:77] Creating layer pool2
+I0421 19:11:04.253768 17066 net.cpp:100] Creating Layer pool2
+I0421 19:11:04.253775 17066 net.cpp:434] pool2 <- conv2a
+I0421 19:11:04.253785 17066 net.cpp:408] pool2 -> pool2
+I0421 19:11:04.253981 17066 net.cpp:150] Setting up pool2
+I0421 19:11:04.253993 17066 net.cpp:157] Top shape: 1 128 384 28 28 (38535168)
+I0421 19:11:04.254001 17066 net.cpp:165] Memory required for data: 8516273340
+I0421 19:11:04.254007 17066 layer_factory.hpp:77] Creating layer conv3a
+I0421 19:11:04.254025 17066 net.cpp:100] Creating Layer conv3a
+I0421 19:11:04.254031 17066 net.cpp:434] conv3a <- pool2
+I0421 19:11:04.254042 17066 net.cpp:408] conv3a -> conv3a
+I0421 19:11:04.280606 17066 net.cpp:150] Setting up conv3a
+I0421 19:11:04.280633 17066 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0421 19:11:04.280639 17066 net.cpp:165] Memory required for data: 8824554684
+I0421 19:11:04.280656 17066 layer_factory.hpp:77] Creating layer relu3a
+I0421 19:11:04.280671 17066 net.cpp:100] Creating Layer relu3a
+I0421 19:11:04.280681 17066 net.cpp:434] relu3a <- conv3a
+I0421 19:11:04.280694 17066 net.cpp:395] relu3a -> conv3a (in-place)
+I0421 19:11:04.281051 17066 net.cpp:150] Setting up relu3a
+I0421 19:11:04.281064 17066 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0421 19:11:04.281070 17066 net.cpp:165] Memory required for data: 9132836028
+I0421 19:11:04.281076 17066 layer_factory.hpp:77] Creating layer conv3b
+I0421 19:11:04.281095 17066 net.cpp:100] Creating Layer conv3b
+I0421 19:11:04.281103 17066 net.cpp:434] conv3b <- conv3a
+I0421 19:11:04.281114 17066 net.cpp:408] conv3b -> conv3b
+I0421 19:11:04.331825 17066 net.cpp:150] Setting up conv3b
+I0421 19:11:04.331856 17066 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0421 19:11:04.331862 17066 net.cpp:165] Memory required for data: 9441117372
+I0421 19:11:04.331874 17066 layer_factory.hpp:77] Creating layer relu3b
+I0421 19:11:04.331887 17066 net.cpp:100] Creating Layer relu3b
+I0421 19:11:04.331897 17066 net.cpp:434] relu3b <- conv3b
+I0421 19:11:04.331908 17066 net.cpp:395] relu3b -> conv3b (in-place)
+I0421 19:11:04.332306 17066 net.cpp:150] Setting up relu3b
+I0421 19:11:04.332320 17066 net.cpp:157] Top shape: 1 256 384 28 28 (77070336)
+I0421 19:11:04.332326 17066 net.cpp:165] Memory required for data: 9749398716
+I0421 19:11:04.332332 17066 layer_factory.hpp:77] Creating layer pool3
+I0421 19:11:04.332347 17066 net.cpp:100] Creating Layer pool3
+I0421 19:11:04.332356 17066 net.cpp:434] pool3 <- conv3b
+I0421 19:11:04.332366 17066 net.cpp:408] pool3 -> pool3
+I0421 19:11:04.332548 17066 net.cpp:150] Setting up pool3
+I0421 19:11:04.332561 17066 net.cpp:157] Top shape: 1 256 192 14 14 (9633792)
+I0421 19:11:04.332566 17066 net.cpp:165] Memory required for data: 9787933884
+I0421 19:11:04.332571 17066 layer_factory.hpp:77] Creating layer conv4a
+I0421 19:11:04.332589 17066 net.cpp:100] Creating Layer conv4a
+I0421 19:11:04.332597 17066 net.cpp:434] conv4a <- pool3
+I0421 19:11:04.332612 17066 net.cpp:408] conv4a -> conv4a
+I0421 19:11:04.437145 17066 net.cpp:150] Setting up conv4a
+I0421 19:11:04.437223 17066 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0421 19:11:04.437252 17066 net.cpp:165] Memory required for data: 9865004220
+I0421 19:11:04.437288 17066 layer_factory.hpp:77] Creating layer relu4a
+I0421 19:11:04.437314 17066 net.cpp:100] Creating Layer relu4a
+I0421 19:11:04.437335 17066 net.cpp:434] relu4a <- conv4a
+I0421 19:11:04.437357 17066 net.cpp:395] relu4a -> conv4a (in-place)
+I0421 19:11:04.437980 17066 net.cpp:150] Setting up relu4a
+I0421 19:11:04.438019 17066 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0421 19:11:04.438040 17066 net.cpp:165] Memory required for data: 9942074556
+I0421 19:11:04.438058 17066 layer_factory.hpp:77] Creating layer conv4b
+I0421 19:11:04.438100 17066 net.cpp:100] Creating Layer conv4b
+I0421 19:11:04.438122 17066 net.cpp:434] conv4b <- conv4a
+I0421 19:11:04.438149 17066 net.cpp:408] conv4b -> conv4b
+I0421 19:11:04.646208 17066 net.cpp:150] Setting up conv4b
+I0421 19:11:04.646231 17066 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0421 19:11:04.646235 17066 net.cpp:165] Memory required for data: 10019144892
+I0421 19:11:04.646245 17066 layer_factory.hpp:77] Creating layer relu4b
+I0421 19:11:04.646253 17066 net.cpp:100] Creating Layer relu4b
+I0421 19:11:04.646258 17066 net.cpp:434] relu4b <- conv4b
+I0421 19:11:04.646268 17066 net.cpp:395] relu4b -> conv4b (in-place)
+I0421 19:11:04.646445 17066 net.cpp:150] Setting up relu4b
+I0421 19:11:04.646458 17066 net.cpp:157] Top shape: 1 512 192 14 14 (19267584)
+I0421 19:11:04.646464 17066 net.cpp:165] Memory required for data: 10096215228
+I0421 19:11:04.646469 17066 layer_factory.hpp:77] Creating layer pool4
+I0421 19:11:04.646500 17066 net.cpp:100] Creating Layer pool4
+I0421 19:11:04.646510 17066 net.cpp:434] pool4 <- conv4b
+I0421 19:11:04.646518 17066 net.cpp:408] pool4 -> pool4
+I0421 19:11:04.646934 17066 net.cpp:150] Setting up pool4
+I0421 19:11:04.646950 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:04.646955 17066 net.cpp:165] Memory required for data: 10105849020
+I0421 19:11:04.646960 17066 layer_factory.hpp:77] Creating layer conv5a
+I0421 19:11:04.646997 17066 net.cpp:100] Creating Layer conv5a
+I0421 19:11:04.647006 17066 net.cpp:434] conv5a <- pool4
+I0421 19:11:04.647014 17066 net.cpp:408] conv5a -> conv5a
+I0421 19:11:04.840247 17066 net.cpp:150] Setting up conv5a
+I0421 19:11:04.840273 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:04.840279 17066 net.cpp:165] Memory required for data: 10115482812
+I0421 19:11:04.840291 17066 layer_factory.hpp:77] Creating layer relu5a
+I0421 19:11:04.840303 17066 net.cpp:100] Creating Layer relu5a
+I0421 19:11:04.840329 17066 net.cpp:434] relu5a <- conv5a
+I0421 19:11:04.840350 17066 net.cpp:395] relu5a -> conv5a (in-place)
+I0421 19:11:04.840912 17066 net.cpp:150] Setting up relu5a
+I0421 19:11:04.840926 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:04.840932 17066 net.cpp:165] Memory required for data: 10125116604
+I0421 19:11:04.840939 17066 layer_factory.hpp:77] Creating layer conv5b
+I0421 19:11:04.840972 17066 net.cpp:100] Creating Layer conv5b
+I0421 19:11:04.840981 17066 net.cpp:434] conv5b <- conv5a
+I0421 19:11:04.840991 17066 net.cpp:408] conv5b -> conv5b
+I0421 19:11:05.029891 17066 net.cpp:150] Setting up conv5b
+I0421 19:11:05.029918 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:05.029922 17066 net.cpp:165] Memory required for data: 10134750396
+I0421 19:11:05.029932 17066 layer_factory.hpp:77] Creating layer relu5b
+I0421 19:11:05.029944 17066 net.cpp:100] Creating Layer relu5b
+I0421 19:11:05.029949 17066 net.cpp:434] relu5b <- conv5b
+I0421 19:11:05.029954 17066 net.cpp:395] relu5b -> conv5b (in-place)
+I0421 19:11:05.030104 17066 net.cpp:150] Setting up relu5b
+I0421 19:11:05.030115 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:05.030118 17066 net.cpp:165] Memory required for data: 10144384188
+I0421 19:11:05.030122 17066 layer_factory.hpp:77] Creating layer conv5b_relu5b_0_split
+I0421 19:11:05.030128 17066 net.cpp:100] Creating Layer conv5b_relu5b_0_split
+I0421 19:11:05.030133 17066 net.cpp:434] conv5b_relu5b_0_split <- conv5b
+I0421 19:11:05.030138 17066 net.cpp:408] conv5b_relu5b_0_split -> conv5b_relu5b_0_split_0
+I0421 19:11:05.030143 17066 net.cpp:408] conv5b_relu5b_0_split -> conv5b_relu5b_0_split_1
+I0421 19:11:05.030179 17066 net.cpp:150] Setting up conv5b_relu5b_0_split
+I0421 19:11:05.030186 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:05.030190 17066 net.cpp:157] Top shape: 1 512 96 7 7 (2408448)
+I0421 19:11:05.030194 17066 net.cpp:165] Memory required for data: 10163651772
+I0421 19:11:05.030200 17066 layer_factory.hpp:77] Creating layer rpn_conv/3x3
+I0421 19:11:05.030210 17066 net.cpp:100] Creating Layer rpn_conv/3x3
+I0421 19:11:05.030215 17066 net.cpp:434] rpn_conv/3x3 <- conv5b_relu5b_0_split_0
+I0421 19:11:05.030221 17066 net.cpp:408] rpn_conv/3x3 -> rpn/output
+I0421 19:11:05.216511 17066 net.cpp:150] Setting up rpn_conv/3x3
+I0421 19:11:05.216534 17066 net.cpp:157] Top shape: 1 512 96 4 4 (786432)
+I0421 19:11:05.216538 17066 net.cpp:165] Memory required for data: 10166797500
+I0421 19:11:05.216553 17066 layer_factory.hpp:77] Creating layer rpn_relu/3x3
+I0421 19:11:05.216562 17066 net.cpp:100] Creating Layer rpn_relu/3x3
+I0421 19:11:05.216567 17066 net.cpp:434] rpn_relu/3x3 <- rpn/output
+I0421 19:11:05.216573 17066 net.cpp:395] rpn_relu/3x3 -> rpn/output (in-place)
+I0421 19:11:05.216930 17066 net.cpp:150] Setting up rpn_relu/3x3
+I0421 19:11:05.216943 17066 net.cpp:157] Top shape: 1 512 96 4 4 (786432)
+I0421 19:11:05.216946 17066 net.cpp:165] Memory required for data: 10169943228
+I0421 19:11:05.216950 17066 layer_factory.hpp:77] Creating layer rpn_conv/3x3_2
+I0421 19:11:05.216962 17066 net.cpp:100] Creating Layer rpn_conv/3x3_2
+I0421 19:11:05.216967 17066 net.cpp:434] rpn_conv/3x3_2 <- rpn/output
+I0421 19:11:05.216974 17066 net.cpp:408] rpn_conv/3x3_2 -> rpn/output_2
+I0421 19:11:05.403617 17066 net.cpp:150] Setting up rpn_conv/3x3_2
+I0421 19:11:05.403651 17066 net.cpp:157] Top shape: 1 512 96 2 2 (196608)
+I0421 19:11:05.403656 17066 net.cpp:165] Memory required for data: 10170729660
+I0421 19:11:05.403664 17066 layer_factory.hpp:77] Creating layer rpn_relu/3x3_2
+I0421 19:11:05.403674 17066 net.cpp:100] Creating Layer rpn_relu/3x3_2
+I0421 19:11:05.403679 17066 net.cpp:434] rpn_relu/3x3_2 <- rpn/output_2
+I0421 19:11:05.403687 17066 net.cpp:395] rpn_relu/3x3_2 -> rpn/output_2 (in-place)
+I0421 19:11:05.404050 17066 net.cpp:150] Setting up rpn_relu/3x3_2
+I0421 19:11:05.404062 17066 net.cpp:157] Top shape: 1 512 96 2 2 (196608)
+I0421 19:11:05.404067 17066 net.cpp:165] Memory required for data: 10171516092
+I0421 19:11:05.404070 17066 layer_factory.hpp:77] Creating layer rpn/output_pool
+I0421 19:11:05.404078 17066 net.cpp:100] Creating Layer rpn/output_pool
+I0421 19:11:05.404081 17066 net.cpp:434] rpn/output_pool <- rpn/output_2
+I0421 19:11:05.404088 17066 net.cpp:408] rpn/output_pool -> rpn/output_pool
+I0421 19:11:05.404265 17066 net.cpp:150] Setting up rpn/output_pool
+I0421 19:11:05.404275 17066 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0421 19:11:05.404279 17066 net.cpp:165] Memory required for data: 10171712700
+I0421 19:11:05.404284 17066 layer_factory.hpp:77] Creating layer rpn/output_pool_rpn/output_pool_0_split
+I0421 19:11:05.404289 17066 net.cpp:100] Creating Layer rpn/output_pool_rpn/output_pool_0_split
+I0421 19:11:05.404292 17066 net.cpp:434] rpn/output_pool_rpn/output_pool_0_split <- rpn/output_pool
+I0421 19:11:05.404297 17066 net.cpp:408] rpn/output_pool_rpn/output_pool_0_split -> rpn/output_pool_rpn/output_pool_0_split_0
+I0421 19:11:05.404304 17066 net.cpp:408] rpn/output_pool_rpn/output_pool_0_split -> rpn/output_pool_rpn/output_pool_0_split_1
+I0421 19:11:05.404335 17066 net.cpp:150] Setting up rpn/output_pool_rpn/output_pool_0_split
+I0421 19:11:05.404343 17066 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0421 19:11:05.404347 17066 net.cpp:157] Top shape: 1 512 96 1 1 (49152)
+I0421 19:11:05.404350 17066 net.cpp:165] Memory required for data: 10172105916
+I0421 19:11:05.404353 17066 layer_factory.hpp:77] Creating layer rpn_cls_score
+I0421 19:11:05.404367 17066 net.cpp:100] Creating Layer rpn_cls_score
+I0421 19:11:05.404373 17066 net.cpp:434] rpn_cls_score <- rpn/output_pool_rpn/output_pool_0_split_0
+I0421 19:11:05.404378 17066 net.cpp:408] rpn_cls_score -> rpn_cls_score
+I0421 19:11:05.406678 17066 net.cpp:150] Setting up rpn_cls_score
+I0421 19:11:05.406690 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.406694 17066 net.cpp:165] Memory required for data: 10172134332
+I0421 19:11:05.406700 17066 layer_factory.hpp:77] Creating layer rpn_cls_score_rpn_cls_score_0_split
+I0421 19:11:05.406708 17066 net.cpp:100] Creating Layer rpn_cls_score_rpn_cls_score_0_split
+I0421 19:11:05.406711 17066 net.cpp:434] rpn_cls_score_rpn_cls_score_0_split <- rpn_cls_score
+I0421 19:11:05.406716 17066 net.cpp:408] rpn_cls_score_rpn_cls_score_0_split -> rpn_cls_score_rpn_cls_score_0_split_0
+I0421 19:11:05.406723 17066 net.cpp:408] rpn_cls_score_rpn_cls_score_0_split -> rpn_cls_score_rpn_cls_score_0_split_1
+I0421 19:11:05.406774 17066 net.cpp:150] Setting up rpn_cls_score_rpn_cls_score_0_split
+I0421 19:11:05.406783 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.406787 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.406790 17066 net.cpp:165] Memory required for data: 10172191164
+I0421 19:11:05.406795 17066 layer_factory.hpp:77] Creating layer rpn_twin_pred
+I0421 19:11:05.406810 17066 net.cpp:100] Creating Layer rpn_twin_pred
+I0421 19:11:05.406814 17066 net.cpp:434] rpn_twin_pred <- rpn/output_pool_rpn/output_pool_0_split_1
+I0421 19:11:05.406819 17066 net.cpp:408] rpn_twin_pred -> rpn_twin_pred
+I0421 19:11:05.411087 17066 net.cpp:150] Setting up rpn_twin_pred
+I0421 19:11:05.411103 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.411108 17066 net.cpp:165] Memory required for data: 10172219580
+I0421 19:11:05.411114 17066 layer_factory.hpp:77] Creating layer rpn_twin_pred_rpn_twin_pred_0_split
+I0421 19:11:05.411123 17066 net.cpp:100] Creating Layer rpn_twin_pred_rpn_twin_pred_0_split
+I0421 19:11:05.411125 17066 net.cpp:434] rpn_twin_pred_rpn_twin_pred_0_split <- rpn_twin_pred
+I0421 19:11:05.411130 17066 net.cpp:408] rpn_twin_pred_rpn_twin_pred_0_split -> rpn_twin_pred_rpn_twin_pred_0_split_0
+I0421 19:11:05.411137 17066 net.cpp:408] rpn_twin_pred_rpn_twin_pred_0_split -> rpn_twin_pred_rpn_twin_pred_0_split_1
+I0421 19:11:05.411173 17066 net.cpp:150] Setting up rpn_twin_pred_rpn_twin_pred_0_split
+I0421 19:11:05.411181 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.411185 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.411188 17066 net.cpp:165] Memory required for data: 10172276412
+I0421 19:11:05.411191 17066 layer_factory.hpp:77] Creating layer rpn_cls_score_reshape
+I0421 19:11:05.411206 17066 net.cpp:100] Creating Layer rpn_cls_score_reshape
+I0421 19:11:05.411212 17066 net.cpp:434] rpn_cls_score_reshape <- rpn_cls_score_rpn_cls_score_0_split_0
+I0421 19:11:05.411216 17066 net.cpp:408] rpn_cls_score_reshape -> rpn_cls_score_reshape
+I0421 19:11:05.411247 17066 net.cpp:150] Setting up rpn_cls_score_reshape
+I0421 19:11:05.411257 17066 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0421 19:11:05.411259 17066 net.cpp:165] Memory required for data: 10172304828
+I0421 19:11:05.411262 17066 layer_factory.hpp:77] Creating layer rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0421 19:11:05.411267 17066 net.cpp:100] Creating Layer rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0421 19:11:05.411272 17066 net.cpp:434] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split <- rpn_cls_score_reshape
+I0421 19:11:05.411278 17066 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_0
+I0421 19:11:05.411286 17066 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_1
+I0421 19:11:05.411291 17066 net.cpp:408] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split -> rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_2
+I0421 19:11:05.411332 17066 net.cpp:150] Setting up rpn_cls_score_reshape_rpn_cls_score_reshape_0_split
+I0421 19:11:05.411340 17066 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0421 19:11:05.411345 17066 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0421 19:11:05.411348 17066 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0421 19:11:05.411351 17066 net.cpp:165] Memory required for data: 10172390076
+I0421 19:11:05.411355 17066 layer_factory.hpp:77] Creating layer rpn-data
+I0421 19:11:05.411751 17066 net.cpp:100] Creating Layer rpn-data
+I0421 19:11:05.411763 17066 net.cpp:434] rpn-data <- rpn_cls_score_rpn_cls_score_0_split_1
+I0421 19:11:05.411768 17066 net.cpp:434] rpn-data <- gt_boxes_data_1_split_0
+I0421 19:11:05.411773 17066 net.cpp:434] rpn-data <- data_data_0_split_1
+I0421 19:11:05.411778 17066 net.cpp:408] rpn-data -> rpn_labels
+I0421 19:11:05.411785 17066 net.cpp:408] rpn-data -> rpn_twin_targets
+I0421 19:11:05.411790 17066 net.cpp:408] rpn-data -> rpn_twin_inside_weights
+I0421 19:11:05.411799 17066 net.cpp:408] rpn-data -> rpn_twin_outside_weights
+I0421 19:11:05.414263 17066 net.cpp:150] Setting up rpn-data
+I0421 19:11:05.414278 17066 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0421 19:11:05.414283 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.414288 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.414291 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.414294 17066 net.cpp:165] Memory required for data: 10172489532
+I0421 19:11:05.414299 17066 layer_factory.hpp:77] Creating layer rpn_labels_rpn-data_0_split
+I0421 19:11:05.414304 17066 net.cpp:100] Creating Layer rpn_labels_rpn-data_0_split
+I0421 19:11:05.414307 17066 net.cpp:434] rpn_labels_rpn-data_0_split <- rpn_labels
+I0421 19:11:05.414312 17066 net.cpp:408] rpn_labels_rpn-data_0_split -> rpn_labels_rpn-data_0_split_0
+I0421 19:11:05.414319 17066 net.cpp:408] rpn_labels_rpn-data_0_split -> rpn_labels_rpn-data_0_split_1
+I0421 19:11:05.414350 17066 net.cpp:150] Setting up rpn_labels_rpn-data_0_split
+I0421 19:11:05.414357 17066 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0421 19:11:05.414361 17066 net.cpp:157] Top shape: 1 1 3552 1 1 (3552)
+I0421 19:11:05.414364 17066 net.cpp:165] Memory required for data: 10172517948
+I0421 19:11:05.414368 17066 layer_factory.hpp:77] Creating layer rpn_loss_cls
+I0421 19:11:05.414376 17066 net.cpp:100] Creating Layer rpn_loss_cls
+I0421 19:11:05.414384 17066 net.cpp:434] rpn_loss_cls <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_0
+I0421 19:11:05.414389 17066 net.cpp:434] rpn_loss_cls <- rpn_labels_rpn-data_0_split_0
+I0421 19:11:05.414394 17066 net.cpp:408] rpn_loss_cls -> rpn_cls_loss
+I0421 19:11:05.414404 17066 layer_factory.hpp:77] Creating layer rpn_loss_cls
+I0421 19:11:05.415136 17066 net.cpp:150] Setting up rpn_loss_cls
+I0421 19:11:05.415149 17066 net.cpp:157] Top shape: (1)
+I0421 19:11:05.415153 17066 net.cpp:160]     with loss weight 1
+I0421 19:11:05.415164 17066 net.cpp:165] Memory required for data: 10172517952
+I0421 19:11:05.415169 17066 layer_factory.hpp:77] Creating layer rpn_loss_twin
+I0421 19:11:05.415177 17066 net.cpp:100] Creating Layer rpn_loss_twin
+I0421 19:11:05.415181 17066 net.cpp:434] rpn_loss_twin <- rpn_twin_pred_rpn_twin_pred_0_split_0
+I0421 19:11:05.415189 17066 net.cpp:434] rpn_loss_twin <- rpn_twin_targets
+I0421 19:11:05.415194 17066 net.cpp:434] rpn_loss_twin <- rpn_twin_inside_weights
+I0421 19:11:05.415197 17066 net.cpp:434] rpn_loss_twin <- rpn_twin_outside_weights
+I0421 19:11:05.415201 17066 net.cpp:408] rpn_loss_twin -> rpn_loss_twin
+I0421 19:11:05.415297 17066 net.cpp:150] Setting up rpn_loss_twin
+I0421 19:11:05.415308 17066 net.cpp:157] Top shape: (1)
+I0421 19:11:05.415313 17066 net.cpp:160]     with loss weight 1
+I0421 19:11:05.415318 17066 net.cpp:165] Memory required for data: 10172517956
+I0421 19:11:05.415323 17066 layer_factory.hpp:77] Creating layer rpn_accuarcy
+I0421 19:11:05.415330 17066 net.cpp:100] Creating Layer rpn_accuarcy
+I0421 19:11:05.415334 17066 net.cpp:434] rpn_accuarcy <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_1
+I0421 19:11:05.415339 17066 net.cpp:434] rpn_accuarcy <- rpn_labels_rpn-data_0_split_1
+I0421 19:11:05.415344 17066 net.cpp:408] rpn_accuarcy -> rpn_accuarcy
+I0421 19:11:05.415354 17066 net.cpp:408] rpn_accuarcy -> rpn_accuarcy_class
+I0421 19:11:05.415395 17066 net.cpp:150] Setting up rpn_accuarcy
+I0421 19:11:05.415402 17066 net.cpp:157] Top shape: (1)
+I0421 19:11:05.415407 17066 net.cpp:157] Top shape: 2 (2)
+I0421 19:11:05.415411 17066 net.cpp:165] Memory required for data: 10172517968
+I0421 19:11:05.415416 17066 layer_factory.hpp:77] Creating layer rpn_cls_prob
+I0421 19:11:05.415422 17066 net.cpp:100] Creating Layer rpn_cls_prob
+I0421 19:11:05.415426 17066 net.cpp:434] rpn_cls_prob <- rpn_cls_score_reshape_rpn_cls_score_reshape_0_split_2
+I0421 19:11:05.415431 17066 net.cpp:408] rpn_cls_prob -> rpn_cls_prob
+I0421 19:11:05.415689 17066 net.cpp:150] Setting up rpn_cls_prob
+I0421 19:11:05.415702 17066 net.cpp:157] Top shape: 1 2 3552 1 1 (7104)
+I0421 19:11:05.415706 17066 net.cpp:165] Memory required for data: 10172546384
+I0421 19:11:05.415710 17066 layer_factory.hpp:77] Creating layer rpn_cls_prob_reshape
+I0421 19:11:05.415717 17066 net.cpp:100] Creating Layer rpn_cls_prob_reshape
+I0421 19:11:05.415721 17066 net.cpp:434] rpn_cls_prob_reshape <- rpn_cls_prob
+I0421 19:11:05.415729 17066 net.cpp:408] rpn_cls_prob_reshape -> rpn_cls_prob_reshape
+I0421 19:11:05.415762 17066 net.cpp:150] Setting up rpn_cls_prob_reshape
+I0421 19:11:05.415771 17066 net.cpp:157] Top shape: 1 74 96 1 1 (7104)
+I0421 19:11:05.415774 17066 net.cpp:165] Memory required for data: 10172574800
+I0421 19:11:05.415778 17066 layer_factory.hpp:77] Creating layer proposal
+I0421 19:11:05.416399 17066 net.cpp:100] Creating Layer proposal
+I0421 19:11:05.416414 17066 net.cpp:434] proposal <- rpn_cls_prob_reshape
+I0421 19:11:05.416419 17066 net.cpp:434] proposal <- rpn_twin_pred_rpn_twin_pred_0_split_1
+I0421 19:11:05.416426 17066 net.cpp:408] proposal -> rpn_rois
+I0421 19:11:05.419260 17066 net.cpp:150] Setting up proposal
+I0421 19:11:05.419276 17066 net.cpp:157] Top shape: 1 3 (3)
+I0421 19:11:05.419281 17066 net.cpp:165] Memory required for data: 10172574812
+I0421 19:11:05.419286 17066 layer_factory.hpp:77] Creating layer roi-data
+I0421 19:11:05.421110 17066 net.cpp:100] Creating Layer roi-data
+I0421 19:11:05.421124 17066 net.cpp:434] roi-data <- rpn_rois
+I0421 19:11:05.421131 17066 net.cpp:434] roi-data <- gt_boxes_data_1_split_1
+I0421 19:11:05.421139 17066 net.cpp:408] roi-data -> rois
+I0421 19:11:05.421146 17066 net.cpp:408] roi-data -> labels
+I0421 19:11:05.421154 17066 net.cpp:408] roi-data -> twin_targets
+I0421 19:11:05.421161 17066 net.cpp:408] roi-data -> twin_inside_weights
+I0421 19:11:05.421169 17066 net.cpp:408] roi-data -> twin_outside_weights
+I0421 19:11:05.421553 17066 net.cpp:150] Setting up roi-data
+I0421 19:11:05.421567 17066 net.cpp:157] Top shape: 1 3 (3)
+I0421 19:11:05.421573 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:05.421577 17066 net.cpp:157] Top shape: 1 400 (400)
+I0421 19:11:05.421581 17066 net.cpp:157] Top shape: 1 400 (400)
+I0421 19:11:05.421586 17066 net.cpp:157] Top shape: 1 400 (400)
+I0421 19:11:05.421589 17066 net.cpp:165] Memory required for data: 10172580424
+I0421 19:11:05.421594 17066 layer_factory.hpp:77] Creating layer labels_roi-data_1_split
+I0421 19:11:05.421602 17066 net.cpp:100] Creating Layer labels_roi-data_1_split
+I0421 19:11:05.421605 17066 net.cpp:434] labels_roi-data_1_split <- labels
+I0421 19:11:05.421612 17066 net.cpp:408] labels_roi-data_1_split -> labels_roi-data_1_split_0
+I0421 19:11:05.421620 17066 net.cpp:408] labels_roi-data_1_split -> labels_roi-data_1_split_1
+I0421 19:11:05.421656 17066 net.cpp:150] Setting up labels_roi-data_1_split
+I0421 19:11:05.421664 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:05.421669 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:05.421674 17066 net.cpp:165] Memory required for data: 10172582024
+I0421 19:11:05.421677 17066 layer_factory.hpp:77] Creating layer roi_pool5
+I0421 19:11:05.421689 17066 net.cpp:100] Creating Layer roi_pool5
+I0421 19:11:05.421697 17066 net.cpp:434] roi_pool5 <- conv5b_relu5b_0_split_1
+I0421 19:11:05.421703 17066 net.cpp:434] roi_pool5 <- rois
+I0421 19:11:05.421710 17066 net.cpp:408] roi_pool5 -> pool5
+I0421 19:11:05.421717 17066 roi_pooling_layer.cpp:34] Temporal scale: 0.125
+I0421 19:11:05.421726 17066 roi_pooling_layer.cpp:35] Spatial scale: 0.0625
+I0421 19:11:05.421767 17066 net.cpp:150] Setting up roi_pool5
+I0421 19:11:05.421775 17066 net.cpp:157] Top shape: 1 512 1 4 4 (8192)
+I0421 19:11:05.421779 17066 net.cpp:165] Memory required for data: 10172614792
+I0421 19:11:05.421783 17066 layer_factory.hpp:77] Creating layer fc6
+I0421 19:11:05.421793 17066 net.cpp:100] Creating Layer fc6
+I0421 19:11:05.421799 17066 net.cpp:434] fc6 <- pool5
+I0421 19:11:05.421806 17066 net.cpp:408] fc6 -> fc6
+I0421 19:11:06.302335 17066 net.cpp:150] Setting up fc6
+I0421 19:11:06.302357 17066 net.cpp:157] Top shape: 1 4096 (4096)
+I0421 19:11:06.302361 17066 net.cpp:165] Memory required for data: 10172631176
+I0421 19:11:06.302371 17066 layer_factory.hpp:77] Creating layer relu6
+I0421 19:11:06.302381 17066 net.cpp:100] Creating Layer relu6
+I0421 19:11:06.302384 17066 net.cpp:434] relu6 <- fc6
+I0421 19:11:06.302390 17066 net.cpp:395] relu6 -> fc6 (in-place)
+I0421 19:11:06.303220 17066 net.cpp:150] Setting up relu6
+I0421 19:11:06.303231 17066 net.cpp:157] Top shape: 1 4096 (4096)
+I0421 19:11:06.303236 17066 net.cpp:165] Memory required for data: 10172647560
+I0421 19:11:06.303239 17066 layer_factory.hpp:77] Creating layer drop6
+I0421 19:11:06.303251 17066 net.cpp:100] Creating Layer drop6
+I0421 19:11:06.303254 17066 net.cpp:434] drop6 <- fc6
+I0421 19:11:06.303259 17066 net.cpp:395] drop6 -> fc6 (in-place)
+I0421 19:11:06.303292 17066 net.cpp:150] Setting up drop6
+I0421 19:11:06.303300 17066 net.cpp:157] Top shape: 1 4096 (4096)
+I0421 19:11:06.303303 17066 net.cpp:165] Memory required for data: 10172663944
+I0421 19:11:06.303308 17066 layer_factory.hpp:77] Creating layer fc6_drop6_0_split
+I0421 19:11:06.303313 17066 net.cpp:100] Creating Layer fc6_drop6_0_split
+I0421 19:11:06.303315 17066 net.cpp:434] fc6_drop6_0_split <- fc6
+I0421 19:11:06.303320 17066 net.cpp:408] fc6_drop6_0_split -> fc6_drop6_0_split_0
+I0421 19:11:06.303328 17066 net.cpp:408] fc6_drop6_0_split -> fc6_drop6_0_split_1
+I0421 19:11:06.303360 17066 net.cpp:150] Setting up fc6_drop6_0_split
+I0421 19:11:06.303369 17066 net.cpp:157] Top shape: 1 4096 (4096)
+I0421 19:11:06.303372 17066 net.cpp:157] Top shape: 1 4096 (4096)
+I0421 19:11:06.303378 17066 net.cpp:165] Memory required for data: 10172696712
+I0421 19:11:06.303382 17066 layer_factory.hpp:77] Creating layer cls_score
+I0421 19:11:06.303391 17066 net.cpp:100] Creating Layer cls_score
+I0421 19:11:06.303396 17066 net.cpp:434] cls_score <- fc6_drop6_0_split_0
+I0421 19:11:06.303401 17066 net.cpp:408] cls_score -> cls_score
+I0421 19:11:06.324867 17066 net.cpp:150] Setting up cls_score
+I0421 19:11:06.324892 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:06.324895 17066 net.cpp:165] Memory required for data: 10172697512
+I0421 19:11:06.324903 17066 layer_factory.hpp:77] Creating layer cls_score_cls_score_0_split
+I0421 19:11:06.324908 17066 net.cpp:100] Creating Layer cls_score_cls_score_0_split
+I0421 19:11:06.324911 17066 net.cpp:434] cls_score_cls_score_0_split <- cls_score
+I0421 19:11:06.324918 17066 net.cpp:408] cls_score_cls_score_0_split -> cls_score_cls_score_0_split_0
+I0421 19:11:06.324924 17066 net.cpp:408] cls_score_cls_score_0_split -> cls_score_cls_score_0_split_1
+I0421 19:11:06.324959 17066 net.cpp:150] Setting up cls_score_cls_score_0_split
+I0421 19:11:06.324965 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:06.324970 17066 net.cpp:157] Top shape: 1 200 (200)
+I0421 19:11:06.324973 17066 net.cpp:165] Memory required for data: 10172699112
+I0421 19:11:06.324980 17066 layer_factory.hpp:77] Creating layer twin_pred
+I0421 19:11:06.324990 17066 net.cpp:100] Creating Layer twin_pred
+I0421 19:11:06.324996 17066 net.cpp:434] twin_pred <- fc6_drop6_0_split_1
+I0421 19:11:06.325001 17066 net.cpp:408] twin_pred -> twin_pred
+I0421 19:11:06.367470 17066 net.cpp:150] Setting up twin_pred
+I0421 19:11:06.367499 17066 net.cpp:157] Top shape: 1 400 (400)
+I0421 19:11:06.367503 17066 net.cpp:165] Memory required for data: 10172700712
+I0421 19:11:06.367511 17066 layer_factory.hpp:77] Creating layer loss_cls
+I0421 19:11:06.367525 17066 net.cpp:100] Creating Layer loss_cls
+I0421 19:11:06.367530 17066 net.cpp:434] loss_cls <- cls_score_cls_score_0_split_0
+I0421 19:11:06.367537 17066 net.cpp:434] loss_cls <- labels_roi-data_1_split_0
+I0421 19:11:06.367542 17066 net.cpp:408] loss_cls -> loss_cls
+I0421 19:11:06.367594 17066 net.cpp:150] Setting up loss_cls
+I0421 19:11:06.367602 17066 net.cpp:157] Top shape: (1)
+I0421 19:11:06.367605 17066 net.cpp:160]     with loss weight 1
+I0421 19:11:06.367614 17066 net.cpp:165] Memory required for data: 10172700716
+I0421 19:11:06.367616 17066 layer_factory.hpp:77] Creating layer loss_twin
+I0421 19:11:06.367622 17066 net.cpp:100] Creating Layer loss_twin
+I0421 19:11:06.367626 17066 net.cpp:434] loss_twin <- twin_pred
+I0421 19:11:06.367630 17066 net.cpp:434] loss_twin <- twin_targets
+I0421 19:11:06.367635 17066 net.cpp:434] loss_twin <- twin_inside_weights
+I0421 19:11:06.367645 17066 net.cpp:434] loss_twin <- twin_outside_weights
+I0421 19:11:06.367650 17066 net.cpp:408] loss_twin -> loss_twin
+I0421 19:11:06.367727 17066 net.cpp:150] Setting up loss_twin
+I0421 19:11:06.367736 17066 net.cpp:157] Top shape: (1)
+I0421 19:11:06.367739 17066 net.cpp:160]     with loss weight 1
+I0421 19:11:06.367743 17066 net.cpp:165] Memory required for data: 10172700720
+I0421 19:11:06.367746 17066 layer_factory.hpp:77] Creating layer accuracy
+I0421 19:11:06.367940 17066 net.cpp:100] Creating Layer accuracy
+I0421 19:11:06.367951 17066 net.cpp:434] accuracy <- cls_score_cls_score_0_split_1
+I0421 19:11:06.367957 17066 net.cpp:434] accuracy <- labels_roi-data_1_split_1
+I0421 19:11:06.367962 17066 net.cpp:408] accuracy -> accuracy
+I0421 19:11:06.368042 17066 net.cpp:150] Setting up accuracy
+I0421 19:11:06.368053 17066 net.cpp:157] Top shape: 1 (1)
+I0421 19:11:06.368057 17066 net.cpp:165] Memory required for data: 10172700724
+I0421 19:11:06.368060 17066 net.cpp:228] accuracy does not need backward computation.
+I0421 19:11:06.368064 17066 net.cpp:226] loss_twin needs backward computation.
+I0421 19:11:06.368067 17066 net.cpp:226] loss_cls needs backward computation.
+I0421 19:11:06.368072 17066 net.cpp:226] twin_pred needs backward computation.
+I0421 19:11:06.368075 17066 net.cpp:226] cls_score_cls_score_0_split needs backward computation.
+I0421 19:11:06.368078 17066 net.cpp:226] cls_score needs backward computation.
+I0421 19:11:06.368083 17066 net.cpp:226] fc6_drop6_0_split needs backward computation.
+I0421 19:11:06.368085 17066 net.cpp:226] drop6 needs backward computation.
+I0421 19:11:06.368088 17066 net.cpp:226] relu6 needs backward computation.
+I0421 19:11:06.368093 17066 net.cpp:226] fc6 needs backward computation.
+I0421 19:11:06.368096 17066 net.cpp:226] roi_pool5 needs backward computation.
+I0421 19:11:06.368100 17066 net.cpp:228] labels_roi-data_1_split does not need backward computation.
+I0421 19:11:06.368104 17066 net.cpp:226] roi-data needs backward computation.
+I0421 19:11:06.368108 17066 net.cpp:226] proposal needs backward computation.
+I0421 19:11:06.368113 17066 net.cpp:226] rpn_cls_prob_reshape needs backward computation.
+I0421 19:11:06.368116 17066 net.cpp:226] rpn_cls_prob needs backward computation.
+I0421 19:11:06.368119 17066 net.cpp:228] rpn_accuarcy does not need backward computation.
+I0421 19:11:06.368124 17066 net.cpp:226] rpn_loss_twin needs backward computation.
+I0421 19:11:06.368129 17066 net.cpp:226] rpn_loss_cls needs backward computation.
+I0421 19:11:06.368134 17066 net.cpp:228] rpn_labels_rpn-data_0_split does not need backward computation.
+I0421 19:11:06.368137 17066 net.cpp:226] rpn-data needs backward computation.
+I0421 19:11:06.368142 17066 net.cpp:226] rpn_cls_score_reshape_rpn_cls_score_reshape_0_split needs backward computation.
+I0421 19:11:06.368146 17066 net.cpp:226] rpn_cls_score_reshape needs backward computation.
+I0421 19:11:06.368150 17066 net.cpp:226] rpn_twin_pred_rpn_twin_pred_0_split needs backward computation.
+I0421 19:11:06.368155 17066 net.cpp:226] rpn_twin_pred needs backward computation.
+I0421 19:11:06.368157 17066 net.cpp:226] rpn_cls_score_rpn_cls_score_0_split needs backward computation.
+I0421 19:11:06.368161 17066 net.cpp:226] rpn_cls_score needs backward computation.
+I0421 19:11:06.368165 17066 net.cpp:226] rpn/output_pool_rpn/output_pool_0_split needs backward computation.
+I0421 19:11:06.368168 17066 net.cpp:226] rpn/output_pool needs backward computation.
+I0421 19:11:06.368172 17066 net.cpp:226] rpn_relu/3x3_2 needs backward computation.
+I0421 19:11:06.368180 17066 net.cpp:226] rpn_conv/3x3_2 needs backward computation.
+I0421 19:11:06.368185 17066 net.cpp:226] rpn_relu/3x3 needs backward computation.
+I0421 19:11:06.368187 17066 net.cpp:226] rpn_conv/3x3 needs backward computation.
+I0421 19:11:06.368191 17066 net.cpp:226] conv5b_relu5b_0_split needs backward computation.
+I0421 19:11:06.368194 17066 net.cpp:226] relu5b needs backward computation.
+I0421 19:11:06.368198 17066 net.cpp:226] conv5b needs backward computation.
+I0421 19:11:06.368202 17066 net.cpp:226] relu5a needs backward computation.
+I0421 19:11:06.368206 17066 net.cpp:226] conv5a needs backward computation.
+I0421 19:11:06.368208 17066 net.cpp:226] pool4 needs backward computation.
+I0421 19:11:06.368212 17066 net.cpp:226] relu4b needs backward computation.
+I0421 19:11:06.368216 17066 net.cpp:226] conv4b needs backward computation.
+I0421 19:11:06.368218 17066 net.cpp:226] relu4a needs backward computation.
+I0421 19:11:06.368221 17066 net.cpp:226] conv4a needs backward computation.
+I0421 19:11:06.368225 17066 net.cpp:226] pool3 needs backward computation.
+I0421 19:11:06.368228 17066 net.cpp:226] relu3b needs backward computation.
+I0421 19:11:06.368232 17066 net.cpp:226] conv3b needs backward computation.
+I0421 19:11:06.368235 17066 net.cpp:226] relu3a needs backward computation.
+I0421 19:11:06.368238 17066 net.cpp:226] conv3a needs backward computation.
+I0421 19:11:06.368242 17066 net.cpp:228] pool2 does not need backward computation.
+I0421 19:11:06.368245 17066 net.cpp:228] relu2a does not need backward computation.
+I0421 19:11:06.368248 17066 net.cpp:228] conv2a does not need backward computation.
+I0421 19:11:06.368252 17066 net.cpp:228] pool1 does not need backward computation.
+I0421 19:11:06.368255 17066 net.cpp:228] relu1a does not need backward computation.
+I0421 19:11:06.368258 17066 net.cpp:228] conv1a does not need backward computation.
+I0421 19:11:06.368263 17066 net.cpp:228] gt_boxes_data_1_split does not need backward computation.
+I0421 19:11:06.368268 17066 net.cpp:228] data_data_0_split does not need backward computation.
+I0421 19:11:06.368271 17066 net.cpp:228] data does not need backward computation.
+I0421 19:11:06.368275 17066 net.cpp:270] This network produces output accuracy
+I0421 19:11:06.368279 17066 net.cpp:270] This network produces output loss_cls
+I0421 19:11:06.368283 17066 net.cpp:270] This network produces output loss_twin
+I0421 19:11:06.368286 17066 net.cpp:270] This network produces output rpn_accuarcy
+I0421 19:11:06.368289 17066 net.cpp:270] This network produces output rpn_accuarcy_class
+I0421 19:11:06.368294 17066 net.cpp:270] This network produces output rpn_cls_loss
+I0421 19:11:06.368296 17066 net.cpp:270] This network produces output rpn_loss_twin
+I0421 19:11:06.368329 17066 net.cpp:283] Network initialization done.
+I0421 19:11:06.368458 17066 solver.cpp:60] Solver scaffolding done.
+Loading pretrained model weights from ./pretrain/activitynet_iter_30000_3fps.caffemodel
+I0421 19:11:09.146463 17066 net.cpp:761] Ignoring source layer pool5
+I0421 19:11:09.177085 17066 net.cpp:761] Ignoring source layer fc7
+I0421 19:11:09.177120 17066 net.cpp:761] Ignoring source layer relu7
+I0421 19:11:09.177126 17066 net.cpp:761] Ignoring source layer drop7
+I0421 19:11:09.177130 17066 net.cpp:761] Ignoring source layer fc8-200
+I0421 19:11:09.177135 17066 net.cpp:761] Ignoring source layer loss
+Solving...
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:12.822008 17066 accuracy_layer.cpp:96] Accuracy: 0.296875
+I0421 19:11:12.822037 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.275862
+I0421 19:11:12.822044 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 8
+num bg: 20
+('accuracy: ', 0.0)
+I0421 19:11:12.875313 17066 solver.cpp:228] Iteration 0, loss = 165.527
+I0421 19:11:12.875339 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:12.875349 17066 solver.cpp:244]     Train net output #1: loss_cls = 164.779 (* 1 = 164.779 loss)
+I0421 19:11:12.875355 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:12.875360 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.296875
+I0421 19:11:12.875363 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.275862
+I0421 19:11:12.875367 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:12.875371 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.730293 (* 1 = 0.730293 loss)
+I0421 19:11:12.875377 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0174326 (* 1 = 0.0174326 loss)
+I0421 19:11:12.875385 17066 sgd_solver.cpp:106] Iteration 0, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:17.584728 17066 accuracy_layer.cpp:96] Accuracy: 0.671875
+I0421 19:11:17.584750 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.689655
+I0421 19:11:17.584755 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 11
+num bg: 25
+('accuracy: ', 0.0)
+I0421 19:11:17.607625 17066 solver.cpp:228] Iteration 1, loss = 145.761
+I0421 19:11:17.607651 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:17.607661 17066 solver.cpp:244]     Train net output #1: loss_cls = 145.056 (* 1 = 145.056 loss)
+I0421 19:11:17.607666 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:17.607671 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.671875
+I0421 19:11:17.607676 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.689655
+I0421 19:11:17.607679 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:17.607684 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.683361 (* 1 = 0.683361 loss)
+I0421 19:11:17.607695 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0218582 (* 1 = 0.0218582 loss)
+I0421 19:11:17.607702 17066 sgd_solver.cpp:106] Iteration 1, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:22.242306 17066 accuracy_layer.cpp:96] Accuracy: 0.5
+I0421 19:11:22.242328 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.465517
+I0421 19:11:22.242333 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.833333
+TRAIN
+num fg: 11
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:11:22.257647 17066 solver.cpp:228] Iteration 2, loss = 125.079
+I0421 19:11:22.257669 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:22.257678 17066 solver.cpp:244]     Train net output #1: loss_cls = 124.359 (* 1 = 124.359 loss)
+I0421 19:11:22.257683 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:22.257689 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.5
+I0421 19:11:22.257694 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.465517
+I0421 19:11:22.257699 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.833333
+I0421 19:11:22.257704 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.689827 (* 1 = 0.689827 loss)
+I0421 19:11:22.257709 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0302918 (* 1 = 0.0302918 loss)
+I0421 19:11:22.257715 17066 sgd_solver.cpp:106] Iteration 2, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:26.938279 17066 accuracy_layer.cpp:96] Accuracy: 0.4375
+I0421 19:11:26.938304 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.431034
+I0421 19:11:26.938311 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 10
+num bg: 26
+('accuracy: ', 0.0)
+I0421 19:11:26.957284 17066 solver.cpp:228] Iteration 3, loss = 96.5295
+I0421 19:11:26.957329 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:26.957342 17066 solver.cpp:244]     Train net output #1: loss_cls = 95.8045 (* 1 = 95.8045 loss)
+I0421 19:11:26.957351 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:26.957358 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.4375
+I0421 19:11:26.957365 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.431034
+I0421 19:11:26.957397 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:26.957413 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.698976 (* 1 = 0.698976 loss)
+I0421 19:11:26.957425 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0260679 (* 1 = 0.0260679 loss)
+I0421 19:11:26.957435 17066 sgd_solver.cpp:106] Iteration 3, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:31.716655 17066 accuracy_layer.cpp:96] Accuracy: 0.53125
+I0421 19:11:31.716678 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.517241
+I0421 19:11:31.716683 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 10
+num bg: 25
+('accuracy: ', 0.0)
+I0421 19:11:31.734254 17066 solver.cpp:228] Iteration 4, loss = 44.9205
+I0421 19:11:31.734274 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:31.734283 17066 solver.cpp:244]     Train net output #1: loss_cls = 44.1957 (* 1 = 44.1957 loss)
+I0421 19:11:31.734290 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:31.734297 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.53125
+I0421 19:11:31.734300 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.517241
+I0421 19:11:31.734308 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:11:31.734314 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.682719 (* 1 = 0.682719 loss)
+I0421 19:11:31.734319 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0420466 (* 1 = 0.0420466 loss)
+I0421 19:11:31.734325 17066 sgd_solver.cpp:106] Iteration 4, lr = 0.0001
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:11:36.246790 17066 accuracy_layer.cpp:96] Accuracy: 0.46875
+I0421 19:11:36.246821 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.47619
+I0421 19:11:36.246825 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 2
+num bg: 17
+('accuracy: ', 0.0)
+I0421 19:11:36.263129 17066 solver.cpp:228] Iteration 5, loss = 6.61927
+I0421 19:11:36.263147 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:36.263156 17066 solver.cpp:244]     Train net output #1: loss_cls = 5.47893 (* 1 = 5.47893 loss)
+I0421 19:11:36.263161 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:36.263165 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.46875
+I0421 19:11:36.263170 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.47619
+I0421 19:11:36.263172 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:11:36.263177 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 1.11299 (* 1 = 1.11299 loss)
+I0421 19:11:36.263185 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.027348 (* 1 = 0.027348 loss)
+I0421 19:11:36.263191 17066 sgd_solver.cpp:106] Iteration 5, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:41.085505 17066 accuracy_layer.cpp:96] Accuracy: 0.59375
+I0421 19:11:41.085526 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.603448
+I0421 19:11:41.085530 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 5
+num bg: 16
+('accuracy: ', 0.0)
+I0421 19:11:41.107623 17066 solver.cpp:228] Iteration 6, loss = 15.471
+I0421 19:11:41.107646 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:41.107657 17066 solver.cpp:244]     Train net output #1: loss_cls = 11.7584 (* 1 = 11.7584 loss)
+I0421 19:11:41.107663 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:41.107668 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.59375
+I0421 19:11:41.107672 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.603448
+I0421 19:11:41.107676 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:41.107681 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 2.83126 (* 1 = 2.83126 loss)
+I0421 19:11:41.107686 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.881354 (* 1 = 0.881354 loss)
+I0421 19:11:41.107692 17066 sgd_solver.cpp:106] Iteration 6, lr = 0.0001
+rpn: num_positive 4
+rpn: num_negative 60
+I0421 19:11:45.644309 17066 accuracy_layer.cpp:96] Accuracy: 0.640625
+I0421 19:11:45.644333 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.65
+I0421 19:11:45.644351 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 8
+num bg: 21
+('accuracy: ', 0.0)
+I0421 19:11:45.662137 17066 solver.cpp:228] Iteration 7, loss = 49.2862
+I0421 19:11:45.662154 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:45.662163 17066 solver.cpp:244]     Train net output #1: loss_cls = 46.5302 (* 1 = 46.5302 loss)
+I0421 19:11:45.662171 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:45.662178 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.640625
+I0421 19:11:45.662184 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.65
+I0421 19:11:45.662187 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:45.662191 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 2.27857 (* 1 = 2.27857 loss)
+I0421 19:11:45.662196 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.477387 (* 1 = 0.477387 loss)
+I0421 19:11:45.662201 17066 sgd_solver.cpp:106] Iteration 7, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:50.555493 17066 accuracy_layer.cpp:96] Accuracy: 0.8125
+I0421 19:11:50.555517 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.844828
+I0421 19:11:50.555523 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 7
+num bg: 18
+('accuracy: ', 0.0)
+I0421 19:11:50.574384 17066 solver.cpp:228] Iteration 8, loss = 78.7835
+I0421 19:11:50.574414 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:50.574427 17066 solver.cpp:244]     Train net output #1: loss_cls = 77.6106 (* 1 = 77.6106 loss)
+I0421 19:11:50.574437 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:50.574445 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.8125
+I0421 19:11:50.574465 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.844828
+I0421 19:11:50.574471 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:11:50.574484 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.739596 (* 1 = 0.739596 loss)
+I0421 19:11:50.574493 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.433384 (* 1 = 0.433384 loss)
+I0421 19:11:50.574502 17066 sgd_solver.cpp:106] Iteration 8, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:11:55.383385 17066 accuracy_layer.cpp:96] Accuracy: 0.71875
+I0421 19:11:55.383409 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.724138
+I0421 19:11:55.383414 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 8
+num bg: 30
+('accuracy: ', 0.0)
+I0421 19:11:55.410856 17066 solver.cpp:228] Iteration 9, loss = 7.45888
+I0421 19:11:55.410878 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:11:55.410887 17066 solver.cpp:244]     Train net output #1: loss_cls = 6.87551 (* 1 = 6.87551 loss)
+I0421 19:11:55.410892 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:11:55.410897 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.71875
+I0421 19:11:55.410900 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.724138
+I0421 19:11:55.410904 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:11:55.410908 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.514342 (* 1 = 0.514342 loss)
+I0421 19:11:55.410913 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0690234 (* 1 = 0.0690234 loss)
+I0421 19:11:55.410924 17066 sgd_solver.cpp:106] Iteration 9, lr = 0.0001
+speed: 4.620s / iter
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:12:00.400452 17066 accuracy_layer.cpp:96] Accuracy: 0.515625
+I0421 19:12:00.400475 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.52381
+I0421 19:12:00.400480 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 5
+num bg: 9
+('accuracy: ', 0.0)
+I0421 19:12:00.415103 17066 solver.cpp:228] Iteration 10, loss = 9.65455
+I0421 19:12:00.415127 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:00.415134 17066 solver.cpp:244]     Train net output #1: loss_cls = 8.9849 (* 1 = 8.9849 loss)
+I0421 19:12:00.415140 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:00.415144 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.515625
+I0421 19:12:00.415148 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.52381
+I0421 19:12:00.415153 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:12:00.415156 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.661221 (* 1 = 0.661221 loss)
+I0421 19:12:00.415161 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.00843489 (* 1 = 0.00843489 loss)
+I0421 19:12:00.415169 17066 sgd_solver.cpp:106] Iteration 10, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:05.132851 17066 accuracy_layer.cpp:96] Accuracy: 0.828125
+I0421 19:12:05.132874 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.844828
+I0421 19:12:05.132879 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 8
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:12:05.152259 17066 solver.cpp:228] Iteration 11, loss = 8.42528
+I0421 19:12:05.152277 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:05.152297 17066 solver.cpp:244]     Train net output #1: loss_cls = 7.76643 (* 1 = 7.76643 loss)
+I0421 19:12:05.152302 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:05.152307 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.828125
+I0421 19:12:05.152312 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.844828
+I0421 19:12:05.152314 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:12:05.152319 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.638422 (* 1 = 0.638422 loss)
+I0421 19:12:05.152324 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0204262 (* 1 = 0.0204262 loss)
+I0421 19:12:05.152329 17066 sgd_solver.cpp:106] Iteration 11, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:10.121639 17066 accuracy_layer.cpp:96] Accuracy: 0.78125
+I0421 19:12:10.121665 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.793103
+I0421 19:12:10.121670 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 7
+num bg: 25
+('accuracy: ', 0.0)
+I0421 19:12:10.140861 17066 solver.cpp:228] Iteration 12, loss = 2.87675
+I0421 19:12:10.140883 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:10.140892 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.29882 (* 1 = 2.29882 loss)
+I0421 19:12:10.140897 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:10.140902 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.78125
+I0421 19:12:10.140907 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.793103
+I0421 19:12:10.140910 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:12:10.140914 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.552788 (* 1 = 0.552788 loss)
+I0421 19:12:10.140919 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0251366 (* 1 = 0.0251366 loss)
+I0421 19:12:10.140925 17066 sgd_solver.cpp:106] Iteration 12, lr = 0.0001
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:12:14.789100 17066 accuracy_layer.cpp:96] Accuracy: 0.8125
+I0421 19:12:14.789122 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.809524
+I0421 19:12:14.789127 17066 accuracy_layer.cpp:101] Class 1 accuracy : 1
+TRAIN
+num fg: 7
+num bg: 15
+('accuracy: ', 0.0)
+I0421 19:12:14.807274 17066 solver.cpp:228] Iteration 13, loss = 3.88682
+I0421 19:12:14.807294 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:14.807304 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.42289 (* 1 = 3.42289 loss)
+I0421 19:12:14.807309 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:14.807314 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.8125
+I0421 19:12:14.807319 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.809524
+I0421 19:12:14.807323 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 1
+I0421 19:12:14.807327 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.442638 (* 1 = 0.442638 loss)
+I0421 19:12:14.807332 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0212915 (* 1 = 0.0212915 loss)
+I0421 19:12:14.807338 17066 sgd_solver.cpp:106] Iteration 13, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:19.683955 17066 accuracy_layer.cpp:96] Accuracy: 0.828125
+I0421 19:12:19.683979 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.827586
+I0421 19:12:19.683984 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.833333
+TRAIN
+num fg: 7
+num bg: 30
+('accuracy: ', 0.0)
+I0421 19:12:19.703534 17066 solver.cpp:228] Iteration 14, loss = 3.89065
+I0421 19:12:19.703560 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:19.703568 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.30738 (* 1 = 3.30738 loss)
+I0421 19:12:19.703573 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:19.703577 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.828125
+I0421 19:12:19.703583 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.827586
+I0421 19:12:19.703586 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.833333
+I0421 19:12:19.703590 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.496525 (* 1 = 0.496525 loss)
+I0421 19:12:19.703595 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0867444 (* 1 = 0.0867444 loss)
+I0421 19:12:19.703601 17066 sgd_solver.cpp:106] Iteration 14, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:24.376588 17066 accuracy_layer.cpp:96] Accuracy: 0.875
+I0421 19:12:24.376610 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.87931
+I0421 19:12:24.376615 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.833333
+TRAIN
+num fg: 10
+num bg: 34
+('accuracy: ', 0.0)
+I0421 19:12:24.406527 17066 solver.cpp:228] Iteration 15, loss = 6.57491
+I0421 19:12:24.406551 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:24.406560 17066 solver.cpp:244]     Train net output #1: loss_cls = 6.00654 (* 1 = 6.00654 loss)
+I0421 19:12:24.406567 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:24.406572 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.875
+I0421 19:12:24.406577 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.87931
+I0421 19:12:24.406581 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.833333
+I0421 19:12:24.406587 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.400688 (* 1 = 0.400688 loss)
+I0421 19:12:24.406594 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.167682 (* 1 = 0.167682 loss)
+I0421 19:12:24.406600 17066 sgd_solver.cpp:106] Iteration 15, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:29.282558 17066 accuracy_layer.cpp:96] Accuracy: 0.859375
+I0421 19:12:29.282585 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.87931
+I0421 19:12:29.282593 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 10
+num bg: 32
+('accuracy: ', 0.0)
+I0421 19:12:29.303915 17066 solver.cpp:228] Iteration 16, loss = 8.95632
+I0421 19:12:29.303942 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:29.303954 17066 solver.cpp:244]     Train net output #1: loss_cls = 8.22604 (* 1 = 8.22604 loss)
+I0421 19:12:29.303963 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:29.303993 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.859375
+I0421 19:12:29.304003 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.87931
+I0421 19:12:29.304011 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:12:29.304020 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.520945 (* 1 = 0.520945 loss)
+I0421 19:12:29.304033 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.209329 (* 1 = 0.209329 loss)
+I0421 19:12:29.304041 17066 sgd_solver.cpp:106] Iteration 16, lr = 0.0001
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:12:33.951290 17066 accuracy_layer.cpp:96] Accuracy: 0.75
+I0421 19:12:33.951313 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.761905
+I0421 19:12:33.951318 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 6
+num bg: 14
+('accuracy: ', 0.0)
+I0421 19:12:33.969002 17066 solver.cpp:228] Iteration 17, loss = 9.31024
+I0421 19:12:33.969023 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:33.969033 17066 solver.cpp:244]     Train net output #1: loss_cls = 8.92389 (* 1 = 8.92389 loss)
+I0421 19:12:33.969038 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:33.969043 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.75
+I0421 19:12:33.969046 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.761905
+I0421 19:12:33.969051 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:12:33.969056 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.356811 (* 1 = 0.356811 loss)
+I0421 19:12:33.969063 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0295384 (* 1 = 0.0295384 loss)
+I0421 19:12:33.969070 17066 sgd_solver.cpp:106] Iteration 17, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:38.904516 17066 accuracy_layer.cpp:96] Accuracy: 0.890625
+I0421 19:12:38.904541 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.913793
+I0421 19:12:38.904546 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.666667
+TRAIN
+num fg: 9
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:12:38.923704 17066 solver.cpp:228] Iteration 18, loss = 5.30058
+I0421 19:12:38.923728 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:38.923737 17066 solver.cpp:244]     Train net output #1: loss_cls = 4.8915 (* 1 = 4.8915 loss)
+I0421 19:12:38.923743 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:38.923746 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.890625
+I0421 19:12:38.923751 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.913793
+I0421 19:12:38.923754 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.666667
+I0421 19:12:38.923766 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.344857 (* 1 = 0.344857 loss)
+I0421 19:12:38.923772 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.064223 (* 1 = 0.064223 loss)
+I0421 19:12:38.923779 17066 sgd_solver.cpp:106] Iteration 18, lr = 0.0001
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:12:43.562542 17066 accuracy_layer.cpp:96] Accuracy: 0.90625
+I0421 19:12:43.562566 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.920635
+I0421 19:12:43.562571 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 6
+num bg: 15
+('accuracy: ', 0.0)
+I0421 19:12:43.580850 17066 solver.cpp:228] Iteration 19, loss = 4.49899
+I0421 19:12:43.580871 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:43.580880 17066 solver.cpp:244]     Train net output #1: loss_cls = 4.07535 (* 1 = 4.07535 loss)
+I0421 19:12:43.580885 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:43.580889 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.90625
+I0421 19:12:43.580893 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.920635
+I0421 19:12:43.580898 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:12:43.580901 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.400484 (* 1 = 0.400484 loss)
+I0421 19:12:43.580906 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.023156 (* 1 = 0.023156 loss)
+I0421 19:12:43.580912 17066 sgd_solver.cpp:106] Iteration 19, lr = 0.0001
+speed: 4.718s / iter
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:48.444696 17066 accuracy_layer.cpp:96] Accuracy: 0.875
+I0421 19:12:48.444726 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.931035
+I0421 19:12:48.444733 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 9
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:12:48.464567 17066 solver.cpp:228] Iteration 20, loss = 3.22837
+I0421 19:12:48.464591 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:48.464599 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.72232 (* 1 = 2.72232 loss)
+I0421 19:12:48.464606 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:48.464612 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.875
+I0421 19:12:48.464620 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.931035
+I0421 19:12:48.464625 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:12:48.464630 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.482462 (* 1 = 0.482462 loss)
+I0421 19:12:48.464635 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0235902 (* 1 = 0.0235902 loss)
+I0421 19:12:48.464642 17066 sgd_solver.cpp:106] Iteration 20, lr = 0.0001
+rpn: num_positive 5
+rpn: num_negative 59
+I0421 19:12:53.094151 17066 accuracy_layer.cpp:96] Accuracy: 0.875
+I0421 19:12:53.094174 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.932203
+I0421 19:12:53.094178 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.2
+TRAIN
+num fg: 11
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:12:53.113333 17066 solver.cpp:228] Iteration 21, loss = 4.62239
+I0421 19:12:53.113353 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:53.113361 17066 solver.cpp:244]     Train net output #1: loss_cls = 4.01737 (* 1 = 4.01737 loss)
+I0421 19:12:53.113366 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:53.113370 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.875
+I0421 19:12:53.113374 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.932203
+I0421 19:12:53.113379 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.2
+I0421 19:12:53.113384 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.582872 (* 1 = 0.582872 loss)
+I0421 19:12:53.113389 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0221424 (* 1 = 0.0221424 loss)
+I0421 19:12:53.113394 17066 sgd_solver.cpp:106] Iteration 21, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:12:57.906428 17066 accuracy_layer.cpp:96] Accuracy: 0.84375
+I0421 19:12:57.906458 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.896552
+I0421 19:12:57.906463 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 10
+num bg: 23
+('accuracy: ', 0.0)
+I0421 19:12:57.984887 17066 solver.cpp:228] Iteration 22, loss = 3.41274
+I0421 19:12:57.984917 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:12:57.984926 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.8175 (* 1 = 2.8175 loss)
+I0421 19:12:57.984931 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:12:57.984936 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.84375
+I0421 19:12:57.984941 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.896552
+I0421 19:12:57.984947 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:12:57.984956 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.569896 (* 1 = 0.569896 loss)
+I0421 19:12:57.984963 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0253452 (* 1 = 0.0253452 loss)
+I0421 19:12:57.984969 17066 sgd_solver.cpp:106] Iteration 22, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:02.621137 17066 accuracy_layer.cpp:96] Accuracy: 0.796875
+I0421 19:13:02.621160 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.827586
+I0421 19:13:02.621163 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 10
+num bg: 23
+('accuracy: ', 0.0)
+I0421 19:13:02.639626 17066 solver.cpp:228] Iteration 23, loss = 3.87674
+I0421 19:13:02.639645 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:02.639653 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.29269 (* 1 = 3.29269 loss)
+I0421 19:13:02.639659 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:02.639663 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.796875
+I0421 19:13:02.639667 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.827586
+I0421 19:13:02.639672 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:13:02.639677 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.554936 (* 1 = 0.554936 loss)
+I0421 19:13:02.639681 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0291113 (* 1 = 0.0291113 loss)
+I0421 19:13:02.639688 17066 sgd_solver.cpp:106] Iteration 23, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:07.579461 17066 accuracy_layer.cpp:96] Accuracy: 0.828125
+I0421 19:13:07.579483 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.87931
+I0421 19:13:07.579490 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 8
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:13:07.598820 17066 solver.cpp:228] Iteration 24, loss = 3.63875
+I0421 19:13:07.598845 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:07.598855 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.08517 (* 1 = 3.08517 loss)
+I0421 19:13:07.598865 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:07.598868 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.828125
+I0421 19:13:07.598872 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.87931
+I0421 19:13:07.598881 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:07.598886 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.517906 (* 1 = 0.517906 loss)
+I0421 19:13:07.598893 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0356708 (* 1 = 0.0356708 loss)
+I0421 19:13:07.598901 17066 sgd_solver.cpp:106] Iteration 24, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:12.206586 17066 accuracy_layer.cpp:96] Accuracy: 0.890625
+I0421 19:13:12.206607 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.931035
+I0421 19:13:12.206612 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 9
+num bg: 28
+('accuracy: ', 0.0)
+I0421 19:13:12.225769 17066 solver.cpp:228] Iteration 25, loss = 3.04607
+I0421 19:13:12.225793 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:12.225802 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.51159 (* 1 = 2.51159 loss)
+I0421 19:13:12.225807 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:12.225811 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.890625
+I0421 19:13:12.225816 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.931035
+I0421 19:13:12.225819 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:13:12.225824 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.496245 (* 1 = 0.496245 loss)
+I0421 19:13:12.225829 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0382336 (* 1 = 0.0382336 loss)
+I0421 19:13:12.225836 17066 sgd_solver.cpp:106] Iteration 25, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:17.139472 17066 accuracy_layer.cpp:96] Accuracy: 0.859375
+I0421 19:13:17.139499 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.896552
+I0421 19:13:17.139506 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 11
+num bg: 30
+('accuracy: ', 0.0)
+I0421 19:13:17.159521 17066 solver.cpp:228] Iteration 26, loss = 3.54692
+I0421 19:13:17.159554 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:17.159566 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.09111 (* 1 = 3.09111 loss)
+I0421 19:13:17.159574 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:17.159580 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.859375
+I0421 19:13:17.159591 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.896552
+I0421 19:13:17.159601 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:13:17.159610 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.401583 (* 1 = 0.401583 loss)
+I0421 19:13:17.159615 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0542286 (* 1 = 0.0542286 loss)
+I0421 19:13:17.159621 17066 sgd_solver.cpp:106] Iteration 26, lr = 0.0001
+rpn: num_positive 1
+rpn: num_negative 63
+I0421 19:13:21.774999 17066 accuracy_layer.cpp:96] Accuracy: 0.859375
+I0421 19:13:21.775022 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.873016
+I0421 19:13:21.775027 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 6
+num bg: 10
+('accuracy: ', 0.0)
+I0421 19:13:21.791180 17066 solver.cpp:228] Iteration 27, loss = 4.78546
+I0421 19:13:21.791199 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:21.791208 17066 solver.cpp:244]     Train net output #1: loss_cls = 4.37485 (* 1 = 4.37485 loss)
+I0421 19:13:21.791213 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:21.791218 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.859375
+I0421 19:13:21.791223 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.873016
+I0421 19:13:21.791226 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:13:21.791230 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.401778 (* 1 = 0.401778 loss)
+I0421 19:13:21.791236 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.00883477 (* 1 = 0.00883477 loss)
+I0421 19:13:21.791242 17066 sgd_solver.cpp:106] Iteration 27, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:26.667598 17066 accuracy_layer.cpp:96] Accuracy: 0.953125
+I0421 19:13:26.667619 17066 accuracy_layer.cpp:101] Class 0 accuracy : 1
+I0421 19:13:26.667623 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 11
+num bg: 31
+('accuracy: ', 0.0)
+I0421 19:13:26.687445 17066 solver.cpp:228] Iteration 28, loss = 2.33948
+I0421 19:13:26.687466 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:26.687474 17066 solver.cpp:244]     Train net output #1: loss_cls = 1.87239 (* 1 = 1.87239 loss)
+I0421 19:13:26.687479 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:26.687484 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.953125
+I0421 19:13:26.687487 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 1
+I0421 19:13:26.687491 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:13:26.687495 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.423976 (* 1 = 0.423976 loss)
+I0421 19:13:26.687501 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.04311 (* 1 = 0.04311 loss)
+I0421 19:13:26.687507 17066 sgd_solver.cpp:106] Iteration 28, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:31.320144 17066 accuracy_layer.cpp:96] Accuracy: 0.78125
+I0421 19:13:31.320168 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.810345
+I0421 19:13:31.320183 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.5
+TRAIN
+num fg: 11
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:13:31.339534 17066 solver.cpp:228] Iteration 29, loss = 3.25459
+I0421 19:13:31.339550 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:31.339567 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.67415 (* 1 = 2.67415 loss)
+I0421 19:13:31.339573 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:31.339577 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.78125
+I0421 19:13:31.339581 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.810345
+I0421 19:13:31.339586 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.5
+I0421 19:13:31.339589 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.535264 (* 1 = 0.535264 loss)
+I0421 19:13:31.339596 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0451758 (* 1 = 0.0451758 loss)
+I0421 19:13:31.339601 17066 sgd_solver.cpp:106] Iteration 29, lr = 0.0001
+speed: 4.738s / iter
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:36.230864 17066 accuracy_layer.cpp:96] Accuracy: 0.90625
+I0421 19:13:36.230885 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.965517
+I0421 19:13:36.230890 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 8
+num bg: 22
+('accuracy: ', 0.0)
+I0421 19:13:36.251621 17066 solver.cpp:228] Iteration 30, loss = 4.26995
+I0421 19:13:36.251646 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:36.251655 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.77699 (* 1 = 3.77699 loss)
+I0421 19:13:36.251660 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:36.251665 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.90625
+I0421 19:13:36.251669 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.965517
+I0421 19:13:36.251673 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:36.251677 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.452841 (* 1 = 0.452841 loss)
+I0421 19:13:36.251682 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0401128 (* 1 = 0.0401128 loss)
+I0421 19:13:36.251688 17066 sgd_solver.cpp:106] Iteration 30, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:40.858510 17066 accuracy_layer.cpp:96] Accuracy: 0.859375
+I0421 19:13:40.858532 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.913793
+I0421 19:13:40.858537 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 9
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:13:40.876687 17066 solver.cpp:228] Iteration 31, loss = 3.02898
+I0421 19:13:40.876718 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:40.876726 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.39524 (* 1 = 2.39524 loss)
+I0421 19:13:40.876731 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:40.876735 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.859375
+I0421 19:13:40.876739 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.913793
+I0421 19:13:40.876744 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:40.876747 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.591534 (* 1 = 0.591534 loss)
+I0421 19:13:40.876752 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0421996 (* 1 = 0.0421996 loss)
+I0421 19:13:40.876758 17066 sgd_solver.cpp:106] Iteration 31, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:45.775856 17066 accuracy_layer.cpp:96] Accuracy: 0.921875
+I0421 19:13:45.775878 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.982759
+I0421 19:13:45.775882 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 7
+num bg: 23
+('accuracy: ', 0.0)
+I0421 19:13:45.794196 17066 solver.cpp:228] Iteration 32, loss = 3.1806
+I0421 19:13:45.794214 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:45.794224 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.70004 (* 1 = 2.70004 loss)
+I0421 19:13:45.794229 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:45.794232 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.921875
+I0421 19:13:45.794236 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.982759
+I0421 19:13:45.794240 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:45.794245 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.451015 (* 1 = 0.451015 loss)
+I0421 19:13:45.794250 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0295464 (* 1 = 0.0295464 loss)
+I0421 19:13:45.794256 17066 sgd_solver.cpp:106] Iteration 32, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:50.430100 17066 accuracy_layer.cpp:96] Accuracy: 0.890625
+I0421 19:13:50.430121 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.948276
+I0421 19:13:50.430137 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 9
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:13:50.448794 17066 solver.cpp:228] Iteration 33, loss = 2.62092
+I0421 19:13:50.448814 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:50.448822 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.14084 (* 1 = 2.14084 loss)
+I0421 19:13:50.448827 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:50.448832 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.890625
+I0421 19:13:50.448835 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.948276
+I0421 19:13:50.448839 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:50.448843 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.452402 (* 1 = 0.452402 loss)
+I0421 19:13:50.448849 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0276766 (* 1 = 0.0276766 loss)
+I0421 19:13:50.448855 17066 sgd_solver.cpp:106] Iteration 33, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:13:55.355880 17066 accuracy_layer.cpp:96] Accuracy: 0.84375
+I0421 19:13:55.355901 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.896552
+I0421 19:13:55.355906 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 8
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:13:55.374673 17066 solver.cpp:228] Iteration 34, loss = 3.87403
+I0421 19:13:55.374691 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:55.374698 17066 solver.cpp:244]     Train net output #1: loss_cls = 3.28203 (* 1 = 3.28203 loss)
+I0421 19:13:55.374703 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:55.374707 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.84375
+I0421 19:13:55.374711 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.896552
+I0421 19:13:55.374716 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:13:55.374719 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.571744 (* 1 = 0.571744 loss)
+I0421 19:13:55.374724 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0202646 (* 1 = 0.0202646 loss)
+I0421 19:13:55.374730 17066 sgd_solver.cpp:106] Iteration 34, lr = 0.0001
+rpn: num_positive 4
+rpn: num_negative 60
+I0421 19:13:59.967331 17066 accuracy_layer.cpp:96] Accuracy: 0.859375
+I0421 19:13:59.967353 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.916667
+I0421 19:13:59.967358 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 8
+num bg: 21
+('accuracy: ', 0.0)
+I0421 19:13:59.985555 17066 solver.cpp:228] Iteration 35, loss = 2.94762
+I0421 19:13:59.985579 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:13:59.985586 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.45538 (* 1 = 2.45538 loss)
+I0421 19:13:59.985592 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:13:59.985596 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.859375
+I0421 19:13:59.985600 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.916667
+I0421 19:13:59.985605 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:13:59.985608 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.470847 (* 1 = 0.470847 loss)
+I0421 19:13:59.985613 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.021389 (* 1 = 0.021389 loss)
+I0421 19:13:59.985620 17066 sgd_solver.cpp:106] Iteration 35, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:04.840606 17066 accuracy_layer.cpp:96] Accuracy: 0.921875
+I0421 19:14:04.840628 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.982759
+I0421 19:14:04.840633 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 8
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:14:04.859745 17066 solver.cpp:228] Iteration 36, loss = 2.44867
+I0421 19:14:04.859764 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:04.859772 17066 solver.cpp:244]     Train net output #1: loss_cls = 1.99364 (* 1 = 1.99364 loss)
+I0421 19:14:04.859778 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:04.859781 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.921875
+I0421 19:14:04.859786 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.982759
+I0421 19:14:04.859789 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:14:04.859794 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.428651 (* 1 = 0.428651 loss)
+I0421 19:14:04.859800 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0263727 (* 1 = 0.0263727 loss)
+I0421 19:14:04.859807 17066 sgd_solver.cpp:106] Iteration 36, lr = 0.0001
+rpn: num_positive 5
+rpn: num_negative 59
+I0421 19:14:09.454808 17066 accuracy_layer.cpp:96] Accuracy: 0.890625
+I0421 19:14:09.454828 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.949153
+I0421 19:14:09.454833 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.2
+TRAIN
+num fg: 10
+num bg: 25
+('accuracy: ', 0.0)
+I0421 19:14:09.475227 17066 solver.cpp:228] Iteration 37, loss = 3.25918
+I0421 19:14:09.475250 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:09.475260 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.776 (* 1 = 2.776 loss)
+I0421 19:14:09.475266 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:09.475271 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.890625
+I0421 19:14:09.475276 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.949153
+I0421 19:14:09.475281 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.2
+I0421 19:14:09.475286 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.463004 (* 1 = 0.463004 loss)
+I0421 19:14:09.475292 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0201805 (* 1 = 0.0201805 loss)
+I0421 19:14:09.475298 17066 sgd_solver.cpp:106] Iteration 37, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:14.339987 17066 accuracy_layer.cpp:96] Accuracy: 0.890625
+I0421 19:14:14.340008 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.948276
+I0421 19:14:14.340013 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.333333
+TRAIN
+num fg: 8
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:14:14.360325 17066 solver.cpp:228] Iteration 38, loss = 2.78618
+I0421 19:14:14.360347 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:14.360357 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.298 (* 1 = 2.298 loss)
+I0421 19:14:14.360361 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:14.360366 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.890625
+I0421 19:14:14.360371 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.948276
+I0421 19:14:14.360374 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.333333
+I0421 19:14:14.360379 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.467453 (* 1 = 0.467453 loss)
+I0421 19:14:14.360384 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.020735 (* 1 = 0.020735 loss)
+I0421 19:14:14.360389 17066 sgd_solver.cpp:106] Iteration 38, lr = 0.0001
+rpn: num_positive 4
+rpn: num_negative 60
+I0421 19:14:18.952504 17066 accuracy_layer.cpp:96] Accuracy: 0.875
+I0421 19:14:18.952527 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.933333
+I0421 19:14:18.952530 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0
+TRAIN
+num fg: 10
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:14:18.970582 17066 solver.cpp:228] Iteration 39, loss = 2.67179
+I0421 19:14:18.970602 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:18.970610 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.20219 (* 1 = 2.20219 loss)
+I0421 19:14:18.970615 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:18.970619 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.875
+I0421 19:14:18.970623 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.933333
+I0421 19:14:18.970628 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0
+I0421 19:14:18.970633 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.454865 (* 1 = 0.454865 loss)
+I0421 19:14:18.970639 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0147343 (* 1 = 0.0147343 loss)
+I0421 19:14:18.970645 17066 sgd_solver.cpp:106] Iteration 39, lr = 0.0001
+speed: 4.744s / iter
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:23.861954 17066 accuracy_layer.cpp:96] Accuracy: 0.90625
+I0421 19:14:23.861975 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.982759
+I0421 19:14:23.861980 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.166667
+TRAIN
+num fg: 10
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:14:23.880580 17066 solver.cpp:228] Iteration 40, loss = 2.98294
+I0421 19:14:23.880602 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:23.880611 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.56257 (* 1 = 2.56257 loss)
+I0421 19:14:23.880616 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:23.880620 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.90625
+I0421 19:14:23.880625 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.982759
+I0421 19:14:23.880628 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.166667
+I0421 19:14:23.880633 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.401888 (* 1 = 0.401888 loss)
+I0421 19:14:23.880638 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0184817 (* 1 = 0.0184817 loss)
+I0421 19:14:23.880645 17066 sgd_solver.cpp:106] Iteration 40, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:28.484381 17066 accuracy_layer.cpp:96] Accuracy: 0.875
+I0421 19:14:28.484403 17066 accuracy_layer.cpp:101] Class 0 accuracy : 0.948276
+I0421 19:14:28.484418 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.166667
+TRAIN
+num fg: 7
+num bg: 24
+('accuracy: ', 0.0)
+I0421 19:14:28.542910 17066 solver.cpp:228] Iteration 41, loss = 2.54228
+I0421 19:14:28.542935 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:28.542943 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.08763 (* 1 = 2.08763 loss)
+I0421 19:14:28.542948 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:28.542953 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.875
+I0421 19:14:28.542956 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 0.948276
+I0421 19:14:28.542960 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.166667
+I0421 19:14:28.542964 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.435805 (* 1 = 0.435805 loss)
+I0421 19:14:28.542970 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0188442 (* 1 = 0.0188442 loss)
+I0421 19:14:28.542976 17066 sgd_solver.cpp:106] Iteration 41, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:33.353622 17066 accuracy_layer.cpp:96] Accuracy: 0.921875
+I0421 19:14:33.353644 17066 accuracy_layer.cpp:101] Class 0 accuracy : 1
+I0421 19:14:33.353648 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.166667
+TRAIN
+num fg: 10
+num bg: 26
+('accuracy: ', 0.0)
+I0421 19:14:33.374943 17066 solver.cpp:228] Iteration 42, loss = 2.75056
+I0421 19:14:33.374967 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:33.374976 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.33738 (* 1 = 2.33738 loss)
+I0421 19:14:33.374982 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:33.374986 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.921875
+I0421 19:14:33.374991 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 1
+I0421 19:14:33.374995 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.166667
+I0421 19:14:33.375000 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.397106 (* 1 = 0.397106 loss)
+I0421 19:14:33.375005 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0160758 (* 1 = 0.0160758 loss)
+I0421 19:14:33.375011 17066 sgd_solver.cpp:106] Iteration 42, lr = 0.0001
+rpn: num_positive 6
+rpn: num_negative 58
+I0421 19:14:38.053032 17066 accuracy_layer.cpp:96] Accuracy: 0.921875
+I0421 19:14:38.053066 17066 accuracy_layer.cpp:101] Class 0 accuracy : 1
+I0421 19:14:38.053071 17066 accuracy_layer.cpp:101] Class 1 accuracy : 0.166667
+TRAIN
+num fg: 9
+num bg: 27
+('accuracy: ', 0.0)
+I0421 19:14:38.068863 17066 solver.cpp:228] Iteration 43, loss = 2.70084
+I0421 19:14:38.068897 17066 solver.cpp:244]     Train net output #0: accuracy = 0
+I0421 19:14:38.068905 17066 solver.cpp:244]     Train net output #1: loss_cls = 2.29655 (* 1 = 2.29655 loss)
+I0421 19:14:38.068912 17066 solver.cpp:244]     Train net output #2: loss_twin = 0 (* 1 = 0 loss)
+I0421 19:14:38.068914 17066 solver.cpp:244]     Train net output #3: rpn_accuarcy = 0.921875
+I0421 19:14:38.068919 17066 solver.cpp:244]     Train net output #4: rpn_accuarcy_class = 1
+I0421 19:14:38.068922 17066 solver.cpp:244]     Train net output #5: rpn_accuarcy_class = 0.166667
+I0421 19:14:38.068928 17066 solver.cpp:244]     Train net output #6: rpn_cls_loss = 0.389263 (* 1 = 0.389263 loss)
+I0421 19:14:38.068933 17066 solver.cpp:244]     Train net output #7: rpn_loss_twin = 0.0150232 (* 1 = 0.0150232 loss)
+I0421 19:14:38.068939 17066 sgd_solver.cpp:106] Iteration 43, lr = 0.0001

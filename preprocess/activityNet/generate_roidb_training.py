@@ -55,29 +55,29 @@ def generate_roidb(split, segment1, segment2):
   # global WINS
   for vid in segment1:
     if vid in video_list:
-      print(vid)
+#      print(vid)
       length = len(os.listdir('./frames/' + split + '/' + vid))
       db1 = np.array(segment1[vid])
       db2 = np.array(segment2[vid])
       if len(db1) == 0:
-        print("0 length")
+ #       print("0 length")
         continue
       db1[:,:2] = db1[:,:2] * FPS
 
       for win in WINS:
-        print(win)
+#        print(win)
         
         stride = win / LENGTH
         step = stride * STEP
         # Forward Direction
         for start in xrange(0, max(1, length - win + 1), step):
-          print(start)
+  #        print(start)
           end = min(start + win, length)
           assert end <= length
           truelist = (np.logical_not(np.logical_or(db1[:,0] >= end, db1[:,1] <= start)))
           rois1 = db1[truelist]
           rois2 = db2[truelist]
-          print(rois1)
+   #       print(rois1)
           # print rois1
           # print rois2
 
@@ -98,10 +98,10 @@ def generate_roidb(split, segment1, segment2):
             rois2 = rois2[overlap >= overlap_thresh]
 
           # Append data
-          print("len",len(rois1))
-          print(rois1)
+#    #      print("len",len(rois1))
+     #     print(rois1)
           if len(rois1) > 0:
-            print("true")
+      #      print("true")
             rois1[:,0] = np.maximum(start, rois1[:,0])
             rois1[:,1] = np.minimum(end, rois1[:,1])
             tmp = generate_roi(rois1, rois2, vid, start, end, stride, split)
@@ -142,7 +142,7 @@ def generate_roidb(split, segment1, segment2):
                flipped_tmp = copy.deepcopy(tmp)
                flipped_tmp['flipped'] = True
                roidb.append(flipped_tmp)
-  print(roidb)
+#  print(roidb)
   return roidb
 
 USE_FLIPPED = True      

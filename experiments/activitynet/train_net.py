@@ -55,7 +55,7 @@ def parse_args():
 
 def get_train_roidb(path):
     data = cPickle.load(open(path + 'train_data_3fps_flipped.pkl'))
-    print(data)
+    #print(data)
     return data
 
 if __name__ == '__main__':
