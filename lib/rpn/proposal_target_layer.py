@@ -240,7 +240,7 @@ def _sample_all_rois(all_rois, gt_wins, num_classes):
     rois = all_rois
 
     twin_target_data = _compute_targets(
-        rois[:, 1:3], gt_wins[gt_assignment, :2], labels)D
+        rois[:, 1:3], gt_wins[gt_assignment, :2], labels)
 
     twin_targets, twin_inside_weights = \
         _get_twin_regression_labels(twin_target_data, num_classes)
