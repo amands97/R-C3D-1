@@ -25,6 +25,7 @@ class ProposalTargetLayer(caffe.Layer):
         layer_params = yaml.load(self.param_str)
         self._num_classes = layer_params['num_classes']
         self._sample = layer_params.get('sample', 'Random')
+        print("sampling method:", self._sample)
 
         if DEBUG:
             self._fg_num = 0
@@ -64,7 +65,7 @@ class ProposalTargetLayer(caffe.Layer):
         assert np.all(all_rois[:, 0] == 0), \
                 'Only single item batches are supported'
 
-        self._sample == "All"
+        # self._sample == "Hard"
 
         if self._sample == "All":
           labels, rois, twin_targets, twin_inside_weights = _sample_all_rois(
