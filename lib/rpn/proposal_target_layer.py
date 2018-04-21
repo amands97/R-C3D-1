@@ -65,7 +65,7 @@ class ProposalTargetLayer(caffe.Layer):
         assert np.all(all_rois[:, 0] == 0), \
                 'Only single item batches are supported'
 
-
+        self._sample == "All"
         if self._sample == "All":
           labels, rois, twin_targets, twin_inside_weights = _sample_all_rois(
               all_rois, gt_wins, self._num_classes)
