@@ -171,8 +171,8 @@ def _get_twin_regression_labels(twin_target_data, num_classes):
     print("get twin regression called")
     for idx, ind in enumerate(inds1):
         # cls = clss[ind, inds2[id]]
-        start = int(2 * cls)
-        end = start + 2
+        # start = int(2 * cls)
+        # end = start + 2
         twin_targets[ind, inds2[idx]:inds2[idx + 1]] = twin_target_data[ind, -2:]
         twin_inside_weights[ind, inds2[idx]:inds2[idx + 1]] = cfg.TRAIN.TWIN_INSIDE_WEIGHTS
     return twin_targets, twin_inside_weights
