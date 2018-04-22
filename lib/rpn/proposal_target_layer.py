@@ -145,20 +145,35 @@ def _get_twin_regression_labels(twin_target_data, num_classes):
         twin_target (ndarray): N x 4K blob of regression targets
         twin_inside_weights (ndarray): N x 4K blob of loss weights
     """
+    # print(twin_target_data)
+    # print(twin_target_data[0])
+    # clss = twin_target_data[:, 0]
+    # twin_targets = np.zeros((clss.size, 2 * num_classes), dtype=np.float32)
+    # twin_inside_weights = np.zeros(twin_targets.shape, dtype=np.float32)
+    # inds = np.where(clss > 0)[0]
+    # print(inds)
+    # print("get twin regression called")
+    # for ind in inds:
+    #     cls = clss[ind]
+    #     start = int(2 * cls)
+    #     end = start + 2
+    #     twin_targets[ind, start:end] = twin_target_data[ind, 1:]
+    #     twin_inside_weights[ind, start:end] = cfg.TRAIN.TWIN_INSIDE_WEIGHTS
+    # return twin_targets, twin_inside_weights
     print(twin_target_data)
     print(twin_target_data[0])
-    clss = twin_target_data[:, 0]
-    twin_targets = np.zeros((clss.size, 2 * num_classes), dtype=np.float32)
+    clss = twin_target_data[:, -2]
+    twin_targets = np.zeros((clss[:,0].size, clss[0].size), dtype=np.float32)
     twin_inside_weights = np.zeros(twin_targets.shape, dtype=np.float32)
-    inds = np.where(clss > 0)[0]
-    print(inds)
+    inds1, inds2 = np.where(clss > 0)
+    # print(inds)
     print("get twin regression called")
-    for ind in inds:
-        cls = clss[ind]
+    for idx, ind in enumerate(inds1):
+        # cls = clss[ind, inds2[id]]
         start = int(2 * cls)
         end = start + 2
-        twin_targets[ind, start:end] = twin_target_data[ind, 1:]
-        twin_inside_weights[ind, start:end] = cfg.TRAIN.TWIN_INSIDE_WEIGHTS
+        twin_targets[ind, inds2[idx]:inds2[idx + 1]] = twin_target_data[ind, -2:]
+        twin_inside_weights[ind, inds2[idx]:inds2[idx + 1]] = cfg.TRAIN.TWIN_INSIDE_WEIGHTS
     return twin_targets, twin_inside_weights
 
 
