@@ -145,7 +145,7 @@ def _get_twin_regression_labels(twin_target_data, num_classes):
         twin_target (ndarray): N x 4K blob of regression targets
         twin_inside_weights (ndarray): N x 4K blob of loss weights
     """
-
+    print(twin_target_data)
     clss = twin_target_data[:, 0]
     twin_targets = np.zeros((clss.size, 2 * num_classes), dtype=np.float32)
     twin_inside_weights = np.zeros(twin_targets.shape, dtype=np.float32)
