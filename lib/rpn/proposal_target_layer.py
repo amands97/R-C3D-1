@@ -162,7 +162,7 @@ def _get_twin_regression_labels(twin_target_data, num_classes):
     # return twin_targets, twin_inside_weights
     print(twin_target_data)
     print(twin_target_data[0])
-    clss = twin_target_data[:, -2]
+    clss = twin_target_data[:, :-2]
     print(clss)
     twin_targets = np.zeros((clss[:,0].size, clss[0].size), dtype=np.float32)
     twin_inside_weights = np.zeros(twin_targets.shape, dtype=np.float32)
