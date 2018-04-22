@@ -160,10 +160,10 @@ def _get_twin_regression_labels(twin_target_data, num_classes):
     #     twin_targets[ind, start:end] = twin_target_data[ind, 1:]
     #     twin_inside_weights[ind, start:end] = cfg.TRAIN.TWIN_INSIDE_WEIGHTS
     # return twin_targets, twin_inside_weights
-    print(twin_target_data)
-    print(twin_target_data[0])
+    # print(twin_target_data)
+    # print(twin_target_data[0])
     clss = twin_target_data[:, :-2]
-    print(clss)
+    # print(clss)
     twin_targets = np.zeros((clss[:,0].size, 2*clss[0].size), dtype=np.float32)
     twin_inside_weights = np.zeros(twin_targets.shape, dtype=np.float32)
     inds1, inds2 = np.where(clss > 0)
